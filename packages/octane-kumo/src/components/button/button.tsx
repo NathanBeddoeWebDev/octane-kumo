@@ -200,7 +200,9 @@ function renderButtonContent(
   children: OctaneNode,
 ) {
   const childNode =
-    children != null ? <span className="contents">{children}</span> : null;
+    children != null ? (
+      <span className={cn("contents")}>{children}</span>
+    ) : null;
 
   if (!getEmphasisToken(variant)) {
     return (
@@ -215,9 +217,11 @@ function renderButtonContent(
     <>
       <span
         aria-hidden="true"
-        className="absolute inset-0 rounded-[inherit] bg-linear-to-b from-(--kumo-button-emphasis-gradient-start) to-(--kumo-button-emphasis-gradient-end) shadow-[inset_0_1px_0_0_var(--kumo-button-emphasis-bg)] group-hover:from-(--kumo-button-emphasis-bg)"
+        className={cn(
+          "absolute inset-0 rounded-[inherit] bg-linear-to-b from-(--kumo-button-emphasis-gradient-start) to-(--kumo-button-emphasis-gradient-end) shadow-[inset_0_1px_0_0_var(--kumo-button-emphasis-bg)] group-hover:from-(--kumo-button-emphasis-bg)",
+        )}
       />
-      <span className="relative flex items-center gap-1.5">
+      <span className={cn("relative flex items-center gap-1.5")}>
         {iconNode}
         {childNode}
       </span>
@@ -351,7 +355,7 @@ export function Button({
 
   if (title && (disabled || loading)) {
     return (
-      <Tooltip content={title} render={<span className="inline-flex" />}>
+      <Tooltip content={title} render={<span className={cn("inline-flex")} />}>
         {button}
       </Tooltip>
     );

@@ -1,4 +1,5 @@
 /** @jsxImportSource octane */
+import { cn } from "../../utils/cn";
 import { resolveVariant } from "../../utils/resolve-variant";
 
 export const KUMO_LOADER_VARIANTS = {
@@ -59,7 +60,7 @@ export function Loader({
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       stroke="currentColor"
-      className={className}
+      className={cn(className)}
       style={{ height: sizeValue, width: sizeValue }}
       role="status"
       aria-label={ariaLabel}

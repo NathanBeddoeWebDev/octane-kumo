@@ -6,32 +6,33 @@ import {
   RefreshButton,
 } from "../../src/components/button/button";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
+import { cn } from "../../src/utils/cn";
 
 function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
   return (
     <>
-      <div className="row">
+      <div className={cn("row")}>
         <Button variant="primary">Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="ghost">Ghost</Button>
       </div>
-      <div className="row">
+      <div className={cn("row")}>
         <Button variant="destructive">Delete</Button>
         <Button variant="secondary-destructive">Remove</Button>
         <Button variant="outline">Outline</Button>
       </div>
-      <div className="row">
+      <div className={cn("row")}>
         <Button size="xs">Extra small</Button>
         <Button size="sm">Small</Button>
         <Button size="lg">Large</Button>
       </div>
-      <div className="row">
+      <div className={cn("row")}>
         <Button disabled>Disabled</Button>
         <Button loading>Loading</Button>
         <RefreshButton title="Refresh" />
         <LinkButton href="https://example.com">Link button</LinkButton>
       </div>
-      <div className="row">
+      <div className={cn("row")}>
         <Tooltip
           content={`${mode} tooltip content`}
           delay={0}
@@ -47,12 +48,12 @@ function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
 
 function Preview() {
   return (
-    <main className="preview">
-      <section className="mode" data-mode="light">
+    <main className={cn("preview")}>
+      <section className={cn("mode")} data-mode="light">
         <h2>Light</h2>
         <ButtonRows mode="Light" />
       </section>
-      <section className="mode" data-mode="dark">
+      <section className={cn("mode")} data-mode="dark">
         <h2>Dark</h2>
         <ButtonRows mode="Dark" />
       </section>
