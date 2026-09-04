@@ -1,6 +1,6 @@
 /** @jsxImportSource octane */
 import { Info, Package } from "@octanejs/phosphor-icons";
-import { createRoot } from "octane";
+import { createRoot, useRef } from "octane";
 import { Badge } from "../../src/components/badge/badge";
 import { Banner } from "../../src/components/banner/banner";
 import { Breadcrumbs } from "../../src/components/breadcrumbs";
@@ -12,19 +12,26 @@ import {
 import { Checkbox } from "../../src/components/checkbox/checkbox";
 import { CloudflareLogo } from "../../src/components/cloudflare-logo/cloudflare-logo";
 import { Collapsible } from "../../src/components/collapsible/collapsible";
+import { Dialog } from "../../src/components/dialog/dialog";
+import { DropdownMenu } from "../../src/components/dropdown/dropdown";
 import { Empty } from "../../src/components/empty/empty";
 import { InputArea } from "../../src/components/input/input-area";
 import { Input } from "../../src/components/input/input";
 import { InputGroup } from "../../src/components/input-group/input-group";
 import { SkeletonLine } from "../../src/components/loader/skeleton-line";
 import { Meter } from "../../src/components/meter/meter";
+import { MenuBar } from "../../src/components/menubar/menubar";
+import { Popover } from "../../src/components/popover/popover";
 import { Radio } from "../../src/components/radio/radio";
 import { SensitiveInput } from "../../src/components/sensitive-input/sensitive-input";
 import { Sidebar } from "../../src/components/sidebar/sidebar";
 import { Switch } from "../../src/components/switch/switch";
+import { Tabs } from "../../src/components/tabs/tabs";
 import { Text } from "../../src/components/text/text";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
+import { Toolbar } from "../../src/components/toolbar/toolbar";
 import { cn } from "../../src/utils/cn";
+import { KumoPortalProvider } from "../../src/utils/portal-provider";
 
 function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
   return (
@@ -59,6 +66,113 @@ function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
         >
           {mode} tooltip
         </Tooltip>
+      </div>
+    </>
+  );
+}
+
+function OverlayRows({ mode }: { mode: "Light" | "Dark" }) {
+  const portalContainer = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <div className={cn("row")} ref={portalContainer}>
+      <KumoPortalProvider container={portalContainer}>
+        <Dialog.Root>
+          <Dialog.Trigger render={<Button variant="secondary" />}>
+            {mode} dialog
+          </Dialog.Trigger>
+          <Dialog className={cn("p-6")} size="lg">
+            <Dialog.Title>Review deployment</Dialog.Title>
+            <Dialog.Description className={cn("mt-2 text-kumo-subtle")}>
+              Confirm the production rollout before continuing.
+            </Dialog.Description>
+            <div className={cn("mt-6 flex justify-end gap-3")}>
+              <Dialog.Close render={<Button variant="secondary" />}>
+                Cancel
+              </Dialog.Close>
+              <Dialog.Close render={<Button variant="primary" />}>
+                Deploy
+              </Dialog.Close>
+            </div>
+          </Dialog>
+        </Dialog.Root>
+        <Popover>
+          <Popover.Trigger render={<Button variant="secondary" />}>
+            {mode} popover
+          </Popover.Trigger>
+          <Popover.Content align="start">
+            <Popover.Title>Deployment status</Popover.Title>
+            <Popover.Description>Healthy in every region.</Popover.Description>
+          </Popover.Content>
+        </Popover>
+        <DropdownMenu>
+          <DropdownMenu.Trigger>
+            <Button variant="secondary">{mode} menu</Button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content align="start">
+            <DropdownMenu.Group>
+              <DropdownMenu.Label>Deployment</DropdownMenu.Label>
+              <DropdownMenu.Item>View details</DropdownMenu.Item>
+              <DropdownMenu.CheckboxItem defaultChecked>
+                Automatic rollback
+              </DropdownMenu.CheckboxItem>
+            </DropdownMenu.Group>
+            <DropdownMenu.Separator />
+            <DropdownMenu.Item variant="danger">
+              Delete deployment
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu>
+      </KumoPortalProvider>
+    </div>
+  );
+}
+
+function NavigationRows() {
+  return (
+    <>
+      <Tabs
+        selectedValue="overview"
+        tabs={[
+          { value: "overview", label: "Overview" },
+          { value: "analytics", label: "Analytics" },
+          { value: "settings", label: "Settings" },
+        ]}
+      />
+      <Tabs
+        selectedValue="workers"
+        size="sm"
+        tabs={[
+          { value: "workers", label: "Workers" },
+          { value: "pages", label: "Pages" },
+          { value: "storage", label: "Storage" },
+        ]}
+        variant="underline"
+      />
+      <div className={cn("row")}>
+        <Toolbar aria-label="Deployment tools">
+          <Toolbar.Button icon={Package}>Deploy</Toolbar.Button>
+          <Toolbar.Input aria-label="Search deployments" placeholder="Search" />
+          <Toolbar.Link href="#documentation">Documentation</Toolbar.Link>
+        </Toolbar>
+        <MenuBar
+          isActive="details"
+          optionIds
+          options={[
+            {
+              id: "details",
+              icon: <Info />,
+              tooltip: "Details view",
+              onClick: () => undefined,
+            },
+            {
+              id: "packages",
+              icon: <Package />,
+              tooltip: "Packages view",
+              onClick: () => undefined,
+            },
+          ]}
+        />
       </div>
     </>
   );
@@ -325,6 +439,10 @@ function Preview() {
           <section className={cn("mode")} data-mode="light">
             <h2>Light</h2>
             <ButtonRows mode="Light" />
+            <h3>Overlays</h3>
+            <OverlayRows mode="Light" />
+            <h3>Navigation</h3>
+            <NavigationRows />
             <h3>Form controls</h3>
             <FormRows />
             <div className={cn("status-preview")}>
@@ -335,6 +453,10 @@ function Preview() {
           <section className={cn("mode")} data-mode="dark">
             <h2>Dark</h2>
             <ButtonRows mode="Dark" />
+            <h3>Overlays</h3>
+            <OverlayRows mode="Dark" />
+            <h3>Navigation</h3>
+            <NavigationRows />
             <h3>Form controls</h3>
             <FormRows />
             <div className={cn("status-preview")}>

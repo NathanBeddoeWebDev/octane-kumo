@@ -73,6 +73,16 @@
       "import": "./src/components/collapsible/index.ts",
       "default": "./src/components/collapsible/index.ts"
     },
+    "./components/dialog": {
+      "types": "./src/components/dialog/index.ts",
+      "import": "./src/components/dialog/index.ts",
+      "default": "./src/components/dialog/index.ts"
+    },
+    "./components/dropdown": {
+      "types": "./src/components/dropdown/index.ts",
+      "import": "./src/components/dropdown/index.ts",
+      "default": "./src/components/dropdown/index.ts"
+    },
     "./components/empty": {
       "types": "./src/components/empty/index.ts",
       "import": "./src/components/empty/index.ts",
@@ -123,6 +133,16 @@
       "import": "./src/components/meter/index.ts",
       "default": "./src/components/meter/index.ts"
     },
+    "./components/menubar": {
+      "types": "./src/components/menubar/index.ts",
+      "import": "./src/components/menubar/index.ts",
+      "default": "./src/components/menubar/index.ts"
+    },
+    "./components/popover": {
+      "types": "./src/components/popover/index.ts",
+      "import": "./src/components/popover/index.ts",
+      "default": "./src/components/popover/index.ts"
+    },
     "./components/radio": {
       "types": "./src/components/radio/index.ts",
       "import": "./src/components/radio/index.ts",
@@ -148,6 +168,11 @@
       "import": "./src/components/switch/index.ts",
       "default": "./src/components/switch/index.ts"
     },
+    "./components/tabs": {
+      "types": "./src/components/tabs/index.ts",
+      "import": "./src/components/tabs/index.ts",
+      "default": "./src/components/tabs/index.ts"
+    },
     "./components/table-of-contents": {
       "types": "./src/components/table-of-contents/index.ts",
       "import": "./src/components/table-of-contents/index.ts",
@@ -162,6 +187,11 @@
       "types": "./src/components/tooltip/index.ts",
       "import": "./src/components/tooltip/index.ts",
       "default": "./src/components/tooltip/index.ts"
+    },
+    "./components/toolbar": {
+      "types": "./src/components/toolbar/index.ts",
+      "import": "./src/components/toolbar/index.ts",
+      "default": "./src/components/toolbar/index.ts"
     },
     "./styles": "./src/styles/kumo.css",
     "./styles/tailwind": "./src/styles/kumo.css",

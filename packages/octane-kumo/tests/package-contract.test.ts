@@ -10,6 +10,8 @@ import {
   CloudflareLogo as RootCloudflareLogo,
   PoweredByCloudflare as RootPoweredByCloudflare,
   Collapsible as RootCollapsible,
+  Dialog as RootDialog,
+  DropdownMenu as RootDropdownMenu,
   Empty as RootEmpty,
   Field as RootField,
   Grid as RootGrid,
@@ -19,7 +21,9 @@ import {
   Label as RootLabel,
   LayerCard as RootLayerCard,
   Link as RootLink,
+  MenuBar as RootMenuBar,
   Meter as RootMeter,
+  Popover as RootPopover,
   Radio as RootRadio,
   RadioGroup as RootRadioGroup,
   SensitiveInput as RootSensitiveInput,
@@ -28,8 +32,10 @@ import {
   Surface as RootSurface,
   Switch as RootSwitch,
   TableOfContents as RootTableOfContents,
+  Tabs as RootTabs,
   Text as RootText,
   Textarea as RootTextarea,
+  Toolbar as RootToolbar,
 } from "octane-kumo";
 import { Badge as SubpathBadge } from "octane-kumo/components/badge";
 import { Banner as SubpathBanner } from "octane-kumo/components/banner";
@@ -41,6 +47,8 @@ import {
   PoweredByCloudflare as SubpathPoweredByCloudflare,
 } from "octane-kumo/components/cloudflare-logo";
 import { Collapsible as SubpathCollapsible } from "octane-kumo/components/collapsible";
+import { Dialog as SubpathDialog } from "octane-kumo/components/dialog";
+import { DropdownMenu as SubpathDropdownMenu } from "octane-kumo/components/dropdown";
 import { Empty as SubpathEmpty } from "octane-kumo/components/empty";
 import { Field as SubpathField } from "octane-kumo/components/field";
 import { Grid as SubpathGrid } from "octane-kumo/components/grid";
@@ -54,7 +62,9 @@ import { Label as SubpathLabel } from "octane-kumo/components/label";
 import { LayerCard as SubpathLayerCard } from "octane-kumo/components/layer-card";
 import { Link as SubpathLink } from "octane-kumo/components/link";
 import { SkeletonLine as SubpathSkeletonLine } from "octane-kumo/components/loader";
+import { MenuBar as SubpathMenuBar } from "octane-kumo/components/menubar";
 import { Meter as SubpathMeter } from "octane-kumo/components/meter";
+import { Popover as SubpathPopover } from "octane-kumo/components/popover";
 import {
   Radio as SubpathRadio,
   RadioGroup as SubpathRadioGroup,
@@ -64,7 +74,9 @@ import { Sidebar as SubpathSidebar } from "octane-kumo/components/sidebar";
 import { Surface as SubpathSurface } from "octane-kumo/components/surface";
 import { Switch as SubpathSwitch } from "octane-kumo/components/switch";
 import { TableOfContents as SubpathTableOfContents } from "octane-kumo/components/table-of-contents";
+import { Tabs as SubpathTabs } from "octane-kumo/components/tabs";
 import { Text as SubpathText } from "octane-kumo/components/text";
+import { Toolbar as SubpathToolbar } from "octane-kumo/components/toolbar";
 
 const packageRoot = resolve(import.meta.dirname, "..");
 
@@ -86,6 +98,8 @@ describe("package contract", () => {
     expect(RootCloudflareLogo).toBe(SubpathCloudflareLogo);
     expect(RootPoweredByCloudflare).toBe(SubpathPoweredByCloudflare);
     expect(RootCollapsible).toBe(SubpathCollapsible);
+    expect(RootDialog).toBe(SubpathDialog);
+    expect(RootDropdownMenu).toBe(SubpathDropdownMenu);
     expect(RootEmpty).toBe(SubpathEmpty);
     expect(RootField).toBe(SubpathField);
     expect(RootGrid).toBe(SubpathGrid);
@@ -95,7 +109,9 @@ describe("package contract", () => {
     expect(RootLabel).toBe(SubpathLabel);
     expect(RootLayerCard).toBe(SubpathLayerCard);
     expect(RootLink).toBe(SubpathLink);
+    expect(RootMenuBar).toBe(SubpathMenuBar);
     expect(RootMeter).toBe(SubpathMeter);
+    expect(RootPopover).toBe(SubpathPopover);
     expect(RootRadio).toBe(SubpathRadio);
     expect(RootRadioGroup).toBe(SubpathRadioGroup);
     expect(RootSensitiveInput).toBe(SubpathSensitiveInput);
@@ -104,9 +120,11 @@ describe("package contract", () => {
     expect(RootSurface).toBe(SubpathSurface);
     expect(RootSwitch).toBe(SubpathSwitch);
     expect(RootTableOfContents).toBe(SubpathTableOfContents);
+    expect(RootTabs).toBe(SubpathTabs);
     expect(RootText).toBe(SubpathText);
     expect(RootTextarea).toBe(RootInputArea);
     expect(RootTextarea).toBe(SubpathTextarea);
+    expect(RootToolbar).toBe(SubpathToolbar);
   });
 
   it("publishes only export targets that exist", () => {

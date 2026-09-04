@@ -76,6 +76,8 @@ import {
   CloudflareLogo,
   PoweredByCloudflare,
   Collapsible,
+  Dialog,
+  DropdownMenu,
   Empty,
   Field,
   Grid,
@@ -86,7 +88,9 @@ import {
   Label,
   LayerCard,
   Link,
+  MenuBar,
   Meter,
+  Popover,
   Radio,
   RadioGroup,
   SensitiveInput,
@@ -95,9 +99,11 @@ import {
   Surface,
   Switch,
   TableOfContents,
+  Tabs,
   Text,
   Textarea,
   Tooltip,
+  Toolbar,
 } from "octane-kumo";
 import { Badge as BadgeSubpath } from "octane-kumo/components/badge";
 import { Banner as BannerSubpath } from "octane-kumo/components/banner";
@@ -108,6 +114,8 @@ import {
 } from "octane-kumo/components/cloudflare-logo";
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
 import { Collapsible as CollapsibleSubpath } from "octane-kumo/components/collapsible";
+import { Dialog as DialogSubpath } from "octane-kumo/components/dialog";
+import { DropdownMenu as DropdownMenuSubpath } from "octane-kumo/components/dropdown";
 import { Empty as EmptySubpath } from "octane-kumo/components/empty";
 import { Field as FieldSubpath } from "octane-kumo/components/field";
 import {
@@ -120,14 +128,18 @@ import { Label as LabelSubpath } from "octane-kumo/components/label";
 import { LayerCard as LayerCardSubpath } from "octane-kumo/components/layer-card";
 import { Link as LinkSubpath } from "octane-kumo/components/link";
 import { SkeletonLine as SkeletonLineSubpath } from "octane-kumo/components/loader";
+import { MenuBar as MenuBarSubpath } from "octane-kumo/components/menubar";
 import { Meter as MeterSubpath } from "octane-kumo/components/meter";
+import { Popover as PopoverSubpath } from "octane-kumo/components/popover";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
 import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
 import { Sidebar as SidebarSubpath } from "octane-kumo/components/sidebar";
 import { Surface as SurfaceSubpath } from "octane-kumo/components/surface";
 import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
 import { TableOfContents as TableOfContentsSubpath } from "octane-kumo/components/table-of-contents";
+import { Tabs as TabsSubpath } from "octane-kumo/components/tabs";
 import { Text as TextSubpath } from "octane-kumo/components/text";
+import { Toolbar as ToolbarSubpath } from "octane-kumo/components/toolbar";
 import { Grid as GridSubpath } from "octane-kumo/components/grid";
 import { GridItem as GridItemSubpath } from "octane-kumo/components/grid";
 
@@ -142,6 +154,8 @@ void [
   CloudflareLogoSubpath,
   PoweredByCloudflareSubpath,
   CollapsibleSubpath,
+  DialogSubpath,
+  DropdownMenuSubpath,
   EmptySubpath,
   FieldSubpath,
   GridSubpath,
@@ -152,7 +166,9 @@ void [
   LabelSubpath,
   LayerCardSubpath,
   LinkSubpath,
+  MenuBarSubpath,
   MeterSubpath,
+  PopoverSubpath,
   RadioSubpath,
   SensitiveInputSubpath,
   SidebarSubpath,
@@ -160,8 +176,10 @@ void [
   SurfaceSubpath,
   SwitchSubpath,
   TableOfContentsSubpath,
+  TabsSubpath,
   TextSubpath,
   TextareaSubpath,
+  ToolbarSubpath,
 ];
 
 export const consumerView = (
@@ -263,6 +281,62 @@ export const consumerView = (
       <Collapsible.DefaultTrigger>Details</Collapsible.DefaultTrigger>
       <Collapsible.DefaultPanel keepMounted>Content</Collapsible.DefaultPanel>
     </Collapsible.Root>
+    <Dialog.Root>
+      <Dialog.Trigger render={<Button />}>Open dialog</Dialog.Trigger>
+      <Dialog size="lg">
+        <Dialog.Title>Settings</Dialog.Title>
+        <Dialog.Description>Update your settings.</Dialog.Description>
+        <Dialog.Close>Done</Dialog.Close>
+      </Dialog>
+    </Dialog.Root>
+    <Popover>
+      <Popover.Trigger render={<Button />}>Open popover</Popover.Trigger>
+      <Popover.Content side="right" align="start">
+        <Popover.Title>Details</Popover.Title>
+        <Popover.Description>More information.</Popover.Description>
+        <Popover.Close>Dismiss</Popover.Close>
+      </Popover.Content>
+    </Popover>
+    <DropdownMenu>
+      <DropdownMenu.Trigger render={<Button />}>Actions</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item>Edit</DropdownMenu.Item>
+        <DropdownMenu.CheckboxItem defaultChecked>Notifications</DropdownMenu.CheckboxItem>
+        <DropdownMenu.RadioGroup defaultValue="comfortable">
+          <DropdownMenu.RadioItem value="compact">Compact</DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="comfortable">
+            Comfortable
+            <DropdownMenu.RadioItemIndicator />
+          </DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+        <DropdownMenu.LinkItem href="/settings">Settings</DropdownMenu.LinkItem>
+      </DropdownMenu.Content>
+    </DropdownMenu>
+    <Tabs
+      selectedValue="overview"
+      tabs={[
+        { value: "overview", label: "Overview" },
+        { value: "settings", label: "Settings" },
+      ]}
+      onValueChange={(value) => value.toUpperCase()}
+    />
+    <Toolbar aria-label="Record tools">
+      <Toolbar.Input aria-label="Search records" />
+      <Toolbar.Button>Apply</Toolbar.Button>
+      <Toolbar.Link href="/docs">Documentation</Toolbar.Link>
+    </Toolbar>
+    <MenuBar
+      isActive="list"
+      optionIds
+      options={[
+        {
+          id: "list",
+          icon: <span aria-hidden="true">L</span>,
+          tooltip: "List view",
+          onClick: () => {},
+        },
+      ]}
+    />
     <Text variant="body">Body copy</Text>
     <Text variant="heading" as="h2">Section</Text>
     <Link href="/docs">Learn more</Link>
