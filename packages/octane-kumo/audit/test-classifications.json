@@ -7,9 +7,19 @@
       "reason": "Covers the native Button vertical using scenarios derived from the pinned Kumo tests. It is not a one-for-one adapted upstream suite or a React differential lane."
     },
     {
+      "path": "packages/octane-kumo/tests/checkbox.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers standalone Checkbox and the compound Group, Item, and Legend family, including native events and refs, controlled and uncontrolled state, form values, label activation, accessibility associations, and validation states."
+    },
+    {
       "path": "packages/octane-kumo/tests/hydration.test.ts",
       "disposition": "octane-only-framework-contract",
-      "reason": "Checks Button and Tooltip through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+      "reason": "Checks Button, Tooltip, Input, standalone Checkbox, and Checkbox.Group through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+    },
+    {
+      "path": "packages/octane-kumo/tests/input.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers Label, Field, and Input associations, native input events and refs, Base UI-style value details, error precedence, and password-manager attributes."
     },
     {
       "path": "packages/octane-kumo/tests/tooltip.test.tsx",
@@ -29,7 +39,7 @@
     {
       "path": "packages/octane-kumo/tests/packed-consumer.test.ts",
       "disposition": "repo-authored-package-contract",
-      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button and Tooltip usage through published exports."
+      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, and Checkbox-family usage through root and component-subpath exports."
     },
     {
       "path": "packages/octane-kumo/tests/styles.test.ts",

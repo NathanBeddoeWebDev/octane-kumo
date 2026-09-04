@@ -1,8 +1,9 @@
 /** @jsxImportSource octane */
-import { act, fireEvent, waitFor } from "@octanejs/testing-library";
+import { act, fireEvent, waitFor, within } from "@octanejs/testing-library";
 import { createElement, hydrateRoot, type Root } from "octane";
 import { describe, expect, it, vi } from "vite-plus/test";
 import { ButtonHydrationFixture } from "./fixtures/button-hydration";
+import { FormHydrationFixture } from "./fixtures/form-hydration";
 import { TooltipHydrationFixture } from "./fixtures/tooltip-hydration";
 import { renderHydrationFixture } from "./hydration-ssr";
 
@@ -80,6 +81,69 @@ describe("Tooltip SSR and hydration", () => {
         expect(hydratedTrigger?.hasAttribute("data-popup-open")).toBe(true);
         expect(document.body.textContent).toContain("Hydrated help");
       });
+      expect(errors).not.toHaveBeenCalled();
+    } finally {
+      root?.unmount();
+      errors.mockRestore();
+      container.remove();
+    }
+  });
+});
+
+describe("Form controls SSR and hydration", () => {
+  it("adopts input and checkbox markup and remains interactive", async () => {
+    const serverResult = await renderHydrationFixture(
+      "tests/fixtures/form-hydration.tsx",
+      "FormHydrationFixture",
+    );
+    const container = document.createElement("div");
+    container.innerHTML = serverResult.html;
+    document.body.appendChild(container);
+    const serverInput = container.querySelector<HTMLInputElement>(
+      'input[name="worker"]',
+    );
+    const serverCheckbox = container.querySelector<HTMLButtonElement>(
+      '[data-kumo-component="Checkbox"]',
+    );
+    const errors = vi.spyOn(console, "error").mockImplementation(() => {});
+    let root: Root | undefined;
+
+    try {
+      expect(serverInput?.value).toBe("worker");
+      expect(serverCheckbox?.getAttribute("aria-checked")).toBe("false");
+
+      await act(async () => {
+        root = hydrateRoot(container, createElement(FormHydrationFixture, {}));
+        await Promise.resolve();
+      });
+
+      const hydratedInput = container.querySelector<HTMLInputElement>(
+        'input[name="worker"]',
+      );
+      const hydratedCheckbox = container.querySelector<HTMLButtonElement>(
+        '[data-kumo-component="Checkbox"]',
+      );
+      expect(hydratedInput).toBe(serverInput);
+      expect(hydratedCheckbox).toBe(serverCheckbox);
+
+      await act(async () => {
+        fireEvent.input(hydratedInput!, { target: { value: "api-worker" } });
+        fireEvent.click(hydratedCheckbox!);
+        fireEvent.click(
+          within(container).getByRole("checkbox", { name: "SMS" }),
+        );
+        await Promise.resolve();
+      });
+
+      expect(
+        container.querySelector('[data-testid="worker-value"]')?.textContent,
+      ).toBe("api-worker");
+      expect(
+        container.querySelector('[data-testid="enabled-value"]')?.textContent,
+      ).toBe("true");
+      expect(
+        container.querySelector('[data-testid="channels-value"]')?.textContent,
+      ).toBe("email,sms");
       expect(errors).not.toHaveBeenCalled();
     } finally {
       root?.unmount();

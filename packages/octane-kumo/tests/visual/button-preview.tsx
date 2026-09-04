@@ -5,6 +5,8 @@ import {
   LinkButton,
   RefreshButton,
 } from "../../src/components/button/button";
+import { Checkbox } from "../../src/components/checkbox/checkbox";
+import { Input } from "../../src/components/input/input";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
 import { cn } from "../../src/utils/cn";
 
@@ -46,16 +48,53 @@ function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
   );
 }
 
+function FormRows() {
+  return (
+    <>
+      <div className={cn("form-grid")}>
+        <Input label="Worker name" placeholder="api-worker" />
+        <Input
+          description="Choose a globally unique name"
+          label="Hostname"
+          placeholder="example.com"
+        />
+        <Input error="Enter a valid email" label="Email" value="invalid" />
+        <Input disabled label="Disabled input" value="Unavailable" />
+      </div>
+      <div className={cn("checkbox-grid")}>
+        <Checkbox label="Unchecked" />
+        <Checkbox checked label="Checked" />
+        <Checkbox indeterminate label="Indeterminate" />
+        <Checkbox disabled label="Disabled" />
+        <Checkbox label="Validation error" variant="error" />
+        <Checkbox controlFirst={false} label="Label first" />
+      </div>
+      <Checkbox.Group
+        defaultValue={["email"]}
+        description="Choose every channel you want"
+        legend="Notification channels"
+      >
+        <Checkbox.Item label="Email" value="email" />
+        <Checkbox.Item label="SMS" value="sms" />
+      </Checkbox.Group>
+    </>
+  );
+}
+
 function Preview() {
   return (
     <main className={cn("preview")}>
       <section className={cn("mode")} data-mode="light">
         <h2>Light</h2>
         <ButtonRows mode="Light" />
+        <h3>Form controls</h3>
+        <FormRows />
       </section>
       <section className={cn("mode")} data-mode="dark">
         <h2>Dark</h2>
         <ButtonRows mode="Dark" />
+        <h3>Form controls</h3>
+        <FormRows />
       </section>
     </main>
   );

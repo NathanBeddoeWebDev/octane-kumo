@@ -1,8 +1,18 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
-import { Button as RootButton } from "octane-kumo";
+import {
+  Button as RootButton,
+  Checkbox as RootCheckbox,
+  Field as RootField,
+  Input as RootInput,
+  Label as RootLabel,
+} from "octane-kumo";
 import { Button as SubpathButton } from "octane-kumo/components/button";
+import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
+import { Field as SubpathField } from "octane-kumo/components/field";
+import { Input as SubpathInput } from "octane-kumo/components/input";
+import { Label as SubpathLabel } from "octane-kumo/components/label";
 
 const packageRoot = resolve(import.meta.dirname, "..");
 
@@ -17,6 +27,10 @@ function sourceFiles(directory: string): string[] {
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
     expect(RootButton).toBe(SubpathButton);
+    expect(RootCheckbox).toBe(SubpathCheckbox);
+    expect(RootField).toBe(SubpathField);
+    expect(RootInput).toBe(SubpathInput);
+    expect(RootLabel).toBe(SubpathLabel);
   });
 
   it("publishes only export targets that exist", () => {

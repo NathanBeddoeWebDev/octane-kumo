@@ -5,14 +5,14 @@
     "source": "https://github.com/cloudflare/kumo.git",
     "license": "MIT"
   },
-  "surface": "The initial Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, and KumoPortalProvider. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
+  "surface": "The Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, KumoPortalProvider, Label, Field, Input, and the complete Checkbox family: Checkbox, Checkbox.Group, Checkbox.Item, and Checkbox.Legend. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
   "divergences": [
     "Handlers receive native DOM events rather than React synthetic events.",
     "Refs use Octane ref-as-prop rather than React forwardRef.",
     "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
     "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
   ],
-  "ssr": "Button and Tooltip are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
+  "ssr": "Button, Tooltip, Input, standalone Checkbox, and Checkbox.Group are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
   "provenance": {
     "source": "https://github.com/cloudflare/kumo/tree/2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
     "license": "MIT",
@@ -22,10 +22,12 @@
   "notes": [
     "Button-family DOM behavior, native events, refs, loading transitions, icon forms, and tooltip trigger composition have repo-authored Octane tests.",
     "Tooltip focus/Escape interaction, portal routing, hydration, and a browser-rendered open state have repo-authored Octane evidence.",
+    "Label, Field, and Input associations, native input events and refs, Base UI-style value details, validation precedence, password-manager attributes, and Input hydration have repo-authored Octane evidence.",
+    "Standalone Checkbox and the compound Group, Item, and Legend family cover native events and refs, controlled and uncontrolled state, label activation, form values, validation, accessibility associations, and hydration.",
     "The package contract resolves root and component subpath imports, rejects React or ReactCompat imports in native source, and verifies the bundled native module graph remains React-free.",
-    "A temporary external consumer compiles Button and Tooltip from the real packed tarball on every test run.",
+    "A temporary external consumer compiles Button, Tooltip, Label, Field, Input, and the Checkbox family from the real packed tarball on every test run.",
     "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
-    "Representative Button variants, disabled/loading states, light/dark modes, and an open Tooltip have a reproducible visual fixture.",
+    "Representative Button variants, disabled/loading states, an open Tooltip, Input validation and disabled states, and Checkbox standalone and group states have a reproducible light/dark visual fixture.",
     "No React differential lane has been recorded yet."
   ],
   "docs": [

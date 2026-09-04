@@ -67,7 +67,22 @@ describe("packed consumer", () => {
       writeFileSync(
         resolve(consumerDirectory, "consumer.tsx"),
         `/** @jsxImportSource octane */
-import { Button, Tooltip } from "octane-kumo";
+import {
+  Button,
+  Checkbox,
+  Field,
+  Input,
+  Label,
+  Tooltip,
+} from "octane-kumo";
+import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
+import { Field as FieldSubpath } from "octane-kumo/components/field";
+import { Input as InputSubpath } from "octane-kumo/components/input";
+import { Label as LabelSubpath } from "octane-kumo/components/label";
+
+const inputRef: { current: HTMLInputElement | null } = { current: null };
+const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
+void [CheckboxSubpath, FieldSubpath, InputSubpath, LabelSubpath];
 
 export const consumerView = (
   <div>
@@ -81,6 +96,33 @@ export const consumerView = (
     >
       Save
     </Tooltip>
+    <Label htmlFor="region">Region</Label>
+    <Input
+      id="region"
+      ref={inputRef}
+      label="Region"
+      description="Deployment region"
+      passwordManagerIgnore
+      onValueChange={(value, details) => {
+        value.toUpperCase();
+        details.event.preventDefault();
+      }}
+    />
+    <Field label="Worker name" error={{ message: "Required", match: true }}>
+      <Input aria-label="Worker name" />
+    </Field>
+    <Checkbox
+      ref={checkboxRef}
+      label="Enable logs"
+      onCheckedChange={(checked, details) => {
+        Boolean(checked);
+        details.event.preventDefault();
+      }}
+    />
+    <Checkbox.Group legend="Channels" defaultValue={["email"]}>
+      <Checkbox.Item label="Email" value="email" />
+      <Checkbox.Legend className="sr-only">Notification channels</Checkbox.Legend>
+    </Checkbox.Group>
   </div>
 );
 `,

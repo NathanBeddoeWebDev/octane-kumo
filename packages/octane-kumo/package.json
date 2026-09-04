@@ -43,6 +43,26 @@
       "import": "./src/components/button/index.ts",
       "default": "./src/components/button/index.ts"
     },
+    "./components/checkbox": {
+      "types": "./src/components/checkbox/index.ts",
+      "import": "./src/components/checkbox/index.ts",
+      "default": "./src/components/checkbox/index.ts"
+    },
+    "./components/field": {
+      "types": "./src/components/field/index.ts",
+      "import": "./src/components/field/index.ts",
+      "default": "./src/components/field/index.ts"
+    },
+    "./components/input": {
+      "types": "./src/components/input/index.ts",
+      "import": "./src/components/input/index.ts",
+      "default": "./src/components/input/index.ts"
+    },
+    "./components/label": {
+      "types": "./src/components/label/index.ts",
+      "import": "./src/components/label/index.ts",
+      "default": "./src/components/label/index.ts"
+    },
     "./components/loader": {
       "types": "./src/components/loader/index.ts",
       "import": "./src/components/loader/index.ts",

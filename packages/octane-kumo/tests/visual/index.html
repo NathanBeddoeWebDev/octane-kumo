@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Octane Kumo Button preview</title>
+    <title>Octane Kumo component preview</title>
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="../../src/styles/kumo-standalone.css" />
     <style>
@@ -39,12 +39,34 @@
         font-size: 20px;
       }
 
+      .mode h3 {
+        margin: 28px 0 16px;
+        font-size: 16px;
+      }
+
       .row {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         gap: 12px;
         margin-bottom: 20px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .form-grid input {
+        width: 100%;
+      }
+
+      .checkbox-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 20px;
+        margin: 20px 0;
       }
     </style>
   </head>
