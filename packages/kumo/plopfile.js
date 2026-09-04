@@ -68,7 +68,7 @@ export default function (plop) {
       actions.push({
         type: "modify",
         path: "vite.config.ts",
-        pattern: /(        \/\/ PLOP_INJECT_COMPONENT_ENTRY)/,
+        pattern: /( {8}\/\/ PLOP_INJECT_COMPONENT_ENTRY)/,
         template: `        'components/${kebabName}': resolve(__dirname, 'src/components/${kebabName}/index.ts'),\n$1`,
       });
 
