@@ -174,6 +174,11 @@ function NavigationRows() {
           ]}
         />
       </div>
+      <Toolbar aria-label="Compact deployment tools" size="sm">
+        <Toolbar.Button disabled>Disabled</Toolbar.Button>
+        <Toolbar.Button loading>Saving</Toolbar.Button>
+        <Toolbar.Button>Ready</Toolbar.Button>
+      </Toolbar>
     </>
   );
 }
