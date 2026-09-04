@@ -1,5 +1,8 @@
 /** @jsxImportSource octane */
-import { Tooltip as TooltipBase } from "@octanejs/base-ui/tooltip";
+import {
+  Tooltip as TooltipBase,
+  type TooltipHandle,
+} from "@octanejs/base-ui/tooltip";
 import type { ElementDescriptor, OctaneNode } from "octane";
 import type { JSX } from "octane/jsx-runtime";
 import { cn } from "../../utils/cn";
@@ -30,6 +33,37 @@ export const KUMO_TOOLTIP_DEFAULT_VARIANTS = {
 
 export type KumoTooltipSide = keyof typeof KUMO_TOOLTIP_VARIANTS.side;
 export type TooltipAlign = "start" | "center" | "end";
+export type TooltipTrackCursorAxis = "none" | "x" | "y" | "both";
+export type TooltipOpenChangeReason =
+  | "trigger-hover"
+  | "trigger-focus"
+  | "trigger-press"
+  | "outside-press"
+  | "escape-key"
+  | "disabled"
+  | "imperative-action"
+  | "none";
+
+export interface TooltipOpenChangeDetails {
+  allowPropagation(): void;
+  cancel(): void;
+  event: Event;
+  readonly isCanceled: boolean;
+  readonly isPropagationAllowed: boolean;
+  preventUnmountOnClose(): void;
+  reason: TooltipOpenChangeReason;
+  trigger: Element | undefined;
+}
+
+export interface TooltipActions {
+  close(): void;
+  unmount(): void;
+}
+
+type TooltipActionsRef =
+  | { current: TooltipActions | null }
+  | ((value: TooltipActions | null) => void)
+  | null;
 
 export interface KumoTooltipVariantsProps {
   side?: KumoTooltipSide;
@@ -56,7 +90,7 @@ export function tooltipVariants({
 export const TooltipProvider = TooltipBase.Provider;
 
 export interface TooltipProps extends KumoTooltipVariantsProps {
-  [key: string]: unknown;
+  actionsRef?: TooltipActionsRef;
   align?: TooltipAlign;
   asChild?: boolean;
   children?: OctaneNode;
@@ -64,8 +98,21 @@ export interface TooltipProps extends KumoTooltipVariantsProps {
   closeDelay?: number;
   container?: PortalContainer;
   content: OctaneNode;
+  defaultOpen?: boolean;
+  defaultTriggerId?: string | null;
   delay?: number;
+  disableHoverablePopup?: boolean;
+  disabled?: boolean;
+  handle?: TooltipHandle<unknown>;
+  onOpenChange?: (
+    open: boolean,
+    eventDetails: TooltipOpenChangeDetails,
+  ) => void;
+  onOpenChangeComplete?: (open: boolean) => void;
+  open?: boolean;
   render?: ElementDescriptor;
+  trackCursorAxis?: TooltipTrackCursorAxis;
+  triggerId?: string | null;
 }
 
 export function Tooltip({

@@ -12,7 +12,7 @@
     "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
     "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
   ],
-  "ssr": "The Button vertical is covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
+  "ssr": "Button and Tooltip are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
   "provenance": {
     "source": "https://github.com/cloudflare/kumo/tree/2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
     "license": "MIT",
@@ -21,10 +21,11 @@
   },
   "notes": [
     "Button-family DOM behavior, native events, refs, loading transitions, icon forms, and tooltip trigger composition have repo-authored Octane tests.",
-    "The package contract resolves root and component subpath imports and rejects React or ReactCompat imports in native source.",
+    "Tooltip focus/Escape interaction, portal routing, hydration, and a browser-rendered open state have repo-authored Octane evidence.",
+    "The package contract resolves root and component subpath imports, rejects React or ReactCompat imports in native source, and verifies the bundled native module graph remains React-free.",
+    "A temporary external consumer compiles Button and Tooltip from the real packed tarball on every test run.",
     "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
-    "Representative Button variants, disabled/loading states, and light/dark modes have a reproducible visual fixture.",
-    "Tooltip popup interactions and visual parity are not covered by the current unit lane.",
+    "Representative Button variants, disabled/loading states, light/dark modes, and an open Tooltip have a reproducible visual fixture.",
     "No React differential lane has been recorded yet."
   ],
   "docs": [

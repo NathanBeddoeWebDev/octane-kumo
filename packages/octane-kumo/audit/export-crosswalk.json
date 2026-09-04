@@ -23,6 +23,8 @@
         "tests/button.test.tsx",
         "tests/hydration.test.ts",
         "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
         "tests/visual/button-preview.tsx"
       ]
     },
@@ -130,8 +132,16 @@
       "source": "Tooltip",
       "target": "Tooltip",
       "status": "adapted-unverified",
-      "evidence": ["tests/button.test.tsx"],
-      "notes": "Trigger composition is covered; popup behavior is not."
+      "evidence": [
+        "tests/button.test.tsx",
+        "tests/tooltip.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Trigger composition, focus/Escape interaction, portal routing, SSR/hydration, and an open browser-rendered state are covered. Broad upstream differential and accessibility parity remain open."
     }
   ],
   "providers": [
@@ -143,7 +153,8 @@
     {
       "source": "KumoPortalProvider",
       "target": "KumoPortalProvider",
-      "status": "adapted-unverified"
+      "status": "adapted-unverified",
+      "evidence": ["tests/tooltip.test.tsx"]
     },
     {
       "source": "TooltipProvider",

@@ -27,9 +27,10 @@ export function SaveAction() {
 
 ## Current limits
 
-Export presence is not a parity claim. Tooltip trigger composition is covered,
-the Button vertical has SSR/hydration and representative light/dark visual
-coverage, and the pinned Kumo styles are exported. Tooltip popup interaction
+Export presence is not a parity claim. Button and Tooltip have native
+interaction and SSR/hydration coverage, a packed external consumer is compiled,
+the native bundle graph is checked for React imports, and representative
+light/dark and open-popup states are rendered in a browser. Broad differential
 parity and the rest of the component catalog remain in progress. See
 [`status.json`](./status.json),
 [`audit/export-crosswalk.json`](./audit/export-crosswalk.json), and [`PORTING.md`](./PORTING.md)

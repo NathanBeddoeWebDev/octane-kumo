@@ -5,8 +5,9 @@ import {
   LinkButton,
   RefreshButton,
 } from "../../src/components/button/button";
+import { Tooltip } from "../../src/components/tooltip/tooltip";
 
-function ButtonRows() {
+function ButtonRows({ mode }: { mode: "Light" | "Dark" }) {
   return (
     <>
       <div className="row">
@@ -30,6 +31,16 @@ function ButtonRows() {
         <RefreshButton title="Refresh" />
         <LinkButton href="https://example.com">Link button</LinkButton>
       </div>
+      <div className="row">
+        <Tooltip
+          content={`${mode} tooltip content`}
+          delay={0}
+          render={<Button variant="secondary" />}
+          side="bottom"
+        >
+          {mode} tooltip
+        </Tooltip>
+      </div>
     </>
   );
 }
@@ -39,11 +50,11 @@ function Preview() {
     <main className="preview">
       <section className="mode" data-mode="light">
         <h2>Light</h2>
-        <ButtonRows />
+        <ButtonRows mode="Light" />
       </section>
       <section className="mode" data-mode="dark">
         <h2>Dark</h2>
-        <ButtonRows />
+        <ButtonRows mode="Dark" />
       </section>
     </main>
   );
