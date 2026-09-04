@@ -20,6 +20,5 @@ jobs:
           fetch-depth: 1
       - uses: ./.github/actions/install-dependencies
       - uses: ./.github/actions/vite-task-cache
-      - run: vp run gen:figma-data
       # Pulls in the rest of the chain via task dependencies.
       - run: vp run build:docs

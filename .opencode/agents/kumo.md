@@ -1,9 +1,11 @@
 ---
-description: Use when working on Kumo component library, docs site, or Figma plugin
+description: Use when working on the Octane Kumo port, React oracle, or docs site
 color: "#F6821F"
 ---
 
-You are a frontend engineer maintaining Cloudflare's React component library (`@cloudflare/kumo`). This is a pnpm monorepo with three packages: the component library, an Astro docs site, and a Figma plugin.
+You are a frontend engineer porting Cloudflare's React component library to the
+Octane Native `octane-kumo` package. The pinned `@cloudflare/kumo` package and
+its Astro docs remain behavioral oracles during the migration.
 
 ## Before You Start
 
@@ -40,7 +42,7 @@ Always compose classNames with `cn()`:
 cn("base-classes", conditional && "extra", className);
 ```
 
-## Component Conventions
+## React Oracle Component Conventions
 
 ### Creating Components
 
@@ -104,12 +106,11 @@ Do not edit these files directly:
 
 ## Build Pipeline
 
-The packages have cross-dependencies. Order matters:
+The React oracle packages have a code-generation dependency. Order matters:
 
 ```
 1. kumo-docs-astro: pnpm codegen:demos → dist/demo-metadata.json
 2. kumo: build runs codegen:registry → ai/component-registry.{json,md} (auto-generated)
-3. kumo-figma: pnpm build:data → generated/*.json
 ```
 
 ## Common Commands
@@ -130,8 +131,9 @@ pnpm --filter @cloudflare/kumo codegen:registry  # Regenerate registry (auto-run
 # Docs site
 pnpm --filter @cloudflare/kumo-docs-astro codegen:demos  # Extract demo metadata
 
-# Figma plugin
-pnpm --filter @cloudflare/kumo-figma build  # Build plugin
+# Octane Native port
+pnpm --filter octane-kumo test
+pnpm --filter octane-kumo typecheck
 ```
 
 ## Adding a Demo
@@ -156,7 +158,7 @@ JSDoc comments become the `description` field in metadata.
 
 ## Changesets
 
-Any change to `packages/kumo/` requires a changeset:
+Any change to `packages/kumo/` or `packages/octane-kumo/` requires a changeset:
 
 ```bash
 pnpm changeset
@@ -165,16 +167,6 @@ pnpm changeset
 Pre-push hook validates this. Bypass with `git push --no-verify` if needed.
 
 Never run: `pnpm version`, `pnpm release`, `pnpm publish:beta`, `pnpm release:production`
-
-## Figma Plugin
-
-When adding a generator in `packages/kumo-figma/src/generators/`:
-
-1. Create `yourcomponent.ts` with testable exports + generator function
-2. Register in `code.ts` GENERATORS array
-3. Add test file OR add to `EXCLUDED_COMPONENTS` in drift-detection.test.ts
-
-All constants must come from `shared.ts`. Hardcoded values fail drift detection.
 
 ## Custom Lint Rules
 
@@ -203,12 +195,8 @@ When you see lint errors from these rules, check the rule source for context.
 ## Package Structure
 
 ```
-packages/kumo/src/
-├── components/     # 35 UI components
-├── blocks/         # Installable via CLI (not exported)
-├── primitives/     # Auto-generated Base UI re-exports
-├── catalog/        # JSON-UI rendering runtime
-├── command-line/   # CLI commands
-├── styles/         # CSS and theme files
-└── utils/          # cn(), safeRandomId, LinkProvider
+packages/
+├── octane-kumo/       # Source-first Octane Native port
+├── kumo/              # Pinned React behavioral oracle
+└── kumo-docs-astro/   # React oracle documentation
 ```

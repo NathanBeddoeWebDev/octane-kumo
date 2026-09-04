@@ -57,7 +57,6 @@ See [AGENTS.md](./AGENTS.md) for comprehensive development documentation includi
 - Semantic color tokens
 - Development workflows
 - CI/CD pipeline
-- Figma plugin
 
 ### Quick Start
 
@@ -67,17 +66,21 @@ pnpm dev                    # Start docs site at localhost:4321
 pnpm --filter @cloudflare/kumo test
 ```
 
-### Figma Plugin
+### Octane Native Port
 
 ```bash
-# Optional: enable token sync during build
-# cp packages/kumo-figma/scripts/.env.example packages/kumo-figma/scripts/.env
-# $EDITOR packages/kumo-figma/scripts/.env  # set FIGMA_TOKEN (and optionally FIGMA_FILE_KEY)
-
-pnpm --filter @cloudflare/kumo-figma build
-# In Figma: Plugins > Development > Import plugin from manifest...
-# Select: packages/kumo-figma/src/manifest.json
+pnpm --filter octane-kumo test
+pnpm --filter octane-kumo typecheck
 ```
+
+The `packages/kumo` React package remains the behavioral oracle while components
+are ported incrementally to the source-first `octane-kumo` package.
+
+### Visual Regression Service
+
+The visual-regression client calls Cloudflare's externally maintained screenshot
+service. This fork does not contain or deploy that worker; CI requires a valid
+`SCREENSHOT_API_KEY` for the hosted endpoint.
 
 ### Creating Components
 

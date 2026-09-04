@@ -449,7 +449,7 @@
     "test:watch": "vp test run --project=unit --watch",
     "typecheck": "tsc --noEmit",
     "validate:build": "vp test run --project=unit tests/imports/export-path-validation.test.ts",
-    "validate:changeset": "tsx ../../ci/scripts/validate-kumo-changeset.ts",
+    "validate:changeset": "tsx ../../ci/scripts/validate-package-changesets.ts",
     "test:browser": "vp test --config=vitest.browser.config.ts"
   },
   "dependencies": {

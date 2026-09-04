@@ -70,9 +70,18 @@ describe("packed consumer", () => {
 import { Button, Tooltip } from "octane-kumo";
 
 export const consumerView = (
-  <Tooltip content="Details" render={<Button variant="primary" />}>
-    Save
-  </Tooltip>
+  <div>
+    <Button aria-label="Save changes">Save</Button>
+    <Button aria-labelledby="save-label">Save</Button>
+    <Tooltip
+      content="Details"
+      render={(_triggerProps, state) => (
+        <Button aria-pressed={state.open} variant="primary" />
+      )}
+    >
+      Save
+    </Tooltip>
+  </div>
 );
 `,
       );
@@ -119,5 +128,5 @@ export const consumerView = (
     } finally {
       rmSync(temporaryRoot, { force: true, recursive: true });
     }
-  });
+  }, 15_000);
 });

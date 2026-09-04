@@ -16,7 +16,7 @@ ci/
 │   ├── kumo-docs-preview.ts   # Docs preview URL (priority 30)
 │   └── visual-regression.ts   # Screenshot diff report
 ├── scripts/
-│   ├── validate-kumo-changeset.ts   # Pre-push + CI changeset enforcement
+│   ├── validate-package-changesets.ts # Pre-push + CI changeset enforcement
 │   ├── ensure-changeset-config.ts   # Guard: .changeset/config.json exists
 │   ├── write-npm-report.ts          # Writes ci/reports/npm-release.json
 │   ├── write-kumo-docs-report.ts    # Writes ci/reports/kumo-docs-preview.json
@@ -40,7 +40,7 @@ ci/
 
 | Task                 | Location                                     | Notes                                                   |
 | -------------------- | -------------------------------------------- | ------------------------------------------------------- |
-| Changeset validation | `scripts/validate-kumo-changeset.ts`         | Used by `.vite-hooks/pre-push` AND CI                   |
+| Changeset validation | `scripts/validate-package-changesets.ts`     | Used by `.vite-hooks/pre-push` AND CI                   |
 | PR comment system    | `reporters/` + `scripts/post-pr-report.ts`   | Artifact bus via `ci/reports/*.json`                    |
 | Beta release         | `versioning/publish-beta.sh`                 | Calls version-beta.sh internally                        |
 | Production release   | `versioning/release-production.sh`           | Creates release branch + PR                             |
@@ -101,7 +101,8 @@ deploy-docs-preview.sh → write-kumo-docs-report.ts → ci/reports/kumo-docs-pr
 - **Verify-after-publish**: Both beta (45s) and production (30s) scripts sleep then check npm registry. No retry logic.
 - **`DRY_RUN=true`**: Production release script gates all destructive operations; logs what would happen
 - **Hardcoded repo**: `github-api.ts` uses `owner: "cloudflare", repo: "kumo"`
-- **Required secrets**: `NPM_TOKEN`, `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GITHUB_TOKEN`, `FIGMA_TOKEN` (optional)
+- **Required secrets**: `NPM_TOKEN`, `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GITHUB_TOKEN`, `SCREENSHOT_API_KEY`
 - **Visual regression**: Creates ephemeral `vr-screenshots-{pr}-{runId}` branches for diff images
+- **Screenshot service**: The worker implementation/deployment is externally maintained by Cloudflare; this fork only contains its authenticated CI client
 - **Fork PR security**: `preview-deploy.yml` handles fork PRs via `workflow_run` (no secrets in fork context)
 - **Composite action**: `.github/actions/install-dependencies/action.yml` installs pnpm 10.34.0, Node 24, with optional filter

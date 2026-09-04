@@ -10,8 +10,7 @@ demos/
 ├── *Demo.tsx       # Component-oriented exported examples
 ├── Chart/          # ECharts and chart-specific examples
 ├── data/           # Shared static demo fixtures
-├── HomeGrid.tsx    # Homepage showcase and route map
-└── FigmaPage.tsx   # Figma integration presentation
+└── HomeGrid.tsx    # Homepage showcase and route map
 ```
 
 ## WHERE TO LOOK

@@ -85,11 +85,6 @@ const coreDocs: LlmLink[] = [
     description: "Semantic color tokens and theme behavior.",
   },
   {
-    title: "Figma Resources",
-    path: "/figma.md",
-    description: "Design resources and Figma integration notes.",
-  },
-  {
     title: "Streaming",
     path: "/streaming.md",
     description: "Streaming interface patterns and examples.",

@@ -42,6 +42,36 @@ describe("Tooltip", () => {
     });
   });
 
+  it("passes trigger props and open state to a render callback", async () => {
+    render(Tooltip, {
+      props: {
+        content: "Stateful content",
+        delay: 0,
+        render: (triggerProps, state) => (
+          <button
+            {...triggerProps}
+            data-render-open={String(state.open)}
+            type="button"
+          >
+            Stateful trigger
+          </button>
+        ),
+      },
+    });
+    const trigger = screen.getByRole("button", { name: "Stateful trigger" });
+
+    expect(trigger.getAttribute("data-render-open")).toBe("false");
+    await act(async () => {
+      trigger.focus();
+      await Promise.resolve();
+    });
+
+    await waitFor(() => {
+      expect(trigger.getAttribute("data-render-open")).toBe("true");
+      expect(screen.getByText("Stateful content")).toBeTruthy();
+    });
+  });
+
   it("uses the Kumo portal container", async () => {
     const portalContainer = document.createElement("div");
     document.body.appendChild(portalContainer);

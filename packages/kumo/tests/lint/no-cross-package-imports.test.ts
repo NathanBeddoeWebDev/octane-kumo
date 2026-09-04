@@ -3,7 +3,7 @@ import { describe, it, expect } from "vite-plus/test";
 // Test the detection logic directly by importing and testing the pattern matching
 // Note: We can't easily test oxlint rules in isolation, so we test the core logic
 
-const PACKAGE_DIRS = new Set(["kumo", "kumo-docs-astro", "kumo-figma"]);
+const PACKAGE_DIRS = new Set(["kumo", "kumo-docs-astro", "octane-kumo"]);
 const CROSS_PACKAGE_PATTERN = /^((?:\.\.\/)+)([a-z0-9-]+)\//;
 
 function getCrossPackageImport(importPath: string): string | null {
@@ -48,9 +48,9 @@ describe("no-cross-package-imports", () => {
       );
     });
 
-    it("detects ../../kumo-figma/path", () => {
-      expect(getCrossPackageImport("../../kumo-figma/src/bar")).toBe(
-        "kumo-figma",
+    it("detects ../../octane-kumo/path", () => {
+      expect(getCrossPackageImport("../../octane-kumo/src/bar")).toBe(
+        "octane-kumo",
       );
     });
   });

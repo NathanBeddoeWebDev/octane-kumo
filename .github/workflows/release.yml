@@ -16,7 +16,7 @@ jobs:
       contents: write
       pull-requests: write
 
-    if: ${{ github.repository_owner == 'cloudflare' }}
+    if: ${{ github.repository == 'cloudflare/kumo' || github.repository == 'NathanBeddoeWebDev/octane-kumo' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -49,6 +49,6 @@ jobs:
 
       # Publish pkg-pr-new preview for Version Packages PR
       # (GITHUB_TOKEN PRs don't trigger workflows, so we do it here)
-      - name: Publish package preview
+      - name: Publish package previews
         if: ${{ steps.changesets.outputs.pullRequestNumber }}
-        run: vp dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo
+        run: vp dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo ./packages/octane-kumo

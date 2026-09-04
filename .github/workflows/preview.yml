@@ -52,7 +52,7 @@ jobs:
 
   pkg-preview:
     name: Package Preview
-    if: ${{ github.repository_owner == 'cloudflare' }}
+    if: ${{ github.repository == 'cloudflare/kumo' || github.repository == 'NathanBeddoeWebDev/octane-kumo' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -63,15 +63,13 @@ jobs:
 
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
-        with:
-          filter: "@cloudflare/kumo..."
 
       - uses: ./.github/actions/vite-task-cache
       - name: Build @cloudflare/kumo
         run: vp run build:kumo
 
-      - name: Publish preview package
-        run: vp dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo
+      - name: Publish preview packages
+        run: vp dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo ./packages/octane-kumo
 
   # Stage 1: Build docs (runs for ALL PRs including forks).
   # Produces an artifact consumed by either docs-deploy (internal) or

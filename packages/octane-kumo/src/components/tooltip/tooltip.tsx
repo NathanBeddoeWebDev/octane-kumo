@@ -69,6 +69,17 @@ export interface KumoTooltipVariantsProps {
   side?: KumoTooltipSide;
 }
 
+export interface TooltipTriggerState {
+  open: boolean;
+}
+
+export type TooltipRender =
+  | ElementDescriptor
+  | ((
+      props: JSX.IntrinsicElements["button"],
+      state: TooltipTriggerState,
+    ) => ElementDescriptor);
+
 export function tooltipVariants({
   side = KUMO_TOOLTIP_DEFAULT_VARIANTS.side,
 }: KumoTooltipVariantsProps = {}) {
@@ -110,7 +121,7 @@ export interface TooltipProps extends KumoTooltipVariantsProps {
   ) => void;
   onOpenChangeComplete?: (open: boolean) => void;
   open?: boolean;
-  render?: ElementDescriptor;
+  render?: TooltipRender;
   trackCursorAxis?: TooltipTrackCursorAxis;
   triggerId?: string | null;
 }
@@ -131,7 +142,7 @@ export function Tooltip({
   const contextContainer = usePortalContainer();
   const container = containerProp ?? contextContainer ?? undefined;
   const resolvedRender =
-    render ?? (asChild ? (children as ElementDescriptor) : undefined);
+    render ?? (asChild ? (children as TooltipRender) : undefined);
   const shouldUseRender = resolvedRender !== undefined;
 
   return (

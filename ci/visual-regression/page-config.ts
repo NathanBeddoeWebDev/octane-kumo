@@ -111,7 +111,6 @@ const SKIP_PATTERNS: RegExp[] = [
   /\.spec\.(ts|tsx)$/,
   /packages\/kumo\/ai\//,
   /packages\/kumo\/scripts\//,
-  /packages\/kumo-figma\//,
   /packages\/kumo\/src\/command-line\//,
   /packages\/kumo\/src\/catalog\//,
   /packages\/kumo\/src\/blocks\//,

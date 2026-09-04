@@ -350,7 +350,7 @@ export function extractDescription(
     // First, find the position of the component declaration
     // Handles: export function X, export const X =, function X(
     const componentDeclPattern = new RegExp(
-      `(?:exports+)?(?:function|const)s+${componentName}s*[=(]`,
+      `(?:export\\s+)?(?:function|const)\\s+${componentName}\\s*(?:=|\\()`,
     );
     const componentMatch = content.match(componentDeclPattern);
 

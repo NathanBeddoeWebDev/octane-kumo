@@ -55,10 +55,9 @@ const aliases: Record<string, string> = {
  * files of the sibling package during `astro dev`.
  *
  * **Why not just use `resolve.alias`?**
- * `resolve.alias` is a simple prefix match — it can't distinguish
- * `@cloudflare/kumo` from `@cloudflare/kumo-figma` without a trailing
- * slash, and it can't handle the overlapping sub-path exports cleanly.
- * A plugin gives us exact-match control.
+ * `resolve.alias` is a simple prefix match and can't handle the package's
+ * overlapping root and sub-path exports cleanly. A plugin gives us exact-match
+ * control.
  */
 export function kumoHmrPlugin() {
   return {

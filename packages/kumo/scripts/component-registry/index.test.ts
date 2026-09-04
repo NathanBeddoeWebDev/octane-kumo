@@ -7,7 +7,10 @@
  */
 
 import { describe, it, expect } from "vite-plus/test";
-import { detectComponentExportsFromIndex } from "./discovery.js";
+import {
+  detectComponentExportsFromIndex,
+  extractDescription,
+} from "./discovery.js";
 
 // =============================================================================
 // Tests for string transformation utilities
@@ -749,6 +752,31 @@ function writeTempFile(content: string): {
   writeFileSync(filePath, content);
   return { filePath, cleanup: () => unlinkSync(filePath) };
 }
+
+describe("extractDescription", () => {
+  const declarations = [
+    ["exported function", "export function Example() {}"],
+    ["non-exported function", "function Example() {}"],
+    ["exported const", "export const Example = () => null;"],
+    ["non-exported const", "const Example = () => null;"],
+  ] as const;
+
+  for (const [name, declaration] of declarations) {
+    it(`extracts JSDoc before an ${name}`, () => {
+      const { filePath, cleanup } = writeTempFile(
+        `/**\n * Concise component summary.\n *\n * @example\n * <Example />\n */\n${declaration}\n`,
+      );
+
+      try {
+        expect(extractDescription(filePath, "Example")).toBe(
+          "Concise component summary.",
+        );
+      } finally {
+        cleanup();
+      }
+    });
+  }
+});
 
 const cliFlags = {
   includeInheritedProps: false,

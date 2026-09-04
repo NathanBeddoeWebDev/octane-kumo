@@ -3,7 +3,7 @@ import { defineRule } from "@oxlint/plugins";
 const RULE_NAME = "no-cross-package-imports";
 
 // Known package directory names in this monorepo
-const PACKAGE_DIRS = new Set(["kumo", "kumo-docs-astro", "kumo-figma"]);
+const PACKAGE_DIRS = new Set(["kumo", "kumo-docs-astro", "octane-kumo"]);
 
 // Pattern to detect relative imports that traverse up to packages/ level
 // and then into a sibling package directory.

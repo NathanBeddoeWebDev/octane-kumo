@@ -237,12 +237,7 @@ function getTitleLabel(title: OctaneNode) {
 
 type ButtonBaseProps = Omit<
   NativeButtonProps,
-  | "aria-label"
-  | "aria-labelledby"
-  | "children"
-  | "className"
-  | "style"
-  | "title"
+  "children" | "className" | "style" | "title"
 > & {
   children?: OctaneNode;
   className?: string;

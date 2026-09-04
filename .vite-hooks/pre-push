@@ -13,4 +13,4 @@ if [ -d "$gitdir/rebase-merge" ] || [ -d "$gitdir/rebase-apply" ] || [ -f "$gitd
   exit 0
 fi
 
-pnpm tsx ci/scripts/validate-kumo-changeset.ts
+pnpm tsx ci/scripts/validate-package-changesets.ts

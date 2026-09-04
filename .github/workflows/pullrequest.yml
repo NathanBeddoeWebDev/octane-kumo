@@ -24,8 +24,8 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/install-dependencies
       - name: Test changeset validation
-        run: vp exec tsx --test ci/utils/git-operations.test.ts
-      - run: vp exec tsx ci/scripts/validate-kumo-changeset.ts
+        run: vp exec tsx --test ci/utils/git-operations.test.ts ci/scripts/validate-package-changesets.test.ts
+      - run: vp exec tsx ci/scripts/validate-package-changesets.ts
         env:
           NO_CHANGESET_REQUIRED: ${{ contains(github.event.pull_request.labels.*.name, 'no-changeset-required') }}
 
@@ -102,8 +102,6 @@ jobs:
           name: kumo-ai
           path: packages/kumo/ai
       - uses: ./.github/actions/vite-task-cache
-      # kumo-figma imports generated JSON data; type-aware lint needs it
-      - run: vp run gen:figma-data
       - run: vp run --filter @cloudflare/kumo lint:oxlint
       - run: vp lint packages/*/src
 
@@ -146,6 +144,19 @@ jobs:
           path: packages/kumo/ai
       - run: vp run --filter @cloudflare/kumo test
       - run: vp run test:ci
+
+  test-octane-kumo:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: ./.github/actions/install-dependencies
+        with:
+          filter: "octane-kumo..."
+      - uses: ./.github/actions/vite-task-cache
+      - run: vp run --filter octane-kumo test
 
   test-react-compatibility:
     needs: build

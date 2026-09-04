@@ -145,12 +145,6 @@ const STATIC_PAGES: Array<{
     category: "Guides",
   },
   {
-    name: "Figma",
-    description: "Using Kumo components in Figma with the Kumo Figma plugin.",
-    url: "/figma",
-    category: "Guides",
-  },
-  {
     name: "Component Registry",
     description: "Browse and explore the full Kumo component registry.",
     url: "/registry",
