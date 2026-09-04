@@ -2,21 +2,29 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 import {
+  Badge as RootBadge,
   Button as RootButton,
   Checkbox as RootCheckbox,
+  Collapsible as RootCollapsible,
+  Empty as RootEmpty,
   Field as RootField,
   Input as RootInput,
   InputArea as RootInputArea,
   InputGroup as RootInputGroup,
   Label as RootLabel,
+  Meter as RootMeter,
   Radio as RootRadio,
   RadioGroup as RootRadioGroup,
   SensitiveInput as RootSensitiveInput,
+  SkeletonLine as RootSkeletonLine,
   Switch as RootSwitch,
   Textarea as RootTextarea,
 } from "octane-kumo";
+import { Badge as SubpathBadge } from "octane-kumo/components/badge";
 import { Button as SubpathButton } from "octane-kumo/components/button";
 import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
+import { Collapsible as SubpathCollapsible } from "octane-kumo/components/collapsible";
+import { Empty as SubpathEmpty } from "octane-kumo/components/empty";
 import { Field as SubpathField } from "octane-kumo/components/field";
 import {
   Input as SubpathInput,
@@ -25,6 +33,8 @@ import {
 } from "octane-kumo/components/input";
 import { InputGroup as SubpathInputGroup } from "octane-kumo/components/input-group";
 import { Label as SubpathLabel } from "octane-kumo/components/label";
+import { SkeletonLine as SubpathSkeletonLine } from "octane-kumo/components/loader";
+import { Meter as SubpathMeter } from "octane-kumo/components/meter";
 import {
   Radio as SubpathRadio,
   RadioGroup as SubpathRadioGroup,
@@ -44,16 +54,21 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootBadge).toBe(SubpathBadge);
     expect(RootButton).toBe(SubpathButton);
     expect(RootCheckbox).toBe(SubpathCheckbox);
+    expect(RootCollapsible).toBe(SubpathCollapsible);
+    expect(RootEmpty).toBe(SubpathEmpty);
     expect(RootField).toBe(SubpathField);
     expect(RootInput).toBe(SubpathInput);
     expect(RootInputArea).toBe(SubpathInputArea);
     expect(RootInputGroup).toBe(SubpathInputGroup);
     expect(RootLabel).toBe(SubpathLabel);
+    expect(RootMeter).toBe(SubpathMeter);
     expect(RootRadio).toBe(SubpathRadio);
     expect(RootRadioGroup).toBe(SubpathRadioGroup);
     expect(RootSensitiveInput).toBe(SubpathSensitiveInput);
+    expect(RootSkeletonLine).toBe(SubpathSkeletonLine);
     expect(RootSwitch).toBe(SubpathSwitch);
     expect(RootTextarea).toBe(RootInputArea);
     expect(RootTextarea).toBe(SubpathTextarea);

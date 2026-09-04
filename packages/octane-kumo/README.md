@@ -5,11 +5,12 @@ observable compatibility with `@cloudflare/kumo@2.13.1`, expressed through
 Octane's native component, ref, and event contracts.
 
 This package is an early, source-published port. Its native surface currently
-contains `Button`, `RefreshButton`, `LinkButton`, `Loader`, `Tooltip`, `Label`,
-`Field`, `Input`, `InputArea`/`Textarea`, `InputGroup`, `SensitiveInput`, and the
-complete `Checkbox`, `Switch`, and generic `Radio` families (`Group`, `Item`,
-and `Legend`), plus the direct `RadioGroup` export, `LinkProvider`,
-`TooltipProvider`, and `KumoPortalProvider`.
+contains `Badge`, `Button`, `RefreshButton`, `LinkButton`, `Loader`,
+`SkeletonLine`, `Tooltip`, `Label`, `Field`, `Input`, `InputArea`/`Textarea`,
+`InputGroup`, `SensitiveInput`, `Meter`, `Empty`, and the complete
+`Collapsible`, `Checkbox`, `Switch`, and generic `Radio` families (`Group`,
+`Item`, and `Legend` where applicable), plus the direct `RadioGroup` export,
+`LinkProvider`, `TooltipProvider`, and `KumoPortalProvider`.
 
 ```tsx
 /** @jsxImportSource octane */
@@ -30,15 +31,15 @@ export function SaveAction() {
 
 ## Current limits
 
-Export presence is not a parity claim. Button, Tooltip, Input, InputArea,
-InputGroup, SensitiveInput, Checkbox, Switch, and Radio have native interaction
-and SSR/hydration coverage; Label and Field associations are tested; a packed
-external consumer is compiled; the native bundle graph is checked for React
-imports; and representative light/dark, validation, disabled, card,
-transitioning, masked, and open-popup states are rendered in a reproducible
-fixture. SensitiveInput reveal/copy interaction is manually exercised in that
-fixture. Broad differential parity and the rest of the component catalog remain
-in progress. See
+Export presence is not a parity claim. Badge, Button, Collapsible, Empty,
+Meter, SkeletonLine, Tooltip, Input, InputArea, InputGroup, SensitiveInput,
+Checkbox, Switch, and Radio have native interaction and SSR/hydration coverage;
+Label and Field associations are tested; a packed external consumer is
+compiled; the native bundle graph is checked for React imports; and
+representative light/dark states are rendered in a reproducible fixture.
+Collapsible opening and Empty and SensitiveInput copy interactions are manually
+exercised in that fixture. Broad differential parity and the rest of the
+component catalog remain in progress. See
 [`status.json`](./status.json),
 [`audit/export-crosswalk.json`](./audit/export-crosswalk.json), and [`PORTING.md`](./PORTING.md)
 for the exact boundary.

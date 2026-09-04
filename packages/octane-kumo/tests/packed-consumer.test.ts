@@ -68,21 +68,29 @@ describe("packed consumer", () => {
         resolve(consumerDirectory, "consumer.tsx"),
         `/** @jsxImportSource octane */
 import {
+  Badge,
   Button,
   Checkbox,
+  Collapsible,
+  Empty,
   Field,
   Input,
   InputArea,
   InputGroup,
   Label,
+  Meter,
   Radio,
   RadioGroup,
   SensitiveInput,
+  SkeletonLine,
   Switch,
   Textarea,
   Tooltip,
 } from "octane-kumo";
+import { Badge as BadgeSubpath } from "octane-kumo/components/badge";
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
+import { Collapsible as CollapsibleSubpath } from "octane-kumo/components/collapsible";
+import { Empty as EmptySubpath } from "octane-kumo/components/empty";
 import { Field as FieldSubpath } from "octane-kumo/components/field";
 import {
   Input as InputSubpath,
@@ -91,6 +99,8 @@ import {
 } from "octane-kumo/components/input";
 import { InputGroup as InputGroupSubpath } from "octane-kumo/components/input-group";
 import { Label as LabelSubpath } from "octane-kumo/components/label";
+import { SkeletonLine as SkeletonLineSubpath } from "octane-kumo/components/loader";
+import { Meter as MeterSubpath } from "octane-kumo/components/meter";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
 import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
 import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
@@ -99,20 +109,26 @@ const inputRef: { current: HTMLInputElement | null } = { current: null };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
 void [
+  BadgeSubpath,
   CheckboxSubpath,
+  CollapsibleSubpath,
+  EmptySubpath,
   FieldSubpath,
   InputSubpath,
   InputAreaSubpath,
   InputGroupSubpath,
   LabelSubpath,
+  MeterSubpath,
   RadioSubpath,
   SensitiveInputSubpath,
+  SkeletonLineSubpath,
   SwitchSubpath,
   TextareaSubpath,
 ];
 
 export const consumerView = (
   <div>
+    <Badge variant="success" appearance="dot">Operational</Badge>
     <Button aria-label="Save changes">Save</Button>
     <Button aria-labelledby="save-label">Save</Button>
     <Tooltip
@@ -192,6 +208,23 @@ export const consumerView = (
       <Radio.Item<number> label="10" value={10} />
       <Radio.Item<number> label="25" value={25} />
     </RadioGroup>
+    <Meter label="Storage" max={1000} value={650} />
+    <SkeletonLine blockHeight={24} minWidth={60} maxWidth={80} />
+    <Empty
+      commandLine="pnpm add octane-kumo"
+      contents={<Button>Create resource</Button>}
+      title="No resources"
+    />
+    <Collapsible.Root
+      defaultOpen
+      onOpenChange={(open, details) => {
+        Boolean(open);
+        details.allowPropagation();
+      }}
+    >
+      <Collapsible.DefaultTrigger>Details</Collapsible.DefaultTrigger>
+      <Collapsible.DefaultPanel keepMounted>Content</Collapsible.DefaultPanel>
+    </Collapsible.Root>
   </div>
 );
 `,

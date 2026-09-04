@@ -38,6 +38,11 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./components/badge": {
+      "types": "./src/components/badge/index.ts",
+      "import": "./src/components/badge/index.ts",
+      "default": "./src/components/badge/index.ts"
+    },
     "./components/button": {
       "types": "./src/components/button/index.ts",
       "import": "./src/components/button/index.ts",
@@ -47,6 +52,16 @@
       "types": "./src/components/checkbox/index.ts",
       "import": "./src/components/checkbox/index.ts",
       "default": "./src/components/checkbox/index.ts"
+    },
+    "./components/collapsible": {
+      "types": "./src/components/collapsible/index.ts",
+      "import": "./src/components/collapsible/index.ts",
+      "default": "./src/components/collapsible/index.ts"
+    },
+    "./components/empty": {
+      "types": "./src/components/empty/index.ts",
+      "import": "./src/components/empty/index.ts",
+      "default": "./src/components/empty/index.ts"
     },
     "./components/field": {
       "types": "./src/components/field/index.ts",
@@ -72,6 +87,11 @@
       "types": "./src/components/loader/index.ts",
       "import": "./src/components/loader/index.ts",
       "default": "./src/components/loader/index.ts"
+    },
+    "./components/meter": {
+      "types": "./src/components/meter/index.ts",
+      "import": "./src/components/meter/index.ts",
+      "default": "./src/components/meter/index.ts"
     },
     "./components/radio": {
       "types": "./src/components/radio/index.ts",

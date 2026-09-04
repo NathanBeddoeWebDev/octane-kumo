@@ -3,7 +3,9 @@ import { act, fireEvent, waitFor, within } from "@octanejs/testing-library";
 import { createElement, hydrateRoot, type Root } from "octane";
 import { describe, expect, it, vi } from "vite-plus/test";
 import { ButtonHydrationFixture } from "./fixtures/button-hydration";
+import { CollapsibleHydrationFixture } from "./fixtures/collapsible-hydration";
 import { FormHydrationFixture } from "./fixtures/form-hydration";
+import { StatusHydrationFixture } from "./fixtures/status-hydration";
 import { TooltipHydrationFixture } from "./fixtures/tooltip-hydration";
 import { renderHydrationFixture } from "./hydration-ssr";
 
@@ -80,6 +82,141 @@ describe("Tooltip SSR and hydration", () => {
       await waitFor(() => {
         expect(hydratedTrigger?.hasAttribute("data-popup-open")).toBe(true);
         expect(document.body.textContent).toContain("Hydrated help");
+      });
+      expect(errors).not.toHaveBeenCalled();
+    } finally {
+      root?.unmount();
+      errors.mockRestore();
+      container.remove();
+    }
+  });
+});
+
+describe("Status and disclosure SSR and hydration", () => {
+  it("adopts status markup and preserves copy interaction", async () => {
+    const serverResult = await renderHydrationFixture(
+      "tests/fixtures/status-hydration.tsx",
+      "StatusHydrationFixture",
+    );
+    const container = document.createElement("div");
+    container.innerHTML = serverResult.html;
+    document.body.appendChild(container);
+    const serverBadge = container.querySelector(
+      '[data-kumo-component="Badge"]',
+    );
+    const serverSkeleton = container.querySelector(
+      '[data-kumo-component="SkeletonLine"]',
+    ) as HTMLElement | null;
+    const serverSkeletonStyles = [
+      "--skeleton-width",
+      "--shimmer-duration",
+      "--shimmer-delay",
+    ].map((property) => serverSkeleton?.style.getPropertyValue(property));
+    const serverMeter = container.querySelector(
+      '[data-kumo-component="Meter"]',
+    );
+    const serverEmpty = container.querySelector(
+      '[data-kumo-component="Empty"]',
+    );
+    const serverCopy = within(container).getByRole("button", {
+      name: "Copy command",
+    });
+    const writeText = vi.fn(async () => {});
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+    const errors = vi.spyOn(console, "error").mockImplementation(() => {});
+    let root: Root | undefined;
+
+    try {
+      expect(serverMeter?.getAttribute("aria-valuenow")).toBe("65");
+
+      await act(async () => {
+        root = hydrateRoot(
+          container,
+          createElement(StatusHydrationFixture, {}),
+        );
+        await Promise.resolve();
+      });
+
+      expect(container.querySelector('[data-kumo-component="Badge"]')).toBe(
+        serverBadge,
+      );
+      const hydratedSkeleton = container.querySelector(
+        '[data-kumo-component="SkeletonLine"]',
+      ) as HTMLElement | null;
+      expect(hydratedSkeleton).toBe(serverSkeleton);
+      expect(
+        ["--skeleton-width", "--shimmer-duration", "--shimmer-delay"].map(
+          (property) => hydratedSkeleton?.style.getPropertyValue(property),
+        ),
+      ).toEqual(serverSkeletonStyles);
+      expect(container.querySelector('[data-kumo-component="Meter"]')).toBe(
+        serverMeter,
+      );
+      expect(container.querySelector('[data-kumo-component="Empty"]')).toBe(
+        serverEmpty,
+      );
+      expect(
+        within(container).getByRole("button", { name: "Copy command" }),
+      ).toBe(serverCopy);
+
+      await act(async () => {
+        fireEvent.click(serverCopy);
+        await Promise.resolve();
+      });
+      await waitFor(() => {
+        expect(
+          within(container).getByRole("button", { name: "Copied" }),
+        ).toBeTruthy();
+      });
+      expect(writeText).toHaveBeenCalledWith("pnpm add octane-kumo");
+      expect(errors).not.toHaveBeenCalled();
+    } finally {
+      root?.unmount();
+      errors.mockRestore();
+      container.remove();
+    }
+  });
+
+  it("opens an initially closed disclosure after hydration", async () => {
+    const serverResult = await renderHydrationFixture(
+      "tests/fixtures/collapsible-hydration.tsx",
+      "CollapsibleHydrationFixture",
+    );
+    const container = document.createElement("div");
+    container.innerHTML = serverResult.html;
+    document.body.appendChild(container);
+    const serverTrigger = within(container).getByRole("button", {
+      name: "Hydrated details",
+    });
+    const serverPanel = within(container)
+      .getByText("Hydrated disclosure content")
+      .closest('[data-kumo-part="panel"]');
+    const errors = vi.spyOn(console, "error").mockImplementation(() => {});
+    let root: Root | undefined;
+
+    try {
+      expect(serverTrigger.getAttribute("aria-expanded")).toBe("false");
+      expect(serverPanel?.hasAttribute("hidden")).toBe(true);
+
+      await act(async () => {
+        root = hydrateRoot(
+          container,
+          createElement(CollapsibleHydrationFixture, {}),
+        );
+        await Promise.resolve();
+      });
+      expect(
+        within(container).getByRole("button", { name: "Hydrated details" }),
+      ).toBe(serverTrigger);
+
+      fireEvent.click(serverTrigger);
+      await waitFor(() => {
+        expect(
+          within(container).getByText("Hydrated disclosure content"),
+        ).toBeTruthy();
       });
       expect(errors).not.toHaveBeenCalled();
     } finally {

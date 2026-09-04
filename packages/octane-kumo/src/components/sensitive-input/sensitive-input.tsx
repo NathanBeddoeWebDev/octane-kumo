@@ -18,6 +18,7 @@ import {
 } from "../input/input";
 import { Field, normalizeFieldError, type FieldError } from "../field/field";
 import { cn } from "../../utils/cn";
+import { copyText } from "../../utils/copy-text";
 
 export const KUMO_SENSITIVE_INPUT_VARIANTS = KUMO_INPUT_VARIANTS;
 
@@ -109,35 +110,6 @@ export type SensitiveInputProps = Omit<
   value?: string;
   variant?: KumoInputVariant;
 };
-
-function fallbackCopy(value: string): boolean {
-  if (typeof document === "undefined") return false;
-
-  const textarea = document.createElement("textarea");
-  textarea.value = value;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "absolute";
-  textarea.style.left = "-9999px";
-  document.body.appendChild(textarea);
-  const selection = document.getSelection();
-  const previousRange = selection?.rangeCount
-    ? selection.getRangeAt(0)
-    : undefined;
-  textarea.select();
-
-  try {
-    return document.execCommand("copy");
-  } catch (error) {
-    console.warn("Clipboard copy failed", error);
-    return false;
-  } finally {
-    textarea.remove();
-    if (previousRange) {
-      selection?.removeAllRanges();
-      selection?.addRange(previousRange);
-    }
-  }
-}
 
 export function SensitiveInput({
   "aria-label": ariaLabel,
@@ -295,18 +267,7 @@ export function SensitiveInput({
   const copyToClipboard = useCallback(
     async (event: MouseEvent) => {
       event.stopPropagation();
-      let copiedValue = false;
-
-      try {
-        if (typeof navigator.clipboard?.writeText === "function") {
-          await navigator.clipboard.writeText(value);
-          copiedValue = true;
-        }
-      } catch {
-        copiedValue = false;
-      }
-
-      if (!copiedValue) copiedValue = fallbackCopy(value);
+      const copiedValue = await copyText(value);
       if (copiedValue) {
         setCopied(true);
         onCopy?.();

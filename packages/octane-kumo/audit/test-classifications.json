@@ -12,9 +12,14 @@
       "reason": "Covers standalone Checkbox and the compound Group, Item, and Legend family, including native events and refs, controlled and uncontrolled state, form values, label activation, accessibility associations, and validation states."
     },
     {
+      "path": "packages/octane-kumo/tests/collapsible.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers Collapsible's root, trigger, panel, and default compound APIs, including controlled and uncontrolled state, native event details, disabled behavior, render composition, state callbacks, refs, and panel mounting."
+    },
+    {
       "path": "packages/octane-kumo/tests/hydration.test.ts",
       "disposition": "octane-only-framework-contract",
-      "reason": "Checks Button, Tooltip, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, and Radio through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+      "reason": "Checks Button, Tooltip, Badge, Meter, SkeletonLine, Empty, Collapsible, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, and Radio through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
     },
     {
       "path": "packages/octane-kumo/tests/input-area.test.tsx",
@@ -47,6 +52,11 @@
       "reason": "Covers SensitiveInput's empty, masked, and revealed states, pointer and keyboard operation, controlled and uncontrolled values, native refs and form behavior, Clipboard API and fallback copying, accessible instructions and announcements, validation, and Field integration."
     },
     {
+      "path": "packages/octane-kumo/tests/status-display.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers Badge variants and icon forms, Meter labels and values, deterministic and bounded SkeletonLine styles, and Empty variants, contents, successful command copying, and accessible announcements."
+    },
+    {
       "path": "packages/octane-kumo/tests/switch.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Covers standalone Switch and the compound Group, Item, and Legend family, including label activation, native refs and form values, controlled and uncontrolled state, disabled and read-only behavior, transitioning, group naming, and inherited state."
@@ -69,7 +79,7 @@
     {
       "path": "packages/octane-kumo/tests/packed-consumer.test.ts",
       "disposition": "repo-authored-package-contract",
-      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, and generic Radio usage through root and component-subpath exports."
+      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Badge, Button, Collapsible, Empty, Meter, SkeletonLine, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, and generic Radio usage through root and component-subpath exports."
     },
     {
       "path": "packages/octane-kumo/tests/styles.test.ts",

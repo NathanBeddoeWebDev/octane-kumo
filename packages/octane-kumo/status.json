@@ -5,14 +5,17 @@
     "source": "https://github.com/cloudflare/kumo.git",
     "license": "MIT"
   },
-  "surface": "The Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, KumoPortalProvider, Label, Field, Input, InputArea and its Textarea alias, InputGroup, SensitiveInput, the complete Checkbox and Switch families, and the generic Radio family with its direct RadioGroup export. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
+  "surface": "The Octane-native surface contains Badge, Banner, Breadcrumbs, Button, RefreshButton, LinkButton, Loader and SkeletonLine, Tooltip, TooltipProvider, LinkProvider, KumoPortalProvider, Label, Field, Input, InputArea and its Textarea alias, InputGroup, SensitiveInput, Meter, Empty, Text, Link, LayerCard and its deprecated Surface wrapper, Grid and GridItem, CloudflareLogo and PoweredByCloudflare, TableOfContents with its active-id hook, the complete Collapsible, Checkbox, Sidebar, and Switch families, and the generic Radio family with its direct RadioGroup export. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
   "divergences": [
     "Handlers receive native DOM events rather than React synthetic events.",
     "Refs use Octane ref-as-prop rather than React forwardRef.",
     "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
+    "Collapsible panels are kept mounted only during SSR hydration to avoid Octane's detached insertion-anchor failure when an initially closed Base UI disclosure first opens; normal post-hydration mounting behavior is preserved.",
+    "Sidebar Content uses a plain overflow viewport because @octanejs/base-ui 0.1.48 has no scroll-area module; custom thumb and mask-fade are dropped while data-sidebar viewport attributes for scrollToItem are preserved.",
+    "Banner inline-link detection matches Link by displayName/data-marker instead of React element-type identity to avoid cross-component coupling.",
     "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
   ],
-  "ssr": "Button, Tooltip, Input, InputArea, InputGroup, SensitiveInput, and standalone and grouped Checkbox, Switch, and Radio are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
+  "ssr": "Button, Tooltip, Badge, Meter, SkeletonLine, Empty, Collapsible, Input, InputArea, InputGroup, SensitiveInput, and standalone and grouped Checkbox, Switch, and Radio are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
   "provenance": {
     "source": "https://github.com/cloudflare/kumo/tree/2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
     "license": "MIT",
@@ -29,10 +32,14 @@
     "Standalone Checkbox and the compound Group, Item, and Legend family cover native events and refs, controlled and uncontrolled state, label activation, form values, validation, accessibility associations, and hydration.",
     "Standalone Switch and the compound Group, Item, and Legend family cover controlled and uncontrolled state, single label activation, refs, native form values, disabled and read-only behavior, accessible grouping, transitioning, semantic-token styling, and hydration.",
     "The generic Radio and direct RadioGroup exports cover accessible naming, controlled and uncontrolled selection, native event details, roving keyboard focus, number and enum types, form serialization, group states, card appearance, and hydration.",
+    "Badge, Meter, SkeletonLine, and Empty cover their Kumo variants, labels and values, SSR-stable seeded shimmer styles, flexible content, accessible command copying, semantic-token styling, and hydration.",
+    "The compound Collapsible family covers controlled and uncontrolled state, native event details, disabled behavior, render composition, state callbacks, refs, panel mounting, initially closed hydration, and representative visuals.",
     "The package contract resolves root and component subpath imports, rejects React or ReactCompat imports in native source, and verifies the bundled native module graph remains React-free.",
-    "A temporary external consumer compiles Button, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, and generic Radio APIs from the real packed tarball on every test run.",
+    "A temporary external consumer compiles Badge, Banner, Breadcrumbs, Button, CloudflareLogo, Collapsible, Empty, Grid/GridItem, Meter, SkeletonLine, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, Text, Link, LayerCard, Surface, Sidebar, TableOfContents, and generic Radio APIs from the real packed tarball on every test run.",
     "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
-    "Representative Button variants, disabled/loading states, an open Tooltip, Input and InputArea validation states, all InputGroup focus modes, SensitiveInput empty/masked states, Checkbox and Switch standalone and group states, and default, error, disabled, and card Radio states have a reproducible light/dark visual fixture; SensitiveInput reveal and copy interactions were manually exercised in that fixture.",
+    "Representative Button, Badge, Meter, SkeletonLine, Empty, Collapsible, Tooltip, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, and Radio states have a reproducible light/dark visual fixture; Collapsible opening and Empty and SensitiveInput copy interactions were manually exercised in that fixture.",
+    "LayerCard, Surface, Grid/GridItem, Text, Link, CloudflareLogo/PoweredByCloudflare, Banner, Breadcrumbs, TableOfContents, and the full Sidebar compound family are Octane-native with variant contracts, compound APIs, and package-as-consumer type checks; shell render coverage lives in tests/shell.test.tsx.",
+    "Sidebar preserves provider state, responsive mobile sheet, peek/resize/scrollToItem registries, and all compound members; ScrollArea fallback is the only accepted visual divergence in this slice.",
     "No React differential lane has been recorded yet."
   ],
   "docs": [

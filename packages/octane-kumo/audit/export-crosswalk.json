@@ -12,7 +12,19 @@
   },
   "entries": [
     { "source": "Autocomplete", "target": "Autocomplete", "status": "planned" },
-    { "source": "Badge", "target": "Badge", "status": "planned" },
+    {
+      "source": "Badge",
+      "target": "Badge",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/status-display.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ]
+    },
     { "source": "Banner", "target": "Banner", "status": "planned" },
     { "source": "Breadcrumbs", "target": "Breadcrumbs", "status": "planned" },
     {
@@ -55,7 +67,20 @@
     },
     { "source": "Code", "target": "Code", "status": "planned" },
     { "source": "CodeBlock", "target": "CodeBlock", "status": "planned" },
-    { "source": "Collapsible", "target": "Collapsible", "status": "planned" },
+    {
+      "source": "Collapsible",
+      "target": "Collapsible",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/collapsible.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Root, Trigger, Panel, DefaultTrigger, and DefaultPanel are native. The panel is kept mounted only during SSR hydration to avoid a detached Octane insertion anchor when opening an initially closed Base UI disclosure; normal post-hydration mounting behavior is preserved."
+    },
     { "source": "Combobox", "target": "Combobox", "status": "planned" },
     {
       "source": "CommandPalette",
@@ -75,7 +100,19 @@
     },
     { "source": "Dialog", "target": "Dialog", "status": "planned" },
     { "source": "DropdownMenu", "target": "DropdownMenu", "status": "planned" },
-    { "source": "Empty", "target": "Empty", "status": "planned" },
+    {
+      "source": "Empty",
+      "target": "Empty",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/status-display.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ]
+    },
     {
       "source": "Field",
       "target": "Field",
@@ -154,7 +191,19 @@
       "evidence": ["tests/button.test.tsx"]
     },
     { "source": "MenuBar", "target": "MenuBar", "status": "planned" },
-    { "source": "Meter", "target": "Meter", "status": "planned" },
+    {
+      "source": "Meter",
+      "target": "Meter",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/status-display.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ]
+    },
     { "source": "Pagination", "target": "Pagination", "status": "planned" },
     { "source": "Popover", "target": "Popover", "status": "planned" },
     {
@@ -212,7 +261,19 @@
       "notes": "Empty, masked, and revealed states; pointer and keyboard operation; controlled and uncontrolled values; native refs and form behavior; Clipboard API and fallback copying; accessible instructions and announcements; Field integration; SSR/hydration; and representative visuals are covered."
     },
     { "source": "Sidebar", "target": "Sidebar", "status": "planned" },
-    { "source": "SkeletonLine", "target": "SkeletonLine", "status": "planned" },
+    {
+      "source": "SkeletonLine",
+      "target": "SkeletonLine",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/status-display.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ]
+    },
     { "source": "Surface", "target": "Surface", "status": "planned" },
     {
       "source": "Switch",
