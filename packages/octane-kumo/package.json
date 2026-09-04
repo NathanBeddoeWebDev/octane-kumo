@@ -43,6 +43,16 @@
       "import": "./src/components/badge/index.ts",
       "default": "./src/components/badge/index.ts"
     },
+    "./components/banner": {
+      "types": "./src/components/banner/index.ts",
+      "import": "./src/components/banner/index.ts",
+      "default": "./src/components/banner/index.ts"
+    },
+    "./components/breadcrumbs": {
+      "types": "./src/components/breadcrumbs/index.ts",
+      "import": "./src/components/breadcrumbs/index.ts",
+      "default": "./src/components/breadcrumbs/index.ts"
+    },
     "./components/button": {
       "types": "./src/components/button/index.ts",
       "import": "./src/components/button/index.ts",
@@ -52,6 +62,11 @@
       "types": "./src/components/checkbox/index.ts",
       "import": "./src/components/checkbox/index.ts",
       "default": "./src/components/checkbox/index.ts"
+    },
+    "./components/cloudflare-logo": {
+      "types": "./src/components/cloudflare-logo/index.ts",
+      "import": "./src/components/cloudflare-logo/index.ts",
+      "default": "./src/components/cloudflare-logo/index.ts"
     },
     "./components/collapsible": {
       "types": "./src/components/collapsible/index.ts",
@@ -68,6 +83,11 @@
       "import": "./src/components/field/index.ts",
       "default": "./src/components/field/index.ts"
     },
+    "./components/grid": {
+      "types": "./src/components/grid/index.ts",
+      "import": "./src/components/grid/index.ts",
+      "default": "./src/components/grid/index.ts"
+    },
     "./components/input": {
       "types": "./src/components/input/index.ts",
       "import": "./src/components/input/index.ts",
@@ -82,6 +102,16 @@
       "types": "./src/components/label/index.ts",
       "import": "./src/components/label/index.ts",
       "default": "./src/components/label/index.ts"
+    },
+    "./components/layer-card": {
+      "types": "./src/components/layer-card/index.ts",
+      "import": "./src/components/layer-card/index.ts",
+      "default": "./src/components/layer-card/index.ts"
+    },
+    "./components/link": {
+      "types": "./src/components/link/index.ts",
+      "import": "./src/components/link/index.ts",
+      "default": "./src/components/link/index.ts"
     },
     "./components/loader": {
       "types": "./src/components/loader/index.ts",
@@ -103,10 +133,30 @@
       "import": "./src/components/sensitive-input/index.ts",
       "default": "./src/components/sensitive-input/index.ts"
     },
+    "./components/sidebar": {
+      "types": "./src/components/sidebar/index.ts",
+      "import": "./src/components/sidebar/index.ts",
+      "default": "./src/components/sidebar/index.ts"
+    },
+    "./components/surface": {
+      "types": "./src/components/surface/index.ts",
+      "import": "./src/components/surface/index.ts",
+      "default": "./src/components/surface/index.ts"
+    },
     "./components/switch": {
       "types": "./src/components/switch/index.ts",
       "import": "./src/components/switch/index.ts",
       "default": "./src/components/switch/index.ts"
+    },
+    "./components/table-of-contents": {
+      "types": "./src/components/table-of-contents/index.ts",
+      "import": "./src/components/table-of-contents/index.ts",
+      "default": "./src/components/table-of-contents/index.ts"
+    },
+    "./components/text": {
+      "types": "./src/components/text/index.ts",
+      "import": "./src/components/text/index.ts",
+      "default": "./src/components/text/index.ts"
     },
     "./components/tooltip": {
       "types": "./src/components/tooltip/index.ts",

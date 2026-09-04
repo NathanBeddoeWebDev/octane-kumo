@@ -224,13 +224,13 @@ export function RadioItem<Value = string>({
           "group relative m-0 flex items-start gap-3 rounded-lg border border-kumo-hairline bg-kumo-base p-3 transition-colors has-[[data-checked]]:border-kumo-interact has-[[data-checked]]:bg-kumo-tint",
           effectiveControlPosition === "start" && "flex-row-reverse",
           variant === "error" &&
-            "border-kumo-danger has-[[data-checked]]:border-kumo-danger has-[[data-checked]]:bg-kumo-base",
+            "border-kumo-danger has-data-checked:border-kumo-danger has-data-checked:bg-kumo-base",
           disabled
             ? "cursor-not-allowed opacity-50"
             : cn(
-                "cursor-pointer has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50",
+                "cursor-pointer has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50",
                 variant !== "error" &&
-                  "hover:not-has-[[data-disabled]]:bg-kumo-tint",
+                  "hover:not-has-data-disabled:bg-kumo-tint",
               ),
           className,
         )}

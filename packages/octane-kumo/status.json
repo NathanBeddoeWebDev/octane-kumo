@@ -12,7 +12,6 @@
     "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
     "Collapsible panels are kept mounted only during SSR hydration to avoid Octane's detached insertion-anchor failure when an initially closed Base UI disclosure first opens; normal post-hydration mounting behavior is preserved.",
     "Sidebar Content uses a plain overflow viewport because @octanejs/base-ui 0.1.48 has no scroll-area module; custom thumb and mask-fade are dropped while data-sidebar viewport attributes for scrollToItem are preserved.",
-    "Banner inline-link detection matches Link by displayName/data-marker instead of React element-type identity to avoid cross-component coupling.",
     "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
   ],
   "ssr": "Button, Tooltip, Badge, Meter, SkeletonLine, Empty, Collapsible, Input, InputArea, InputGroup, SensitiveInput, and standalone and grouped Checkbox, Switch, and Radio are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
@@ -35,11 +34,11 @@
     "Badge, Meter, SkeletonLine, and Empty cover their Kumo variants, labels and values, SSR-stable seeded shimmer styles, flexible content, accessible command copying, semantic-token styling, and hydration.",
     "The compound Collapsible family covers controlled and uncontrolled state, native event details, disabled behavior, render composition, state callbacks, refs, panel mounting, initially closed hydration, and representative visuals.",
     "The package contract resolves root and component subpath imports, rejects React or ReactCompat imports in native source, and verifies the bundled native module graph remains React-free.",
-    "A temporary external consumer compiles Badge, Banner, Breadcrumbs, Button, CloudflareLogo, Collapsible, Empty, Grid/GridItem, Meter, SkeletonLine, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, Text, Link, LayerCard, Surface, Sidebar, TableOfContents, and generic Radio APIs from the real packed tarball on every test run.",
+    "A temporary external consumer compiles Badge, Banner, Breadcrumbs, Button, CloudflareLogo, PoweredByCloudflare, Collapsible, Empty, Grid/GridItem, Meter, SkeletonLine, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, Text, Link, LayerCard, Surface, Sidebar, TableOfContents, and generic Radio APIs from the real packed tarball on every test run.",
     "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
     "Representative Button, Badge, Meter, SkeletonLine, Empty, Collapsible, Tooltip, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, and Radio states have a reproducible light/dark visual fixture; Collapsible opening and Empty and SensitiveInput copy interactions were manually exercised in that fixture.",
-    "LayerCard, Surface, Grid/GridItem, Text, Link, CloudflareLogo/PoweredByCloudflare, Banner, Breadcrumbs, TableOfContents, and the full Sidebar compound family are Octane-native with variant contracts, compound APIs, and package-as-consumer type checks; shell render coverage lives in tests/shell.test.tsx.",
-    "Sidebar preserves provider state, responsive mobile sheet, peek/resize/scrollToItem registries, and all compound members; ScrollArea fallback is the only accepted visual divergence in this slice.",
+    "LayerCard, Surface, Grid/GridItem, Text, Link, CloudflareLogo/PoweredByCloudflare, Banner, Breadcrumbs, TableOfContents, and Sidebar are Octane-native with variant contracts, compound APIs, and package-as-consumer type checks; tests/shell.test.tsx covers render composition, Banner Link identity, and Sidebar's provider/header/content/menu/footer smoke path.",
+    "Sidebar responsive mobile, peek, resize, and scrollToItem behavior is implemented but not yet behaviorally verified. Its Content uses the accepted plain-overflow ScrollArea fallback described above.",
     "No React differential lane has been recorded yet."
   ],
   "docs": [

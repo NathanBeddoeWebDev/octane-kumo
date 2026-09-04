@@ -158,3 +158,4 @@ The [global Vite+ CLI](https://viteplus.dev/) is optional but recommended for co
 - Single linter: Oxlint via `vp lint` (custom kumo JS rules + native jsx-a11y rules; type-aware + type-checked)
 - `PLOP_INJECT_EXPORT` and `PLOP_INJECT_COMPONENT_ENTRY` markers in source for scaffolding
 - 6 GitHub Actions workflows exist in `.github/workflows/` (release, pullrequest, preview, preview-deploy, bonk, reviewer)
+- Porting regression lessons are recorded in `docs/bug-lessons.md`.

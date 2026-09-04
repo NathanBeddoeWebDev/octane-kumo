@@ -11,7 +11,11 @@
     "planned": "Required for the first stable release but not yet exported."
   },
   "entries": [
-    { "source": "Autocomplete", "target": "Autocomplete", "status": "planned" },
+    {
+      "source": "Autocomplete",
+      "target": "Autocomplete",
+      "status": "planned"
+    },
     {
       "source": "Badge",
       "target": "Badge",
@@ -25,8 +29,29 @@
         "tests/visual/button-preview.tsx"
       ]
     },
-    { "source": "Banner", "target": "Banner", "status": "planned" },
-    { "source": "Breadcrumbs", "target": "Breadcrumbs", "status": "planned" },
+    {
+      "source": "Banner",
+      "target": "Banner",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Compact inline-link detection uses exact Kumo Link element identity, matching React Kumo."
+    },
+    {
+      "source": "Breadcrumbs",
+      "target": "Breadcrumbs",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Mobile collapse + Clipboard ported; SkeletonLine loading preserved."
+    },
     {
       "source": "Button",
       "target": "Button",
@@ -40,7 +65,11 @@
         "tests/visual/button-preview.tsx"
       ]
     },
-    { "source": "Chart", "target": "Chart", "status": "planned" },
+    {
+      "source": "Chart",
+      "target": "Chart",
+      "status": "planned"
+    },
     {
       "source": "Checkbox",
       "target": "Checkbox",
@@ -63,10 +92,24 @@
     {
       "source": "CloudflareLogo",
       "target": "CloudflareLogo",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ]
+    },
+    {
+      "source": "Code",
+      "target": "Code",
       "status": "planned"
     },
-    { "source": "Code", "target": "Code", "status": "planned" },
-    { "source": "CodeBlock", "target": "CodeBlock", "status": "planned" },
+    {
+      "source": "CodeBlock",
+      "target": "CodeBlock",
+      "status": "planned"
+    },
     {
       "source": "Collapsible",
       "target": "Collapsible",
@@ -81,13 +124,21 @@
       ],
       "notes": "Root, Trigger, Panel, DefaultTrigger, and DefaultPanel are native. The panel is kept mounted only during SSR hydration to avoid a detached Octane insertion anchor when opening an initially closed Base UI disclosure; normal post-hydration mounting behavior is preserved."
     },
-    { "source": "Combobox", "target": "Combobox", "status": "planned" },
+    {
+      "source": "Combobox",
+      "target": "Combobox",
+      "status": "planned"
+    },
     {
       "source": "CommandPalette",
       "target": "CommandPalette",
       "status": "planned"
     },
-    { "source": "DatePicker", "target": "DatePicker", "status": "planned" },
+    {
+      "source": "DatePicker",
+      "target": "DatePicker",
+      "status": "planned"
+    },
     {
       "source": "DateRangePicker",
       "target": "DateRangePicker",
@@ -98,8 +149,16 @@
       "target": "DeleteResource",
       "status": "planned"
     },
-    { "source": "Dialog", "target": "Dialog", "status": "planned" },
-    { "source": "DropdownMenu", "target": "DropdownMenu", "status": "planned" },
+    {
+      "source": "Dialog",
+      "target": "Dialog",
+      "status": "planned"
+    },
+    {
+      "source": "DropdownMenu",
+      "target": "DropdownMenu",
+      "status": "planned"
+    },
     {
       "source": "Empty",
       "target": "Empty",
@@ -123,8 +182,21 @@
         "tests/packed-consumer.test.ts"
       ]
     },
-    { "source": "Flow", "target": "Flow", "status": "planned" },
-    { "source": "Grid", "target": "Grid", "status": "planned" },
+    {
+      "source": "Flow",
+      "target": "Flow",
+      "status": "planned"
+    },
+    {
+      "source": "Grid",
+      "target": "Grid",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ]
+    },
     {
       "source": "Input",
       "target": "Input",
@@ -176,8 +248,30 @@
         "tests/packed-consumer.test.ts"
       ]
     },
-    { "source": "LayerCard", "target": "LayerCard", "status": "planned" },
-    { "source": "Link", "target": "Link", "status": "planned" },
+    {
+      "source": "LayerCard",
+      "target": "LayerCard",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Octane Base UI useRender preserves callback and element composition, including handlers, styles, and refs."
+    },
+    {
+      "source": "Link",
+      "target": "Link",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Octane Base UI useRender preserves callback and element composition; useLinkComponent is preserved."
+    },
     {
       "source": "LinkButton",
       "target": "LinkButton",
@@ -190,7 +284,11 @@
       "status": "adapted-unverified",
       "evidence": ["tests/button.test.tsx"]
     },
-    { "source": "MenuBar", "target": "MenuBar", "status": "planned" },
+    {
+      "source": "MenuBar",
+      "target": "MenuBar",
+      "status": "planned"
+    },
     {
       "source": "Meter",
       "target": "Meter",
@@ -204,12 +302,24 @@
         "tests/visual/button-preview.tsx"
       ]
     },
-    { "source": "Pagination", "target": "Pagination", "status": "planned" },
-    { "source": "Popover", "target": "Popover", "status": "planned" },
+    {
+      "source": "Pagination",
+      "target": "Pagination",
+      "status": "planned"
+    },
+    {
+      "source": "Popover",
+      "target": "Popover",
+      "status": "planned"
+    },
     {
       "source": "PoweredByCloudflare",
       "target": "PoweredByCloudflare",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts"
+      ]
     },
     {
       "source": "Radio",
@@ -244,8 +354,16 @@
       "status": "adapted-unverified",
       "evidence": ["tests/button.test.tsx"]
     },
-    { "source": "SankeyChart", "target": "SankeyChart", "status": "planned" },
-    { "source": "Select", "target": "Select", "status": "planned" },
+    {
+      "source": "SankeyChart",
+      "target": "SankeyChart",
+      "status": "planned"
+    },
+    {
+      "source": "Select",
+      "target": "Select",
+      "status": "planned"
+    },
     {
       "source": "SensitiveInput",
       "target": "SensitiveInput",
@@ -260,7 +378,18 @@
       ],
       "notes": "Empty, masked, and revealed states; pointer and keyboard operation; controlled and uncontrolled values; native refs and form behavior; Clipboard API and fallback copying; accessible instructions and announcements; Field integration; SSR/hydration; and representative visuals are covered."
     },
-    { "source": "Sidebar", "target": "Sidebar", "status": "planned" },
+    {
+      "source": "Sidebar",
+      "target": "Sidebar",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Octane-native full compound API. Tests smoke-render the provider/header/content/menu/footer path; responsive mobile, peek, resize, and scrollToItem behavior remain unverified. ScrollArea has no @octanejs/base-ui counterpart so Content uses a plain overflow viewport preserving data-sidebar attributes; mask-fade dropped. Collapsible is custom (no Base UI dep)."
+    },
     {
       "source": "SkeletonLine",
       "target": "SkeletonLine",
@@ -274,7 +403,18 @@
         "tests/visual/button-preview.tsx"
       ]
     },
-    { "source": "Surface", "target": "Surface", "status": "planned" },
+    {
+      "source": "Surface",
+      "target": "Surface",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/shell.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ],
+      "notes": "Deprecated compat wrapper over LayerCard preserves color/as->render mapping and inherited callback composition."
+    },
     {
       "source": "Switch",
       "target": "Switch",
@@ -289,14 +429,36 @@
       ],
       "notes": "Standalone and compound Group, Item, and Legend APIs are native. Controlled and uncontrolled state, label activation, native form behavior, disabled and read-only states, group accessibility, SSR/hydration, semantic-token visuals, and transitioning state are covered."
     },
-    { "source": "Table", "target": "Table", "status": "planned" },
+    {
+      "source": "Table",
+      "target": "Table",
+      "status": "planned"
+    },
     {
       "source": "TableOfContents",
       "target": "TableOfContents",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ]
+    },
+    {
+      "source": "Tabs",
+      "target": "Tabs",
       "status": "planned"
     },
-    { "source": "Tabs", "target": "Tabs", "status": "planned" },
-    { "source": "Text", "target": "Text", "status": "planned" },
+    {
+      "source": "Text",
+      "target": "Text",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts"
+      ]
+    },
     {
       "source": "Textarea",
       "target": "Textarea",
@@ -313,8 +475,16 @@
       "target": "TimeseriesChart",
       "status": "planned"
     },
-    { "source": "Toast", "target": "Toast", "status": "planned" },
-    { "source": "Toolbar", "target": "Toolbar", "status": "planned" },
+    {
+      "source": "Toast",
+      "target": "Toast",
+      "status": "planned"
+    },
+    {
+      "source": "Toolbar",
+      "target": "Toolbar",
+      "status": "planned"
+    },
     {
       "source": "Tooltip",
       "target": "Tooltip",

@@ -69,25 +69,43 @@ describe("packed consumer", () => {
         `/** @jsxImportSource octane */
 import {
   Badge,
+  Banner,
+  Breadcrumbs,
   Button,
   Checkbox,
+  CloudflareLogo,
+  PoweredByCloudflare,
   Collapsible,
   Empty,
   Field,
+  Grid,
+  GridItem,
   Input,
   InputArea,
   InputGroup,
   Label,
+  LayerCard,
+  Link,
   Meter,
   Radio,
   RadioGroup,
   SensitiveInput,
+  Sidebar,
   SkeletonLine,
+  Surface,
   Switch,
+  TableOfContents,
+  Text,
   Textarea,
   Tooltip,
 } from "octane-kumo";
 import { Badge as BadgeSubpath } from "octane-kumo/components/badge";
+import { Banner as BannerSubpath } from "octane-kumo/components/banner";
+import { Breadcrumbs as BreadcrumbsSubpath } from "octane-kumo/components/breadcrumbs";
+import {
+  CloudflareLogo as CloudflareLogoSubpath,
+  PoweredByCloudflare as PoweredByCloudflareSubpath,
+} from "octane-kumo/components/cloudflare-logo";
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
 import { Collapsible as CollapsibleSubpath } from "octane-kumo/components/collapsible";
 import { Empty as EmptySubpath } from "octane-kumo/components/empty";
@@ -99,30 +117,50 @@ import {
 } from "octane-kumo/components/input";
 import { InputGroup as InputGroupSubpath } from "octane-kumo/components/input-group";
 import { Label as LabelSubpath } from "octane-kumo/components/label";
+import { LayerCard as LayerCardSubpath } from "octane-kumo/components/layer-card";
+import { Link as LinkSubpath } from "octane-kumo/components/link";
 import { SkeletonLine as SkeletonLineSubpath } from "octane-kumo/components/loader";
 import { Meter as MeterSubpath } from "octane-kumo/components/meter";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
 import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
+import { Sidebar as SidebarSubpath } from "octane-kumo/components/sidebar";
+import { Surface as SurfaceSubpath } from "octane-kumo/components/surface";
 import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
+import { TableOfContents as TableOfContentsSubpath } from "octane-kumo/components/table-of-contents";
+import { Text as TextSubpath } from "octane-kumo/components/text";
+import { Grid as GridSubpath } from "octane-kumo/components/grid";
+import { GridItem as GridItemSubpath } from "octane-kumo/components/grid";
 
 const inputRef: { current: HTMLInputElement | null } = { current: null };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
 void [
   BadgeSubpath,
+  BannerSubpath,
+  BreadcrumbsSubpath,
   CheckboxSubpath,
+  CloudflareLogoSubpath,
+  PoweredByCloudflareSubpath,
   CollapsibleSubpath,
   EmptySubpath,
   FieldSubpath,
+  GridSubpath,
+  GridItemSubpath,
   InputSubpath,
   InputAreaSubpath,
   InputGroupSubpath,
   LabelSubpath,
+  LayerCardSubpath,
+  LinkSubpath,
   MeterSubpath,
   RadioSubpath,
   SensitiveInputSubpath,
+  SidebarSubpath,
   SkeletonLineSubpath,
+  SurfaceSubpath,
   SwitchSubpath,
+  TableOfContentsSubpath,
+  TextSubpath,
   TextareaSubpath,
 ];
 
@@ -225,6 +263,45 @@ export const consumerView = (
       <Collapsible.DefaultTrigger>Details</Collapsible.DefaultTrigger>
       <Collapsible.DefaultPanel keepMounted>Content</Collapsible.DefaultPanel>
     </Collapsible.Root>
+    <Text variant="body">Body copy</Text>
+    <Text variant="heading" as="h2">Section</Text>
+    <Link href="/docs">Learn more</Link>
+    <Banner title="Update available" description="A new version is ready." />
+    <Banner variant="alert" size="sm" title="Heads up" description="Check usage." />
+    <Breadcrumbs>
+      <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+      <Breadcrumbs.Separator />
+      <Breadcrumbs.Current>Current page</Breadcrumbs.Current>
+    </Breadcrumbs>
+    <LayerCard>Card content</LayerCard>
+    <LayerCard>
+      <LayerCard.Secondary>Next steps</LayerCard.Secondary>
+      <LayerCard.Primary>Seen</LayerCard.Primary>
+    </LayerCard>
+    <Surface>Surface content</Surface>
+    <Grid variant="2up">
+      <GridItem>Left</GridItem>
+      <GridItem>Right</GridItem>
+    </Grid>
+    <CloudflareLogo variant="glyph" color="color" />
+    <PoweredByCloudflare />
+    <TableOfContents>
+      <TableOfContents.Title>On this page</TableOfContents.Title>
+      <TableOfContents.List>
+        <TableOfContents.Item href="#overview">Overview</TableOfContents.Item>
+      </TableOfContents.List>
+    </TableOfContents>
+    <Sidebar.Provider defaultOpen>
+      <Sidebar>
+        <Sidebar.Header>Header</Sidebar.Header>
+        <Sidebar.Content>
+          <Sidebar.Menu>
+            <Sidebar.MenuButton>Home</Sidebar.MenuButton>
+          </Sidebar.Menu>
+        </Sidebar.Content>
+        <Sidebar.Footer>Footer</Sidebar.Footer>
+      </Sidebar>
+    </Sidebar.Provider>
   </div>
 );
 `,

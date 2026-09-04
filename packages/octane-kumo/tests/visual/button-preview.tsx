@@ -2,12 +2,15 @@
 import { Info, Package } from "@octanejs/phosphor-icons";
 import { createRoot } from "octane";
 import { Badge } from "../../src/components/badge/badge";
+import { Banner } from "../../src/components/banner/banner";
+import { Breadcrumbs } from "../../src/components/breadcrumbs";
 import {
   Button,
   LinkButton,
   RefreshButton,
 } from "../../src/components/button/button";
 import { Checkbox } from "../../src/components/checkbox/checkbox";
+import { CloudflareLogo } from "../../src/components/cloudflare-logo/cloudflare-logo";
 import { Collapsible } from "../../src/components/collapsible/collapsible";
 import { Empty } from "../../src/components/empty/empty";
 import { InputArea } from "../../src/components/input/input-area";
@@ -17,7 +20,9 @@ import { SkeletonLine } from "../../src/components/loader/skeleton-line";
 import { Meter } from "../../src/components/meter/meter";
 import { Radio } from "../../src/components/radio/radio";
 import { SensitiveInput } from "../../src/components/sensitive-input/sensitive-input";
+import { Sidebar } from "../../src/components/sidebar/sidebar";
 import { Switch } from "../../src/components/switch/switch";
+import { Text } from "../../src/components/text/text";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
 import { cn } from "../../src/utils/cn";
 
@@ -263,28 +268,83 @@ function StatusRows() {
 
 function Preview() {
   return (
-    <main className={cn("preview")}>
-      <section className={cn("mode")} data-mode="light">
-        <h2>Light</h2>
-        <ButtonRows mode="Light" />
-        <h3>Form controls</h3>
-        <FormRows />
-        <div className={cn("status-preview")}>
-          <h3>Status and disclosure</h3>
-          <StatusRows />
+    <Sidebar.Provider defaultOpen>
+      <Sidebar>
+        <Sidebar.Header>
+          <CloudflareLogo variant="glyph" className={cn("h-6 w-6 shrink-0")} />
+          <Text variant="heading" truncate>
+            Octane Kumo
+          </Text>
+        </Sidebar.Header>
+        <Sidebar.Content>
+          <Sidebar.Group>
+            <Sidebar.GroupLabel>Preview</Sidebar.GroupLabel>
+            <Sidebar.Menu>
+              <Sidebar.MenuButton active>Components</Sidebar.MenuButton>
+              <Sidebar.MenuButton>Shell</Sidebar.MenuButton>
+            </Sidebar.Menu>
+          </Sidebar.Group>
+          <Sidebar.Group>
+            <Sidebar.GroupLabel>Layout</Sidebar.GroupLabel>
+            <Sidebar.Menu>
+              <Sidebar.MenuButton>Sidebar</Sidebar.MenuButton>
+              <Sidebar.MenuButton>Breadcrumbs</Sidebar.MenuButton>
+              <Sidebar.MenuButton>Banner</Sidebar.MenuButton>
+            </Sidebar.Menu>
+          </Sidebar.Group>
+        </Sidebar.Content>
+        <Sidebar.Footer>
+          <Sidebar.Trigger />
+          <Text variant="secondary" size="sm" truncate>
+            Toggle sidebar
+          </Text>
+        </Sidebar.Footer>
+      </Sidebar>
+      <div className={cn("shell-main")}>
+        <header className={cn("shell-header")}>
+          <Breadcrumbs>
+            <Breadcrumbs.Link href="#">Preview</Breadcrumbs.Link>
+            <Breadcrumbs.Separator />
+            <Breadcrumbs.Current>Components</Breadcrumbs.Current>
+          </Breadcrumbs>
+          <Text variant="heading" as="h1" size="lg">
+            Component preview
+          </Text>
+          <Text variant="secondary" size="sm">
+            Shell chrome (sidebar, breadcrumbs, banner) wraps the existing
+            light/dark matrix for testing.
+          </Text>
+        </header>
+        <div className={cn("shell-banner")}>
+          <Banner
+            title="Shell testing mode"
+            description="This banner, the sidebar, and the breadcrumbs above are the shell under test."
+          />
         </div>
-      </section>
-      <section className={cn("mode")} data-mode="dark">
-        <h2>Dark</h2>
-        <ButtonRows mode="Dark" />
-        <h3>Form controls</h3>
-        <FormRows />
-        <div className={cn("status-preview")}>
-          <h3>Status and disclosure</h3>
-          <StatusRows />
-        </div>
-      </section>
-    </main>
+        <main className={cn("preview")}>
+          <section className={cn("mode")} data-mode="light">
+            <h2>Light</h2>
+            <ButtonRows mode="Light" />
+            <h3>Form controls</h3>
+            <FormRows />
+            <div className={cn("status-preview")}>
+              <h3>Status and disclosure</h3>
+              <StatusRows />
+            </div>
+          </section>
+          <section className={cn("mode")} data-mode="dark">
+            <h2>Dark</h2>
+            <ButtonRows mode="Dark" />
+            <h3>Form controls</h3>
+            <FormRows />
+            <div className={cn("status-preview")}>
+              <h3>Status and disclosure</h3>
+              <StatusRows />
+            </div>
+          </section>
+        </main>
+      </div>
+    </Sidebar.Provider>
   );
 }
 
