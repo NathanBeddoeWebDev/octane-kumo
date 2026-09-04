@@ -14,12 +14,17 @@
     {
       "path": "packages/octane-kumo/tests/hydration.test.ts",
       "disposition": "octane-only-framework-contract",
-      "reason": "Checks Button, Tooltip, Input, InputArea, Checkbox, Switch, and Radio through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+      "reason": "Checks Button, Tooltip, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, and Radio through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
     },
     {
       "path": "packages/octane-kumo/tests/input-area.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Covers InputArea and Textarea native events and refs, Field associations, controlled and uncontrolled values, min/max row auto-resizing, and cleanup."
+    },
+    {
+      "path": "packages/octane-kumo/tests/input-group.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers InputGroup's complete compound API, container, individual, and hybrid focus modes, inherited state and sizing, native refs and events, aliases, Field integration, and icon and tooltip behavior."
     },
     {
       "path": "packages/octane-kumo/tests/input.test.tsx",
@@ -35,6 +40,11 @@
       "path": "packages/octane-kumo/tests/radio.type-spec.tsx",
       "disposition": "repo-authored-type-contract",
       "reason": "Checks generic Radio group and item value inference for string, number, and enum values, including expected type failures."
+    },
+    {
+      "path": "packages/octane-kumo/tests/sensitive-input.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers SensitiveInput's empty, masked, and revealed states, pointer and keyboard operation, controlled and uncontrolled values, native refs and form behavior, Clipboard API and fallback copying, accessible instructions and announcements, validation, and Field integration."
     },
     {
       "path": "packages/octane-kumo/tests/switch.test.tsx",
@@ -59,7 +69,7 @@
     {
       "path": "packages/octane-kumo/tests/packed-consumer.test.ts",
       "disposition": "repo-authored-package-contract",
-      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, InputArea, Textarea, Checkbox, Switch, and generic Radio usage through root and component-subpath exports."
+      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, and generic Radio usage through root and component-subpath exports."
     },
     {
       "path": "packages/octane-kumo/tests/styles.test.ts",

@@ -5,14 +5,14 @@
     "source": "https://github.com/cloudflare/kumo.git",
     "license": "MIT"
   },
-  "surface": "The Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, KumoPortalProvider, Label, Field, Input, InputArea and its Textarea alias, the complete Checkbox and Switch families, and the generic Radio family with its direct RadioGroup export. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
+  "surface": "The Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, KumoPortalProvider, Label, Field, Input, InputArea and its Textarea alias, InputGroup, SensitiveInput, the complete Checkbox and Switch families, and the generic Radio family with its direct RadioGroup export. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
   "divergences": [
     "Handlers receive native DOM events rather than React synthetic events.",
     "Refs use Octane ref-as-prop rather than React forwardRef.",
     "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
     "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
   ],
-  "ssr": "Button, Tooltip, Input, InputArea, standalone and grouped Checkbox, Switch, and Radio are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
+  "ssr": "Button, Tooltip, Input, InputArea, InputGroup, SensitiveInput, and standalone and grouped Checkbox, Switch, and Radio are covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
   "provenance": {
     "source": "https://github.com/cloudflare/kumo/tree/2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
     "license": "MIT",
@@ -24,13 +24,15 @@
     "Tooltip focus/Escape interaction, portal routing, hydration, and a browser-rendered open state have repo-authored Octane evidence.",
     "Label, Field, and Input associations, native input events and refs, Base UI-style value details, validation precedence, password-manager attributes, and Input hydration have repo-authored Octane evidence.",
     "InputArea and its Textarea alias cover native events and refs, Field associations, controlled and uncontrolled values, min/max row auto-resizing, cleanup, and hydration.",
+    "InputGroup covers the complete Input, Addon, Suffix, Button, Label, and Description compound surface; container, individual, and hybrid focus modes; inherited state and sizing; native refs and events; Field integration; and hydration.",
+    "SensitiveInput covers empty, masked, and revealed states; pointer and keyboard operation; controlled and uncontrolled values; native refs and form behavior; Clipboard API and fallback copying; accessible instructions and announcements; Field integration; and hydration.",
     "Standalone Checkbox and the compound Group, Item, and Legend family cover native events and refs, controlled and uncontrolled state, label activation, form values, validation, accessibility associations, and hydration.",
     "Standalone Switch and the compound Group, Item, and Legend family cover controlled and uncontrolled state, single label activation, refs, native form values, disabled and read-only behavior, accessible grouping, transitioning, semantic-token styling, and hydration.",
     "The generic Radio and direct RadioGroup exports cover accessible naming, controlled and uncontrolled selection, native event details, roving keyboard focus, number and enum types, form serialization, group states, card appearance, and hydration.",
     "The package contract resolves root and component subpath imports, rejects React or ReactCompat imports in native source, and verifies the bundled native module graph remains React-free.",
-    "A temporary external consumer compiles Button, Tooltip, Label, Field, Input, InputArea, Textarea, Checkbox, Switch, and generic Radio APIs from the real packed tarball on every test run.",
+    "A temporary external consumer compiles Button, Tooltip, Label, Field, Input, InputArea, Textarea, InputGroup, SensitiveInput, Checkbox, Switch, and generic Radio APIs from the real packed tarball on every test run.",
     "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
-    "Representative Button variants, disabled/loading states, an open Tooltip, Input and InputArea validation states, Checkbox and Switch standalone and group states, and default, error, disabled, and card Radio states have a reproducible light/dark visual fixture.",
+    "Representative Button variants, disabled/loading states, an open Tooltip, Input and InputArea validation states, all InputGroup focus modes, SensitiveInput empty/masked states, Checkbox and Switch standalone and group states, and default, error, disabled, and card Radio states have a reproducible light/dark visual fixture; SensitiveInput reveal and copy interactions were manually exercised in that fixture.",
     "No React differential lane has been recorded yet."
   ],
   "docs": [

@@ -3,7 +3,9 @@ import { useState } from "octane";
 import { Checkbox } from "../../src/components/checkbox/checkbox";
 import { InputArea } from "../../src/components/input/input-area";
 import { Input } from "../../src/components/input/input";
+import { InputGroup } from "../../src/components/input-group/input-group";
 import { Radio } from "../../src/components/radio/radio";
+import { SensitiveInput } from "../../src/components/sensitive-input/sensitive-input";
 import { Switch } from "../../src/components/switch/switch";
 
 export function FormHydrationFixture() {
@@ -13,6 +15,8 @@ export function FormHydrationFixture() {
   const [channels, setChannels] = useState<string[]>(["email"]);
   const [automaticDeploys, setAutomaticDeploys] = useState(false);
   const [region, setRegion] = useState("americas");
+  const [query, setQuery] = useState("workers");
+  const [secret, setSecret] = useState("token");
 
   return (
     <div>
@@ -30,6 +34,19 @@ export function FormHydrationFixture() {
         value={notes}
       />
       <output data-testid="notes-value">{notes}</output>
+      <InputGroup label="Search">
+        <InputGroup.Addon>⌕</InputGroup.Addon>
+        <InputGroup.Input name="query" onValueChange={setQuery} value={query} />
+        <InputGroup.Button variant="secondary">Run</InputGroup.Button>
+      </InputGroup>
+      <output data-testid="query-value">{query}</output>
+      <SensitiveInput
+        label="API token"
+        name="secret"
+        onValueChange={setSecret}
+        value={secret}
+      />
+      <output data-testid="secret-value">{secret}</output>
       <Checkbox
         checked={enabled}
         label="Enable logs"

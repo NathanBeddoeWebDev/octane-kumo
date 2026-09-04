@@ -7,9 +7,11 @@ import {
   Field as RootField,
   Input as RootInput,
   InputArea as RootInputArea,
+  InputGroup as RootInputGroup,
   Label as RootLabel,
   Radio as RootRadio,
   RadioGroup as RootRadioGroup,
+  SensitiveInput as RootSensitiveInput,
   Switch as RootSwitch,
   Textarea as RootTextarea,
 } from "octane-kumo";
@@ -21,11 +23,13 @@ import {
   InputArea as SubpathInputArea,
   Textarea as SubpathTextarea,
 } from "octane-kumo/components/input";
+import { InputGroup as SubpathInputGroup } from "octane-kumo/components/input-group";
 import { Label as SubpathLabel } from "octane-kumo/components/label";
 import {
   Radio as SubpathRadio,
   RadioGroup as SubpathRadioGroup,
 } from "octane-kumo/components/radio";
+import { SensitiveInput as SubpathSensitiveInput } from "octane-kumo/components/sensitive-input";
 import { Switch as SubpathSwitch } from "octane-kumo/components/switch";
 
 const packageRoot = resolve(import.meta.dirname, "..");
@@ -45,9 +49,11 @@ describe("package contract", () => {
     expect(RootField).toBe(SubpathField);
     expect(RootInput).toBe(SubpathInput);
     expect(RootInputArea).toBe(SubpathInputArea);
+    expect(RootInputGroup).toBe(SubpathInputGroup);
     expect(RootLabel).toBe(SubpathLabel);
     expect(RootRadio).toBe(SubpathRadio);
     expect(RootRadioGroup).toBe(SubpathRadioGroup);
+    expect(RootSensitiveInput).toBe(SubpathSensitiveInput);
     expect(RootSwitch).toBe(SubpathSwitch);
     expect(RootTextarea).toBe(RootInputArea);
     expect(RootTextarea).toBe(SubpathTextarea);

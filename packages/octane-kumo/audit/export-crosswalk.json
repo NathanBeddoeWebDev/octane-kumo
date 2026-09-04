@@ -115,7 +115,20 @@
       ],
       "notes": "Native textarea events and refs, Field associations, controlled and uncontrolled values, min/max row auto-resizing, cleanup, SSR/hydration, and representative visuals are covered."
     },
-    { "source": "InputGroup", "target": "InputGroup", "status": "planned" },
+    {
+      "source": "InputGroup",
+      "target": "InputGroup",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/input-group.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "The complete Input, Addon, Suffix, Button, Label, and Description compound API is native. Container, individual, and hybrid focus modes, inherited state and sizing, native refs and events, Field integration, SSR/hydration, and representative visuals are covered."
+    },
     {
       "source": "Label",
       "target": "Label",
@@ -187,7 +200,16 @@
     {
       "source": "SensitiveInput",
       "target": "SensitiveInput",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/sensitive-input.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Empty, masked, and revealed states; pointer and keyboard operation; controlled and uncontrolled values; native refs and form behavior; Clipboard API and fallback copying; accessible instructions and announcements; Field integration; SSR/hydration; and representative visuals are covered."
     },
     { "source": "Sidebar", "target": "Sidebar", "status": "planned" },
     { "source": "SkeletonLine", "target": "SkeletonLine", "status": "planned" },

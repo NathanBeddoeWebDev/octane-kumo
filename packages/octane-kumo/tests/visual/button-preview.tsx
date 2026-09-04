@@ -8,7 +8,9 @@ import {
 import { Checkbox } from "../../src/components/checkbox/checkbox";
 import { InputArea } from "../../src/components/input/input-area";
 import { Input } from "../../src/components/input/input";
+import { InputGroup } from "../../src/components/input-group/input-group";
 import { Radio } from "../../src/components/radio/radio";
+import { SensitiveInput } from "../../src/components/sensitive-input/sensitive-input";
 import { Switch } from "../../src/components/switch/switch";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
 import { cn } from "../../src/utils/cn";
@@ -72,6 +74,22 @@ function FormRows() {
           minRows={2}
         />
         <InputArea error="A summary is required" label="Summary" />
+        <InputGroup label="Subdomain">
+          <InputGroup.Addon>@</InputGroup.Addon>
+          <InputGroup.Input defaultValue="api" />
+          <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
+        </InputGroup>
+        <InputGroup label="Search">
+          <InputGroup.Addon>⌕</InputGroup.Addon>
+          <InputGroup.Input defaultValue="workers" />
+          <InputGroup.Button variant="secondary">Run</InputGroup.Button>
+        </InputGroup>
+        <InputGroup label="Page">
+          <InputGroup.Input defaultValue="1" />
+          <InputGroup.Button variant="secondary">Next</InputGroup.Button>
+        </InputGroup>
+        <SensitiveInput defaultValue="secret-api-key" label="API token" />
+        <SensitiveInput error="Invalid secret" label="New secret" />
       </div>
       <div className={cn("checkbox-grid")}>
         <Checkbox label="Unchecked" />

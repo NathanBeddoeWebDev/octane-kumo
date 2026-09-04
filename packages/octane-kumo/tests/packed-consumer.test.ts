@@ -73,9 +73,11 @@ import {
   Field,
   Input,
   InputArea,
+  InputGroup,
   Label,
   Radio,
   RadioGroup,
+  SensitiveInput,
   Switch,
   Textarea,
   Tooltip,
@@ -87,8 +89,10 @@ import {
   InputArea as InputAreaSubpath,
   Textarea as TextareaSubpath,
 } from "octane-kumo/components/input";
+import { InputGroup as InputGroupSubpath } from "octane-kumo/components/input-group";
 import { Label as LabelSubpath } from "octane-kumo/components/label";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
+import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
 import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
 
 const inputRef: { current: HTMLInputElement | null } = { current: null };
@@ -99,8 +103,10 @@ void [
   FieldSubpath,
   InputSubpath,
   InputAreaSubpath,
+  InputGroupSubpath,
   LabelSubpath,
   RadioSubpath,
+  SensitiveInputSubpath,
   SwitchSubpath,
   TextareaSubpath,
 ];
@@ -139,6 +145,19 @@ export const consumerView = (
       onValueChange={(value) => value.trim()}
     />
     <Textarea aria-label="Summary" minRows={2} />
+    <InputGroup label="Worker subdomain">
+      <InputGroup.Addon>@</InputGroup.Addon>
+      <InputGroup.Input ref={inputRef} onValueChange={(value) => value.trim()} />
+      <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
+      <InputGroup.Button variant="secondary">Check</InputGroup.Button>
+    </InputGroup>
+    <SensitiveInput
+      defaultValue="secret"
+      label="API token"
+      onCopy={() => {}}
+      onValueChange={(value) => value.trim()}
+      ref={inputRef}
+    />
     <Checkbox
       ref={checkboxRef}
       label="Enable logs"

@@ -108,6 +108,15 @@ describe("Form controls SSR and hydration", () => {
     const serverInputArea = container.querySelector<HTMLTextAreaElement>(
       'textarea[name="notes"]',
     );
+    const serverInputGroup = container.querySelector<HTMLInputElement>(
+      'input[name="query"]',
+    );
+    const serverSensitiveInput = container.querySelector<HTMLInputElement>(
+      'input[name="secret"]',
+    );
+    const serverSensitiveContainer = container.querySelector<HTMLDivElement>(
+      '[data-kumo-part="masked-container"]',
+    );
     const serverSwitch = container.querySelector<HTMLButtonElement>(
       '[data-kumo-component="Switch"]',
     );
@@ -120,6 +129,9 @@ describe("Form controls SSR and hydration", () => {
     try {
       expect(serverInput?.value).toBe("worker");
       expect(serverInputArea?.value).toBe("Runs globally");
+      expect(serverInputGroup?.value).toBe("workers");
+      expect(serverSensitiveInput?.value).toBe("token");
+      expect(serverSensitiveContainer?.getAttribute("role")).toBe("button");
       expect(serverCheckbox?.getAttribute("aria-checked")).toBe("false");
       expect(serverSwitch?.getAttribute("aria-checked")).toBe("false");
       expect(serverRadio?.getAttribute("aria-checked")).toBe("true");
@@ -138,6 +150,16 @@ describe("Form controls SSR and hydration", () => {
       const hydratedInputArea = container.querySelector<HTMLTextAreaElement>(
         'textarea[name="notes"]',
       );
+      const hydratedInputGroup = container.querySelector<HTMLInputElement>(
+        'input[name="query"]',
+      );
+      const hydratedSensitiveInput = container.querySelector<HTMLInputElement>(
+        'input[name="secret"]',
+      );
+      const hydratedSensitiveContainer =
+        container.querySelector<HTMLDivElement>(
+          '[data-kumo-part="masked-container"]',
+        );
       const hydratedSwitch = container.querySelector<HTMLButtonElement>(
         '[data-kumo-component="Switch"]',
       );
@@ -147,6 +169,9 @@ describe("Form controls SSR and hydration", () => {
       expect(hydratedInput).toBe(serverInput);
       expect(hydratedCheckbox).toBe(serverCheckbox);
       expect(hydratedInputArea).toBe(serverInputArea);
+      expect(hydratedInputGroup).toBe(serverInputGroup);
+      expect(hydratedSensitiveInput).toBe(serverSensitiveInput);
+      expect(hydratedSensitiveContainer).toBe(serverSensitiveContainer);
       expect(hydratedSwitch).toBe(serverSwitch);
       expect(hydratedRadio).toBe(serverRadio);
 
@@ -154,6 +179,13 @@ describe("Form controls SSR and hydration", () => {
         fireEvent.input(hydratedInput!, { target: { value: "api-worker" } });
         fireEvent.input(hydratedInputArea!, {
           target: { value: "Deploy from Git" },
+        });
+        fireEvent.input(hydratedInputGroup!, {
+          target: { value: "durable objects" },
+        });
+        fireEvent.click(hydratedSensitiveContainer!);
+        fireEvent.input(hydratedSensitiveInput!, {
+          target: { value: "new-token" },
         });
         fireEvent.click(hydratedCheckbox!);
         fireEvent.click(
@@ -172,6 +204,12 @@ describe("Form controls SSR and hydration", () => {
       expect(
         container.querySelector('[data-testid="notes-value"]')?.textContent,
       ).toBe("Deploy from Git");
+      expect(
+        container.querySelector('[data-testid="query-value"]')?.textContent,
+      ).toBe("durable objects");
+      expect(
+        container.querySelector('[data-testid="secret-value"]')?.textContent,
+      ).toBe("new-token");
       expect(
         container.querySelector('[data-testid="enabled-value"]')?.textContent,
       ).toBe("true");

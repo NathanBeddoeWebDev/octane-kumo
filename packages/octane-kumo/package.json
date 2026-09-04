@@ -58,6 +58,11 @@
       "import": "./src/components/input/index.ts",
       "default": "./src/components/input/index.ts"
     },
+    "./components/input-group": {
+      "types": "./src/components/input-group/index.ts",
+      "import": "./src/components/input-group/index.ts",
+      "default": "./src/components/input-group/index.ts"
+    },
     "./components/label": {
       "types": "./src/components/label/index.ts",
       "import": "./src/components/label/index.ts",
@@ -72,6 +77,11 @@
       "types": "./src/components/radio/index.ts",
       "import": "./src/components/radio/index.ts",
       "default": "./src/components/radio/index.ts"
+    },
+    "./components/sensitive-input": {
+      "types": "./src/components/sensitive-input/index.ts",
+      "import": "./src/components/sensitive-input/index.ts",
+      "default": "./src/components/sensitive-input/index.ts"
     },
     "./components/switch": {
       "types": "./src/components/switch/index.ts",
