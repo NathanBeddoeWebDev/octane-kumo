@@ -1,0 +1,56 @@
+/** @jsxImportSource octane */
+import { createRoot } from "octane";
+import {
+  Button,
+  LinkButton,
+  RefreshButton,
+} from "../../src/components/button/button";
+
+function ButtonRows() {
+  return (
+    <>
+      <div className="row">
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="ghost">Ghost</Button>
+      </div>
+      <div className="row">
+        <Button variant="destructive">Delete</Button>
+        <Button variant="secondary-destructive">Remove</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+      <div className="row">
+        <Button size="xs">Extra small</Button>
+        <Button size="sm">Small</Button>
+        <Button size="lg">Large</Button>
+      </div>
+      <div className="row">
+        <Button disabled>Disabled</Button>
+        <Button loading>Loading</Button>
+        <RefreshButton title="Refresh" />
+        <LinkButton href="https://example.com">Link button</LinkButton>
+      </div>
+    </>
+  );
+}
+
+function Preview() {
+  return (
+    <main className="preview">
+      <section className="mode" data-mode="light">
+        <h2>Light</h2>
+        <ButtonRows />
+      </section>
+      <section className="mode" data-mode="dark">
+        <h2>Dark</h2>
+        <ButtonRows />
+      </section>
+    </main>
+  );
+}
+
+const container = document.querySelector("#app");
+
+if (!container) throw new Error("Missing preview root");
+
+createRoot(container).render(<Preview />);

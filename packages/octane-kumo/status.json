@@ -1,0 +1,38 @@
+{
+  "upstream": {
+    "package": "@cloudflare/kumo",
+    "version": "2.13.1",
+    "source": "https://github.com/cloudflare/kumo.git",
+    "license": "MIT"
+  },
+  "surface": "The initial Octane-native surface contains Button, RefreshButton, LinkButton, Loader, Tooltip, TooltipProvider, LinkProvider, and KumoPortalProvider. Presence records availability only; the remaining Kumo catalog and primitive subpaths are not yet exported.",
+  "divergences": [
+    "Handlers receive native DOM events rather than React synthetic events.",
+    "Refs use Octane ref-as-prop rather than React forwardRef.",
+    "Icon components and descriptors use @octanejs/phosphor-icons and Octane types.",
+    "The emergency octane-kumo/react compatibility subpath is not present because this slice has no irreducibly React-backed surface."
+  ],
+  "ssr": "The Button vertical is covered for real server compilation, hydration node adoption, and post-hydration interaction. Broader component SSR and hydration remain unverified.",
+  "provenance": {
+    "source": "https://github.com/cloudflare/kumo/tree/2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
+    "license": "MIT",
+    "commit": "2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6",
+    "verification": "recorded-unverified"
+  },
+  "notes": [
+    "Button-family DOM behavior, native events, refs, loading transitions, icon forms, and tooltip trigger composition have repo-authored Octane tests.",
+    "The package contract resolves root and component subpath imports and rejects React or ReactCompat imports in native source.",
+    "The upstream Kumo styles are shipped through stable export paths and guarded by exact SHA-256 source-copy checks.",
+    "Representative Button variants, disabled/loading states, and light/dark modes have a reproducible visual fixture.",
+    "Tooltip popup interactions and visual parity are not covered by the current unit lane.",
+    "No React differential lane has been recorded yet."
+  ],
+  "docs": [
+    "README.md",
+    "UPSTREAM.md",
+    "PORTING.md",
+    "audit/export-crosswalk.json",
+    "audit/style-sources.json",
+    "audit/test-classifications.json"
+  ]
+}

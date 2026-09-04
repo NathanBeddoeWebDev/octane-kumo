@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "upstream": {
+    "package": "@cloudflare/kumo",
+    "version": "2.13.1",
+    "commit": "2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6"
+  },
+  "files": [
+    {
+      "target": "src/styles/kumo-binding.css",
+      "source": "packages/kumo/src/styles/kumo-binding.css",
+      "sha256": "a4104b6498644f5a207bffd5737a11aa1e34081dbcb3c26bac2f93adeab211c3"
+    },
+    {
+      "target": "src/styles/kumo-standalone.css",
+      "source": "packages/kumo/dist/styles/kumo-standalone.css",
+      "sha256": "e1921db7d0baeba929fc4a040f9c1a49df3d9438a909f8c89857afbf32ed8c38"
+    },
+    {
+      "target": "src/styles/kumo.css",
+      "source": "packages/kumo/src/styles/kumo.css",
+      "sha256": "cf11578bf1b730f68de182ca949ed6a2b53ae853f3f5a6b0c68e03c454ca518e"
+    },
+    {
+      "target": "src/styles/theme-fedramp.css",
+      "source": "packages/kumo/src/styles/theme-fedramp.css",
+      "sha256": "0b963d1ff9ab477cfdf7ac765c5af18a07c6dc148b4764765c2d2bd1130011a6"
+    },
+    {
+      "target": "src/styles/theme-kumo.css",
+      "source": "packages/kumo/src/styles/theme-kumo.css",
+      "sha256": "f6d4c8f17f806371731f685db9d882f507f78c733f9e0c64f60fd48fb3f8892c"
+    }
+  ]
+}

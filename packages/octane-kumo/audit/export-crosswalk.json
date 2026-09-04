@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "upstream": {
+    "package": "@cloudflare/kumo",
+    "version": "2.13.1",
+    "commit": "2c1cbed3dba66208e43ee7c43ac624fb98c6f0f6"
+  },
+  "target": "octane-kumo",
+  "statuses": {
+    "adapted-unverified": "A native implementation is exported, but the complete acceptance matrix is not closed.",
+    "planned": "Required for the first stable release but not yet exported."
+  },
+  "entries": [
+    { "source": "Autocomplete", "target": "Autocomplete", "status": "planned" },
+    { "source": "Badge", "target": "Badge", "status": "planned" },
+    { "source": "Banner", "target": "Banner", "status": "planned" },
+    { "source": "Breadcrumbs", "target": "Breadcrumbs", "status": "planned" },
+    {
+      "source": "Button",
+      "target": "Button",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/button.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/visual/button-preview.tsx"
+      ]
+    },
+    { "source": "Chart", "target": "Chart", "status": "planned" },
+    { "source": "Checkbox", "target": "Checkbox", "status": "planned" },
+    {
+      "source": "ClipboardText",
+      "target": "ClipboardText",
+      "status": "planned"
+    },
+    {
+      "source": "CloudflareLogo",
+      "target": "CloudflareLogo",
+      "status": "planned"
+    },
+    { "source": "Code", "target": "Code", "status": "planned" },
+    { "source": "CodeBlock", "target": "CodeBlock", "status": "planned" },
+    { "source": "Collapsible", "target": "Collapsible", "status": "planned" },
+    { "source": "Combobox", "target": "Combobox", "status": "planned" },
+    {
+      "source": "CommandPalette",
+      "target": "CommandPalette",
+      "status": "planned"
+    },
+    { "source": "DatePicker", "target": "DatePicker", "status": "planned" },
+    {
+      "source": "DateRangePicker",
+      "target": "DateRangePicker",
+      "status": "planned"
+    },
+    {
+      "source": "DeleteResource",
+      "target": "DeleteResource",
+      "status": "planned"
+    },
+    { "source": "Dialog", "target": "Dialog", "status": "planned" },
+    { "source": "DropdownMenu", "target": "DropdownMenu", "status": "planned" },
+    { "source": "Empty", "target": "Empty", "status": "planned" },
+    { "source": "Field", "target": "Field", "status": "planned" },
+    { "source": "Flow", "target": "Flow", "status": "planned" },
+    { "source": "Grid", "target": "Grid", "status": "planned" },
+    { "source": "Input", "target": "Input", "status": "planned" },
+    { "source": "InputArea", "target": "InputArea", "status": "planned" },
+    { "source": "InputGroup", "target": "InputGroup", "status": "planned" },
+    { "source": "Label", "target": "Label", "status": "planned" },
+    { "source": "LayerCard", "target": "LayerCard", "status": "planned" },
+    { "source": "Link", "target": "Link", "status": "planned" },
+    {
+      "source": "LinkButton",
+      "target": "LinkButton",
+      "status": "adapted-unverified",
+      "evidence": ["tests/button.test.tsx"]
+    },
+    {
+      "source": "Loader",
+      "target": "Loader",
+      "status": "adapted-unverified",
+      "evidence": ["tests/button.test.tsx"]
+    },
+    { "source": "MenuBar", "target": "MenuBar", "status": "planned" },
+    { "source": "Meter", "target": "Meter", "status": "planned" },
+    { "source": "Pagination", "target": "Pagination", "status": "planned" },
+    { "source": "Popover", "target": "Popover", "status": "planned" },
+    {
+      "source": "PoweredByCloudflare",
+      "target": "PoweredByCloudflare",
+      "status": "planned"
+    },
+    { "source": "Radio", "target": "Radio", "status": "planned" },
+    { "source": "RadioGroup", "target": "RadioGroup", "status": "planned" },
+    {
+      "source": "RefreshButton",
+      "target": "RefreshButton",
+      "status": "adapted-unverified",
+      "evidence": ["tests/button.test.tsx"]
+    },
+    { "source": "SankeyChart", "target": "SankeyChart", "status": "planned" },
+    { "source": "Select", "target": "Select", "status": "planned" },
+    {
+      "source": "SensitiveInput",
+      "target": "SensitiveInput",
+      "status": "planned"
+    },
+    { "source": "Sidebar", "target": "Sidebar", "status": "planned" },
+    { "source": "SkeletonLine", "target": "SkeletonLine", "status": "planned" },
+    { "source": "Surface", "target": "Surface", "status": "planned" },
+    { "source": "Switch", "target": "Switch", "status": "planned" },
+    { "source": "Table", "target": "Table", "status": "planned" },
+    {
+      "source": "TableOfContents",
+      "target": "TableOfContents",
+      "status": "planned"
+    },
+    { "source": "Tabs", "target": "Tabs", "status": "planned" },
+    { "source": "Text", "target": "Text", "status": "planned" },
+    { "source": "Textarea", "target": "Textarea", "status": "planned" },
+    {
+      "source": "TimeseriesChart",
+      "target": "TimeseriesChart",
+      "status": "planned"
+    },
+    { "source": "Toast", "target": "Toast", "status": "planned" },
+    { "source": "Toolbar", "target": "Toolbar", "status": "planned" },
+    {
+      "source": "Tooltip",
+      "target": "Tooltip",
+      "status": "adapted-unverified",
+      "evidence": ["tests/button.test.tsx"],
+      "notes": "Trigger composition is covered; popup behavior is not."
+    }
+  ],
+  "providers": [
+    {
+      "source": "LinkProvider",
+      "target": "LinkProvider",
+      "status": "adapted-unverified"
+    },
+    {
+      "source": "KumoPortalProvider",
+      "target": "KumoPortalProvider",
+      "status": "adapted-unverified"
+    },
+    {
+      "source": "TooltipProvider",
+      "target": "TooltipProvider",
+      "status": "adapted-unverified"
+    }
+  ],
+  "primitivePolicy": "Only Octane-native primitive subpaths are eligible for export. Missing primitive families remain explicit gaps rather than ReactCompat fallbacks."
+}

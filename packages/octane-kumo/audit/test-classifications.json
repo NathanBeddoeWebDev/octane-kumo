@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "tests": [
+    {
+      "path": "packages/octane-kumo/tests/button.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers the native Button vertical using scenarios derived from the pinned Kumo tests. It is not a one-for-one adapted upstream suite or a React differential lane."
+    },
+    {
+      "path": "packages/octane-kumo/tests/hydration.test.ts",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Checks Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+    },
+    {
+      "path": "packages/octane-kumo/tests/package-contract.test.ts",
+      "disposition": "repo-authored-package-contract",
+      "reason": "Checks package export resolution and forbids React implementation imports in the native source graph; it is not behavioral parity evidence."
+    },
+    {
+      "path": "packages/octane-kumo/tests/styles.test.ts",
+      "disposition": "repo-authored-provenance-contract",
+      "reason": "Checks that every published stylesheet exactly matches its pinned Kumo source by SHA-256; it is not visual parity evidence."
+    }
+  ]
+}
