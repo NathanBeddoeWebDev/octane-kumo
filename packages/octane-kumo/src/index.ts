@@ -4,6 +4,8 @@ export * from "./components/field";
 export * from "./components/input";
 export * from "./components/label";
 export * from "./components/loader";
+export * from "./components/radio";
+export * from "./components/switch";
 export * from "./components/tooltip";
 export * from "./utils/link-provider";
 export * from "./utils/portal-provider";

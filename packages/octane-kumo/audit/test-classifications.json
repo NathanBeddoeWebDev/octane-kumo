@@ -14,12 +14,32 @@
     {
       "path": "packages/octane-kumo/tests/hydration.test.ts",
       "disposition": "octane-only-framework-contract",
-      "reason": "Checks Button, Tooltip, Input, standalone Checkbox, and Checkbox.Group through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+      "reason": "Checks Button, Tooltip, Input, InputArea, Checkbox, Switch, and Radio through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+    },
+    {
+      "path": "packages/octane-kumo/tests/input-area.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers InputArea and Textarea native events and refs, Field associations, controlled and uncontrolled values, min/max row auto-resizing, and cleanup."
     },
     {
       "path": "packages/octane-kumo/tests/input.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Covers Label, Field, and Input associations, native input events and refs, Base UI-style value details, error precedence, and password-manager attributes."
+    },
+    {
+      "path": "packages/octane-kumo/tests/radio.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers the generic Radio compound family, accessible naming, native event details, controlled and uncontrolled selection, keyboard navigation, typed values, native form serialization, group states, and card appearance."
+    },
+    {
+      "path": "packages/octane-kumo/tests/radio.type-spec.tsx",
+      "disposition": "repo-authored-type-contract",
+      "reason": "Checks generic Radio group and item value inference for string, number, and enum values, including expected type failures."
+    },
+    {
+      "path": "packages/octane-kumo/tests/switch.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers standalone Switch and the compound Group, Item, and Legend family, including label activation, native refs and form values, controlled and uncontrolled state, disabled and read-only behavior, transitioning, group naming, and inherited state."
     },
     {
       "path": "packages/octane-kumo/tests/tooltip.test.tsx",
@@ -39,7 +59,7 @@
     {
       "path": "packages/octane-kumo/tests/packed-consumer.test.ts",
       "disposition": "repo-authored-package-contract",
-      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, and Checkbox-family usage through root and component-subpath exports."
+      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles public Button, Tooltip, Label, Field, Input, InputArea, Textarea, Checkbox, Switch, and generic Radio usage through root and component-subpath exports."
     },
     {
       "path": "packages/octane-kumo/tests/styles.test.ts",

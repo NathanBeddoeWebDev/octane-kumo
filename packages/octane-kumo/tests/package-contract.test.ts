@@ -6,13 +6,27 @@ import {
   Checkbox as RootCheckbox,
   Field as RootField,
   Input as RootInput,
+  InputArea as RootInputArea,
   Label as RootLabel,
+  Radio as RootRadio,
+  RadioGroup as RootRadioGroup,
+  Switch as RootSwitch,
+  Textarea as RootTextarea,
 } from "octane-kumo";
 import { Button as SubpathButton } from "octane-kumo/components/button";
 import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
 import { Field as SubpathField } from "octane-kumo/components/field";
-import { Input as SubpathInput } from "octane-kumo/components/input";
+import {
+  Input as SubpathInput,
+  InputArea as SubpathInputArea,
+  Textarea as SubpathTextarea,
+} from "octane-kumo/components/input";
 import { Label as SubpathLabel } from "octane-kumo/components/label";
+import {
+  Radio as SubpathRadio,
+  RadioGroup as SubpathRadioGroup,
+} from "octane-kumo/components/radio";
+import { Switch as SubpathSwitch } from "octane-kumo/components/switch";
 
 const packageRoot = resolve(import.meta.dirname, "..");
 
@@ -30,7 +44,13 @@ describe("package contract", () => {
     expect(RootCheckbox).toBe(SubpathCheckbox);
     expect(RootField).toBe(SubpathField);
     expect(RootInput).toBe(SubpathInput);
+    expect(RootInputArea).toBe(SubpathInputArea);
     expect(RootLabel).toBe(SubpathLabel);
+    expect(RootRadio).toBe(SubpathRadio);
+    expect(RootRadioGroup).toBe(SubpathRadioGroup);
+    expect(RootSwitch).toBe(SubpathSwitch);
+    expect(RootTextarea).toBe(RootInputArea);
+    expect(RootTextarea).toBe(SubpathTextarea);
   });
 
   it("publishes only export targets that exist", () => {

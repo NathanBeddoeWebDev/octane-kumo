@@ -101,7 +101,20 @@
         "tests/visual/button-preview.tsx"
       ]
     },
-    { "source": "InputArea", "target": "InputArea", "status": "planned" },
+    {
+      "source": "InputArea",
+      "target": "InputArea",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/input-area.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Native textarea events and refs, Field associations, controlled and uncontrolled values, min/max row auto-resizing, cleanup, SSR/hydration, and representative visuals are covered."
+    },
     { "source": "InputGroup", "target": "InputGroup", "status": "planned" },
     {
       "source": "Label",
@@ -136,8 +149,33 @@
       "target": "PoweredByCloudflare",
       "status": "planned"
     },
-    { "source": "Radio", "target": "Radio", "status": "planned" },
-    { "source": "RadioGroup", "target": "RadioGroup", "status": "planned" },
+    {
+      "source": "Radio",
+      "target": "Radio",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/radio.test.tsx",
+        "tests/radio.type-spec.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "The generic compound Group, Item, and Legend API is native. Accessible naming, controlled and uncontrolled selection, native details, keyboard navigation, typed values, form serialization, group states, card appearance, SSR/hydration, and representative visuals are covered."
+    },
+    {
+      "source": "RadioGroup",
+      "target": "RadioGroup",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/radio.test.tsx",
+        "tests/radio.type-spec.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts"
+      ],
+      "notes": "Direct generic RadioGroup export aliases the compound Radio group root."
+    },
     {
       "source": "RefreshButton",
       "target": "RefreshButton",
@@ -154,7 +192,20 @@
     { "source": "Sidebar", "target": "Sidebar", "status": "planned" },
     { "source": "SkeletonLine", "target": "SkeletonLine", "status": "planned" },
     { "source": "Surface", "target": "Surface", "status": "planned" },
-    { "source": "Switch", "target": "Switch", "status": "planned" },
+    {
+      "source": "Switch",
+      "target": "Switch",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/switch.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Standalone and compound Group, Item, and Legend APIs are native. Controlled and uncontrolled state, label activation, native form behavior, disabled and read-only states, group accessibility, SSR/hydration, semantic-token visuals, and transitioning state are covered."
+    },
     { "source": "Table", "target": "Table", "status": "planned" },
     {
       "source": "TableOfContents",
@@ -163,7 +214,17 @@
     },
     { "source": "Tabs", "target": "Tabs", "status": "planned" },
     { "source": "Text", "target": "Text", "status": "planned" },
-    { "source": "Textarea", "target": "Textarea", "status": "planned" },
+    {
+      "source": "Textarea",
+      "target": "Textarea",
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/input-area.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts"
+      ],
+      "notes": "Textarea is a public alias of InputArea."
+    },
     {
       "source": "TimeseriesChart",
       "target": "TimeseriesChart",

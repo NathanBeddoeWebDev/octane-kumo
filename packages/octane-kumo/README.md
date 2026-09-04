@@ -6,8 +6,10 @@ Octane's native component, ref, and event contracts.
 
 This package is an early, source-published port. Its native surface currently
 contains `Button`, `RefreshButton`, `LinkButton`, `Loader`, `Tooltip`, `Label`,
-`Field`, `Input`, the complete `Checkbox` family (`Group`, `Item`, and `Legend`),
-`LinkProvider`, `TooltipProvider`, and `KumoPortalProvider`.
+`Field`, `Input`, `InputArea`/`Textarea`, and the complete `Checkbox`, `Switch`,
+and generic `Radio` families (`Group`, `Item`, and `Legend`), plus the direct
+`RadioGroup` export, `LinkProvider`, `TooltipProvider`, and
+`KumoPortalProvider`.
 
 ```tsx
 /** @jsxImportSource octane */
@@ -28,12 +30,13 @@ export function SaveAction() {
 
 ## Current limits
 
-Export presence is not a parity claim. Button, Tooltip, Input, and Checkbox have
-native interaction and SSR/hydration coverage; Label and Field associations are
-tested; a packed external consumer is compiled; the native bundle graph is
-checked for React imports; and representative light/dark, validation, disabled,
-and open-popup states are rendered in a browser. Broad differential parity and
-the rest of the component catalog remain in progress. See
+Export presence is not a parity claim. Button, Tooltip, Input, InputArea,
+Checkbox, Switch, and Radio have native interaction and SSR/hydration coverage;
+Label and Field associations are tested; a packed external consumer is compiled;
+the native bundle graph is checked for React imports; and representative
+light/dark, validation, disabled, card, transitioning, and open-popup states are
+rendered in a browser. Broad differential parity and the rest of the component
+catalog remain in progress. See
 [`status.json`](./status.json),
 [`audit/export-crosswalk.json`](./audit/export-crosswalk.json), and [`PORTING.md`](./PORTING.md)
 for the exact boundary.

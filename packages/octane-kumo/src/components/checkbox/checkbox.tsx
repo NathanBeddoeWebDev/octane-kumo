@@ -10,6 +10,7 @@ import { Check, Minus } from "@octanejs/phosphor-icons";
 import { createContext, useContext, useId, type OctaneNode } from "octane";
 import type { JSX } from "octane/jsx-runtime";
 import { Label } from "../label/label";
+import { activateControlFromLabel } from "../../utils/activate-control-from-label";
 import { cn } from "../../utils/cn";
 import { resolveVariant } from "../../utils/resolve-variant";
 
@@ -126,15 +127,6 @@ export interface CheckboxItemProps {
 const CheckboxGroupContext = createContext<{ controlFirst: boolean }>({
   controlFirst: true,
 });
-
-function activateCheckboxFromLabel(event: MouseEvent) {
-  const target = event.target;
-  if (target instanceof Element && target.closest("button,input")) return;
-
-  (event.currentTarget as HTMLElement)
-    .querySelector<HTMLButtonElement>("[role=checkbox]")
-    ?.click();
-}
 
 function CheckboxIndicator({ indeterminate }: { indeterminate?: boolean }) {
   return (
@@ -253,7 +245,7 @@ export function CheckboxRoot({
           disabled ? "cursor-not-allowed" : "cursor-pointer",
         )}
         nativeLabel={false}
-        onClick={activateCheckboxFromLabel}
+        onClick={activateControlFromLabel}
         render={<span />}
       >
         {control}
@@ -296,7 +288,7 @@ export function CheckboxItem({
       )}
       data-kumo-component="Checkbox"
       data-kumo-part="item-label"
-      onClick={activateCheckboxFromLabel}
+      onClick={activateControlFromLabel}
     >
       <BaseCheckbox.Root
         aria-labelledby={labelId}

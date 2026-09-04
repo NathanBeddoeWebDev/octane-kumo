@@ -72,17 +72,38 @@ import {
   Checkbox,
   Field,
   Input,
+  InputArea,
   Label,
+  Radio,
+  RadioGroup,
+  Switch,
+  Textarea,
   Tooltip,
 } from "octane-kumo";
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
 import { Field as FieldSubpath } from "octane-kumo/components/field";
-import { Input as InputSubpath } from "octane-kumo/components/input";
+import {
+  Input as InputSubpath,
+  InputArea as InputAreaSubpath,
+  Textarea as TextareaSubpath,
+} from "octane-kumo/components/input";
 import { Label as LabelSubpath } from "octane-kumo/components/label";
+import { Radio as RadioSubpath } from "octane-kumo/components/radio";
+import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
 
 const inputRef: { current: HTMLInputElement | null } = { current: null };
+const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
-void [CheckboxSubpath, FieldSubpath, InputSubpath, LabelSubpath];
+void [
+  CheckboxSubpath,
+  FieldSubpath,
+  InputSubpath,
+  InputAreaSubpath,
+  LabelSubpath,
+  RadioSubpath,
+  SwitchSubpath,
+  TextareaSubpath,
+];
 
 export const consumerView = (
   <div>
@@ -111,6 +132,13 @@ export const consumerView = (
     <Field label="Worker name" error={{ message: "Required", match: true }}>
       <Input aria-label="Worker name" />
     </Field>
+    <InputArea
+      label="Notes"
+      ref={inputAreaRef}
+      autoResize
+      onValueChange={(value) => value.trim()}
+    />
+    <Textarea aria-label="Summary" minRows={2} />
     <Checkbox
       ref={checkboxRef}
       label="Enable logs"
@@ -123,6 +151,28 @@ export const consumerView = (
       <Checkbox.Item label="Email" value="email" />
       <Checkbox.Legend className="sr-only">Notification channels</Checkbox.Legend>
     </Checkbox.Group>
+    <Switch
+      label="Enable alerts"
+      name="alerts"
+      onCheckedChange={(checked) => Boolean(checked)}
+      value="enabled"
+    />
+    <Switch.Group legend="Alert types">
+      <Switch.Item label="Deployments" variant="neutral" />
+      <Switch.Legend className="sr-only">Notifications</Switch.Legend>
+    </Switch.Group>
+    <RadioGroup<number>
+      defaultValue={25}
+      legend="Items per page"
+      name="pageSize"
+      onValueChange={(value, details) => {
+        value.toFixed();
+        details.allowPropagation();
+      }}
+    >
+      <Radio.Item<number> label="10" value={10} />
+      <Radio.Item<number> label="25" value={25} />
+    </RadioGroup>
   </div>
 );
 `,

@@ -91,7 +91,7 @@ describe("Tooltip SSR and hydration", () => {
 });
 
 describe("Form controls SSR and hydration", () => {
-  it("adopts input and checkbox markup and remains interactive", async () => {
+  it("adopts native form-control markup and remains interactive", async () => {
     const serverResult = await renderHydrationFixture(
       "tests/fixtures/form-hydration.tsx",
       "FormHydrationFixture",
@@ -105,12 +105,24 @@ describe("Form controls SSR and hydration", () => {
     const serverCheckbox = container.querySelector<HTMLButtonElement>(
       '[data-kumo-component="Checkbox"]',
     );
+    const serverInputArea = container.querySelector<HTMLTextAreaElement>(
+      'textarea[name="notes"]',
+    );
+    const serverSwitch = container.querySelector<HTMLButtonElement>(
+      '[data-kumo-component="Switch"]',
+    );
+    const serverRadio = container.querySelector<HTMLButtonElement>(
+      '[data-kumo-part="item"][role="radio"]',
+    );
     const errors = vi.spyOn(console, "error").mockImplementation(() => {});
     let root: Root | undefined;
 
     try {
       expect(serverInput?.value).toBe("worker");
+      expect(serverInputArea?.value).toBe("Runs globally");
       expect(serverCheckbox?.getAttribute("aria-checked")).toBe("false");
+      expect(serverSwitch?.getAttribute("aria-checked")).toBe("false");
+      expect(serverRadio?.getAttribute("aria-checked")).toBe("true");
 
       await act(async () => {
         root = hydrateRoot(container, createElement(FormHydrationFixture, {}));
@@ -123,14 +135,33 @@ describe("Form controls SSR and hydration", () => {
       const hydratedCheckbox = container.querySelector<HTMLButtonElement>(
         '[data-kumo-component="Checkbox"]',
       );
+      const hydratedInputArea = container.querySelector<HTMLTextAreaElement>(
+        'textarea[name="notes"]',
+      );
+      const hydratedSwitch = container.querySelector<HTMLButtonElement>(
+        '[data-kumo-component="Switch"]',
+      );
+      const hydratedRadio = container.querySelector<HTMLButtonElement>(
+        '[data-kumo-part="item"][role="radio"]',
+      );
       expect(hydratedInput).toBe(serverInput);
       expect(hydratedCheckbox).toBe(serverCheckbox);
+      expect(hydratedInputArea).toBe(serverInputArea);
+      expect(hydratedSwitch).toBe(serverSwitch);
+      expect(hydratedRadio).toBe(serverRadio);
 
       await act(async () => {
         fireEvent.input(hydratedInput!, { target: { value: "api-worker" } });
+        fireEvent.input(hydratedInputArea!, {
+          target: { value: "Deploy from Git" },
+        });
         fireEvent.click(hydratedCheckbox!);
         fireEvent.click(
           within(container).getByRole("checkbox", { name: "SMS" }),
+        );
+        fireEvent.click(hydratedSwitch!);
+        fireEvent.click(
+          within(container).getByRole("radio", { name: "Europe" }),
         );
         await Promise.resolve();
       });
@@ -139,11 +170,20 @@ describe("Form controls SSR and hydration", () => {
         container.querySelector('[data-testid="worker-value"]')?.textContent,
       ).toBe("api-worker");
       expect(
+        container.querySelector('[data-testid="notes-value"]')?.textContent,
+      ).toBe("Deploy from Git");
+      expect(
         container.querySelector('[data-testid="enabled-value"]')?.textContent,
       ).toBe("true");
       expect(
         container.querySelector('[data-testid="channels-value"]')?.textContent,
       ).toBe("email,sms");
+      expect(
+        container.querySelector('[data-testid="deploys-value"]')?.textContent,
+      ).toBe("true");
+      expect(
+        container.querySelector('[data-testid="region-value"]')?.textContent,
+      ).toBe("europe");
       expect(errors).not.toHaveBeenCalled();
     } finally {
       root?.unmount();

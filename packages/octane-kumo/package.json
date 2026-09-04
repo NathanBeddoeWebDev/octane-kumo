@@ -68,6 +68,16 @@
       "import": "./src/components/loader/index.ts",
       "default": "./src/components/loader/index.ts"
     },
+    "./components/radio": {
+      "types": "./src/components/radio/index.ts",
+      "import": "./src/components/radio/index.ts",
+      "default": "./src/components/radio/index.ts"
+    },
+    "./components/switch": {
+      "types": "./src/components/switch/index.ts",
+      "import": "./src/components/switch/index.ts",
+      "default": "./src/components/switch/index.ts"
+    },
     "./components/tooltip": {
       "types": "./src/components/tooltip/index.ts",
       "import": "./src/components/tooltip/index.ts",

@@ -6,7 +6,10 @@ import {
   RefreshButton,
 } from "../../src/components/button/button";
 import { Checkbox } from "../../src/components/checkbox/checkbox";
+import { InputArea } from "../../src/components/input/input-area";
 import { Input } from "../../src/components/input/input";
+import { Radio } from "../../src/components/radio/radio";
+import { Switch } from "../../src/components/switch/switch";
 import { Tooltip } from "../../src/components/tooltip/tooltip";
 import { cn } from "../../src/utils/cn";
 
@@ -60,6 +63,15 @@ function FormRows() {
         />
         <Input error="Enter a valid email" label="Email" value="invalid" />
         <Input disabled label="Disabled input" value="Unavailable" />
+        <InputArea
+          autoResize
+          defaultValue={"Deploy on every push\nKeep the last ten versions"}
+          description="Add deployment context"
+          label="Notes"
+          maxRows={4}
+          minRows={2}
+        />
+        <InputArea error="A summary is required" label="Summary" />
       </div>
       <div className={cn("checkbox-grid")}>
         <Checkbox label="Unchecked" />
@@ -77,6 +89,53 @@ function FormRows() {
         <Checkbox.Item label="Email" value="email" />
         <Checkbox.Item label="SMS" value="sms" />
       </Checkbox.Group>
+      <div className={cn("checkbox-grid")}>
+        <Switch label="Small" size="sm" />
+        <Switch checked label="Enabled" />
+        <Switch checked label="Neutral" size="lg" variant="neutral" />
+        <Switch disabled label="Disabled" />
+        <Switch label="Label first" controlFirst={false} />
+        <Switch label="Saving" transitioning />
+      </div>
+      <Switch.Group
+        description="Choose the events to receive"
+        legend="Alert types"
+      >
+        <Switch.Item defaultChecked label="Deployments" />
+        <Switch.Item label="Incidents" variant="neutral" />
+      </Switch.Group>
+      <div className={cn("control-columns")}>
+        <Radio.Group defaultValue="auto" legend="Deployment mode">
+          <Radio.Item label="Automatic" value="auto" />
+          <Radio.Item label="Manual" value="manual" />
+          <Radio.Item disabled label="Scheduled" value="scheduled" />
+        </Radio.Group>
+        <Radio.Group
+          defaultValue="production"
+          error="Choose a target"
+          legend="Target"
+        >
+          <Radio.Item label="Preview" value="preview" variant="error" />
+          <Radio.Item label="Production" value="production" variant="error" />
+        </Radio.Group>
+      </div>
+      <Radio.Group
+        appearance="card"
+        defaultValue="pro"
+        legend="Plan"
+        orientation="horizontal"
+      >
+        <Radio.Item
+          description="For personal projects"
+          label="Free"
+          value="free"
+        />
+        <Radio.Item
+          description="For production workloads"
+          label="Pro"
+          value="pro"
+        />
+      </Radio.Group>
     </>
   );
 }
