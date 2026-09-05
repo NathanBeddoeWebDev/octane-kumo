@@ -26,7 +26,11 @@ describe("Table", () => {
             <Table.Row>
               <Table.Head scope="col">
                 Name
-                <Table.ResizeHandle ref={handleRef} onClick={() => clicks++} />
+                <Table.ResizeHandle
+                  ref={handleRef}
+                  className="custom-handle"
+                  onClick={() => clicks++}
+                />
               </Table.Head>
             </Table.Row>
           </Table.Header>
@@ -55,6 +59,7 @@ describe("Table", () => {
     expect(screen.getByTestId("footer").tagName).toBe("TFOOT");
     expect(screen.getByRole("columnheader").getAttribute("scope")).toBe("col");
     expect(handleRef.current?.type).toBe("button");
+    expect(handleRef.current?.className).toContain("custom-handle");
     fireEvent.click(screen.getByRole("button", { name: "Resize column" }));
     expect(clicks).toBe(1);
   });

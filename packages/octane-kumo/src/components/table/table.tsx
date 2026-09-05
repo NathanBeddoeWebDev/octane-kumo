@@ -242,7 +242,11 @@ export function TableFooter({ ref, ...props }: TableFooterProps) {
   return <tfoot ref={ref} {...props} />;
 }
 
-export function TableResizeHandle({ ref, ...props }: TableResizeHandleProps) {
+export function TableResizeHandle({
+  ref,
+  className,
+  ...props
+}: TableResizeHandleProps) {
   return (
     <button
       ref={ref}
@@ -257,6 +261,7 @@ export function TableResizeHandle({ ref, ...props }: TableResizeHandleProps) {
         "absolute top-0 right-0",
         "m-0 bg-kumo-base p-0",
         "focus-visible:ring-2 focus-visible:ring-kumo-brand",
+        className,
       )}
     >
       <span className={cn("h-5 w-[2px] rounded bg-kumo-hairline")} />
