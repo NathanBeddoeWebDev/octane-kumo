@@ -1,0 +1,38 @@
+---
+import { catalog } from "../../../catalog";
+import OctaneFixture from "../../../examples/octane/Fixture";
+import ReactFixture from "../../../examples/react/Fixture";
+import "octane-kumo/styles/standalone";
+
+export function getStaticPaths() {
+  return catalog.flatMap((entry) => ["react", "octane"].map((runtime) => ({
+    params: { runtime, scenario: entry.id }, props: { entry, runtime },
+  })));
+}
+const { entry, runtime } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-mode="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{runtime === "react" ? "React" : "Octane"} — {entry.title}</title>
+    <script is:inline>
+      const mode = new URLSearchParams(location.search).get("mode") === "dark" ? "dark" : "light";
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.style.colorScheme = mode;
+    </script>
+  </head>
+  <body>
+    {runtime === "octane"
+      ? <OctaneFixture scenario={entry.id} client:only="octane" />
+      : <ReactFixture scenario={entry.id} client:only="react" />}
+  </body>
+</html>
+<style is:global>
+  body { margin: 0; padding: 16px; font: 14px ui-sans-serif, system-ui, sans-serif; background: var(--color-kumo-recessed); color: var(--text-color-kumo-default); }
+  main { max-width: 760px; margin: auto; }
+  [data-probe] { margin: 12px 0; }
+  output { display: block; margin-top: 24px; padding: 12px; border: 1px solid var(--color-kumo-line); border-radius: 6px; overflow-wrap: anywhere; font: 14px/1.5 ui-monospace, monospace; color: var(--text-color-kumo-subtle); }
+  output::before { content: "Live demo state"; display: block; margin-bottom: 6px; font: 14px ui-sans-serif, system-ui, sans-serif; }
+</style>

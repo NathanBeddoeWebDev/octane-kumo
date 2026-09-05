@@ -138,8 +138,15 @@ function useIsMobile(breakpoint: number = MOBILE_BREAKPOINT) {
     [query],
   );
 
+  // NOTE: getSnapshot must be SSR-safe. Octane's server `useSyncExternalStore`
+  // falls back to `getSnapshot()` when the compiled call carries no slot arg
+  // (the hook-slot transform does not descend into this nested custom hook),
+  // so an unguarded `window` access throws `window is not defined` during SSR.
   const getSnapshot = useCallback(
-    () => window.matchMedia(query).matches,
+    () =>
+      typeof window === "undefined"
+        ? false
+        : window.matchMedia(query).matches,
     [query],
   );
 

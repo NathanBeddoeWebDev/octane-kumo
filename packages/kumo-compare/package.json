@@ -1,0 +1,30 @@
+{
+  "name": "kumo-compare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4322",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4322",
+    "typecheck": "astro check",
+    "test": "node tests/browser.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "^6.0.1",
+    "@cloudflare/kumo": "workspace:*",
+    "@octanejs/astro": "0.0.31",
+    "astro": "7.1.1",
+    "octane": "0.1.51",
+    "octane-kumo": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
