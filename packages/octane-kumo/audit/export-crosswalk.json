@@ -177,7 +177,16 @@
     {
       "source": "CommandPalette",
       "target": "CommandPalette",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/command-palette.test.tsx",
+        "tests/command-palette-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/command-palette-preview.tsx"
+      ],
+      "notes": "Full compound surface on native ARIA Autocomplete/ListBox and Base UI Dialog. Typed grouped iterators, value filtering, native click and modifier-Enter semantics, disabled skipping, focus restoration, portal routing, highlight ranges, loading/empty/footer, hydration and browser fixture. Noninteractive results are disabled for keyboard too; native highlight reasons and client-created dialog portals are documented. Results owns the collection inside the List scrolling wrapper."
     },
     {
       "source": "DatePicker",
@@ -212,7 +221,16 @@
     {
       "source": "DeleteResource",
       "target": "DeleteResource",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/delete-resource.test.tsx",
+        "tests/delete-resource-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/delete-resource-preview.tsx"
+      ],
+      "notes": "Controlled confirmation dialog with exact/case-insensitive matching, native input events, sizes, caller-owned error/loading, async activation guard, fallback clipboard and live feedback, close/unmount cleanup. Ported from the pinned blocks implementation while preserving its root export; also available at components/delete-resource."
     },
     {
       "source": "Dialog",
@@ -268,7 +286,16 @@
     {
       "source": "Flow",
       "target": "Flow",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/flow.test.tsx",
+        "tests/flow-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/flow-preview.tsx"
+      ],
+      "notes": "Native Diagram/Node/Parallel/List/Anchor composition retains pure layout and SVG routing. Native pointer/wheel panning replaces motion/react. DOM-ordered descendant registration handles keyed reorders; structural value updates propagate branch alignment. Native useRender preserves descriptor refs/handlers without imposing default node styling on custom renders. Resize measurement, disabled connectors, horizontal anchors, bounds/overflow and SSR node adoption have focused evidence; exhaustive geometry/browser parity remains open."
     },
     {
       "source": "Grid",

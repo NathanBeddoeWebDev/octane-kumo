@@ -2,6 +2,36 @@
   "schemaVersion": 1,
   "tests": [
     {
+      "path": "packages/octane-kumo/tests/command-palette.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Native collection keyboard/click behavior, disabled skipping, generic object filtering, grouped rich results, highlights, controlled dialog portals, Escape override and focus restoration."
+    },
+    {
+      "path": "packages/octane-kumo/tests/command-palette-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Real server trigger adoption followed by opening, search, selection and dismissal."
+    },
+    {
+      "path": "packages/octane-kumo/tests/delete-resource.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Exact/case-insensitive confirmation, caller loading/error customization, copying/failure and close/reopen reset."
+    },
+    {
+      "path": "packages/octane-kumo/tests/delete-resource-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Real SSR trigger adoption and post-hydration confirmation interaction."
+    },
+    {
+      "path": "packages/octane-kumo/tests/flow.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Pure layout/rounded connector contracts, native render/ref composition, anchors, dynamic branch alignment, keyed reorders and insertion/removal."
+    },
+    {
+      "path": "packages/octane-kumo/tests/flow-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Real SSR node markup adoption. Client measurements establish positioned geometry."
+    },
+    {
       "path": "packages/octane-kumo/tests/toast.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Native provider/manager dispatch, five variants, native actions, custom content/update/close, external upserts versus hook duplicate bump/ending behavior, promise outcomes, portal precedence and timeout lifecycle."

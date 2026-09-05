@@ -103,6 +103,11 @@
       "import": "./src/components/combobox/index.ts",
       "default": "./src/components/combobox/index.ts"
     },
+    "./components/command-palette": {
+      "types": "./src/components/command-palette/index.ts",
+      "import": "./src/components/command-palette/index.ts",
+      "default": "./src/components/command-palette/index.ts"
+    },
     "./components/date-picker": {
       "types": "./src/components/date-picker/index.ts",
       "import": "./src/components/date-picker/index.ts",
@@ -112,6 +117,11 @@
       "types": "./src/components/date-range-picker/index.ts",
       "import": "./src/components/date-range-picker/index.ts",
       "default": "./src/components/date-range-picker/index.ts"
+    },
+    "./components/delete-resource": {
+      "types": "./src/components/delete-resource/index.ts",
+      "import": "./src/components/delete-resource/index.ts",
+      "default": "./src/components/delete-resource/index.ts"
     },
     "./components/dialog": {
       "types": "./src/components/dialog/index.ts",
@@ -132,6 +142,11 @@
       "types": "./src/components/field/index.ts",
       "import": "./src/components/field/index.ts",
       "default": "./src/components/field/index.ts"
+    },
+    "./components/flow": {
+      "types": "./src/components/flow/index.ts",
+      "import": "./src/components/flow/index.ts",
+      "default": "./src/components/flow/index.ts"
     },
     "./components/grid": {
       "types": "./src/components/grid/index.ts",

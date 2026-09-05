@@ -15,6 +15,9 @@ contains `Autocomplete`, `Badge`, `Banner`, `Breadcrumbs`, `Button`,
 `RefreshButton`, `LinkButton`, and `PoweredByCloudflare` exports; and the native
 link, tooltip, and portal providers; and `Toast`, `Toasty`/`ToastProvider` with
 `useKumoToastManager` and `createKumoToastManager`.
+`DeleteResource`, the compound `CommandPalette`, and `Flow` are also native.
+Only the chart family remains planned in the high-level export ledger; broader
+parity and consumer verification still gate stable release.
 
 ```tsx
 /** @jsxImportSource octane */
@@ -24,6 +27,73 @@ export function SaveAction() {
   return <Button variant="primary">Save</Button>;
 }
 ```
+
+## Confirmation, command search, and workflows
+
+`DeleteResource` preserves controlled `open`/`onOpenChange`, exact or
+case-insensitive resource-name confirmation, both sizes, and caller-owned
+`isDeleting`/`errorMessage`. `onDelete` does not automatically close the dialog.
+Handle request failures in the callback and supply the resulting error message.
+Concurrent activation while a returned promise is pending is ignored. Copying
+uses the shared fallback helper, announces success, resets after 1500ms, and
+ignores late completions after close/unmount.
+
+`CommandPalette.Root` combines `Dialog` and `Panel`; use the separate parts for
+drill-down views. Native ARIA Autocomplete/ListBox replaces missing Base UI
+autocomplete. `List` is the scrolling wrapper; place `Results` inside it to own
+the collection. `Results<T>` and `Items<T>` accept typed render functions, while
+`Group`/`GroupLabel` organize results. `ResultItem`, `HighlightedText`, `Empty`,
+`Loading`, and `Footer` preserve the rich rendering surface.
+
+```tsx
+<CommandPalette.Root
+  open={open}
+  onOpenChange={setOpen}
+  items={commands}
+  value={query}
+  onValueChange={setQuery}
+  filter={(command, text) => command.label.includes(text)}
+>
+  <CommandPalette.Input placeholder="Search commands…" />
+  <CommandPalette.List>
+    <CommandPalette.Results<{ id: string; label: string }>>
+      {(command) => (
+        <CommandPalette.Item value={command} onClick={() => run(command)}>
+          {command.label}
+        </CommandPalette.Item>
+      )}
+    </CommandPalette.Results>
+    <CommandPalette.Empty />
+  </CommandPalette.List>
+</CommandPalette.Root>
+```
+
+By default consumers filter their own results. Ordinary Enter/pointer activation
+calls item `onClick` with a native MouseEvent without changing the search value.
+As in the pinned implementation, modifier-Enter calls `onSelect` only when
+`getSelectableItems` is supplied. Disabled and noninteractive items are skipped;
+the latter deliberately fixes the oracle's keyboard-selectable “noninteractive”
+results. Highlight detail reasons reflect native keyboard/pointer events, not
+Base UI's complete reason vocabulary. Popup focus returns to the opener, and
+explicit portal containers override `KumoPortalProvider`. Dialog portal markup
+is client-created; its shell stays mounted during hydration only.
+
+`Flow` preserves `Node`, `Parallel`, `List`, and `Anchor`, horizontal/vertical
+orientation, cross-axis alignment, padding, disabled connectors, measurements,
+and overflow reporting. Node and Anchor accept native refs and descriptor/render
+composition. The pure layout and SVG routing algorithms are retained; pointer
+capture and wheel events replace `motion/react` without adding a dependency.
+DOM-ordered registration supports keyed reorders and dynamic branch alignment.
+The canvas bounds pointer/wheel panning; `canvas={false}` disables those behaviors
+but retains the padded wrapper, as the pinned implementation does. Anchors affect
+horizontal connector offsets only. Server nodes are hidden until client
+measurement establishes their positions, then hydrated nodes are reused.
+
+Run the native visual server and open `tests/visual/delete-resource.html`,
+`tests/visual/command-palette.html`, or `tests/visual/flow.html` for reproducible
+theme, state, and interaction examples. Import the standalone stylesheet if you
+are not using Tailwind. These components retain `adapted-unverified` audit status;
+the tests are not an exhaustive React differential parity claim.
 
 ## Toasts and clipboard feedback
 

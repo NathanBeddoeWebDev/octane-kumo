@@ -9,6 +9,9 @@ import {
   Button as RootButton,
   Checkbox as RootCheckbox,
   ClipboardText as RootClipboardText,
+  CommandPalette as RootCommandPalette,
+  DeleteResource as RootDeleteResource,
+  Flow as RootFlow,
   Toast as RootToast,
   Toasty as RootToasty,
   ToastProvider as RootToastProvider,
@@ -59,6 +62,9 @@ import { Breadcrumbs as SubpathBreadcrumbs } from "octane-kumo/components/breadc
 import { Button as SubpathButton } from "octane-kumo/components/button";
 import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
 import { ClipboardText as SubpathClipboardText } from "octane-kumo/components/clipboard-text";
+import { CommandPalette as SubpathCommandPalette } from "octane-kumo/components/command-palette";
+import { DeleteResource as SubpathDeleteResource } from "octane-kumo/components/delete-resource";
+import { Flow as SubpathFlow } from "octane-kumo/components/flow";
 import {
   Toast as SubpathToast,
   Toasty as SubpathToasty,
@@ -125,6 +131,9 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootCommandPalette).toBe(SubpathCommandPalette);
+    expect(RootDeleteResource).toBe(SubpathDeleteResource);
+    expect(RootFlow).toBe(SubpathFlow);
     expect(RootClipboardText).toBe(SubpathClipboardText);
     expect(RootToast).toBe(SubpathToast);
     expect(RootToasty).toBe(SubpathToasty);

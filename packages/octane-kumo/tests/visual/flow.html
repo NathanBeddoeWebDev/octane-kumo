@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Flow visual fixture</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../../src/styles/standalone.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        font:
+          14px ui-sans-serif,
+          system-ui,
+          sans-serif;
+        background: var(--color-kumo-recessed);
+        color: var(--text-color-kumo-default);
+      }
+      main {
+        max-width: 900px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      output {
+        display: block;
+        margin-top: 16px;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./flow-preview.tsx"></script>
+  </body>
+</html>

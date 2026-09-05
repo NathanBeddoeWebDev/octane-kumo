@@ -81,6 +81,9 @@ import {
   Button,
   Checkbox,
   ClipboardText,
+  CommandPalette,
+  DeleteResource,
+  Flow,
   Toasty,
   ToastProvider,
   Toast,
@@ -130,6 +133,9 @@ import {
   Toolbar,
 } from "octane-kumo";
 import { ClipboardText as ClipboardTextSubpath } from "octane-kumo/components/clipboard-text";
+import { CommandPalette as CommandSubpath, type HighlightRange } from "octane-kumo/components/command-palette";
+import { DeleteResource as DeleteSubpath, type DeleteResourceProps } from "octane-kumo/components/delete-resource";
+import { Flow as FlowSubpath } from "octane-kumo/components/flow";
 import { Toasty as ToastySubpath, Toast as ToastSubpath, createKumoToastManager as CreateToastSubpath } from "octane-kumo/components/toast";
 import { Code as CodeSubpath, type CodeLang } from "octane-kumo/components/code";
 import { ShikiProvider, CodeHighlighted, useShikiHighlighter, normalizeLanguage, LANGUAGE_ALIASES, type LanguageInput } from "octane-kumo/code";
@@ -183,6 +189,14 @@ const inputRef: { current: HTMLInputElement | null } = { current: null };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
 const clipboardRef: { current: HTMLDivElement | null } = { current: null };
+const commands = [{ id: 1, label: "Deploy" }];
+const deletion: DeleteResourceProps = { open: false, onOpenChange: open => { void open; }, resourceName: "worker", resourceType: "Worker", onDelete: async () => {} };
+const flowNode: Parameters<typeof Flow.Node>[0] = { id: "custom", render: <button onClick={event => event.preventDefault()}>Node</button> };
+const commandViews = <CommandPalette.Root items={commands} open={false} onOpenChange={() => {}} getSelectableItems={items => items} onSelect={(item, options) => { item.id.toFixed(); const newTab: boolean = options.newTab; void newTab; }}><CommandPalette.Input ref={inputRef} onKeyDown={event => event.preventDefault()} /><CommandPalette.List ref={clipboardRef}><CommandPalette.Results<typeof commands[number]>>{item => <CommandPalette.Item value={item} onClick={event => { const native: MouseEvent = event; void native; }}>{item.label}</CommandPalette.Item>}</CommandPalette.Results></CommandPalette.List><CommandPalette.HighlightedText text="Deploy" highlights={[[0, 2] satisfies HighlightRange]} /></CommandPalette.Root>;
+// @ts-expect-error Native command events do not expose React nativeEvent.
+const invalidCommand = <CommandSubpath.Input onKeyDown={event => event.nativeEvent} />;
+// @ts-expect-error Flow direction is a closed union.
+const invalidFlow = <FlowSubpath orientation="diagonal" />;
 const toastManager = createKumoToastManager();
 const notification: KumoToastManagerAddOptions<{ count: number }> = { variant: "success", title: <span>Saved</span>, data: { count: 1 }, actions: [{ children: "Undo", onClick: event => event.preventDefault() }] };
 toastManager.add(notification);
@@ -250,6 +264,10 @@ void [
 
 export const consumerView = (
   <div>
+    {commandViews}
+    <DeleteResource {...deletion} /><DeleteSubpath {...deletion} size="sm" />
+    <Flow orientation="vertical" align="center" onOverflowChange={value => { const overflow: boolean = value.x; void overflow; }}><Flow.Node {...flowNode} /><Flow.Parallel align="end"><Flow.List><Flow.Node><Flow.Anchor>Port</Flow.Anchor></Flow.Node></Flow.List></Flow.Parallel></Flow>
+    <FlowSubpath canvas={false}><FlowSubpath.Node>Subpath</FlowSubpath.Node></FlowSubpath>
     <Toasty toastManager={toastManager}><ToastConsumer /></Toasty>
     <ToastProvider container={{ current: null }}><span>Alias</span></ToastProvider>
     <ToastySubpath toastManager={CreateToastSubpath()}><span>Subpath</span></ToastySubpath>
