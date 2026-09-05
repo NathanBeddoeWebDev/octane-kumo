@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Octane Kumo code</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../../src/styles/standalone.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        font:
+          14px ui-sans-serif,
+          system-ui,
+          sans-serif;
+        background: var(--color-kumo-recessed);
+      }
+      main {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+      section {
+        min-width: 0;
+        padding: 24px;
+        border-radius: 12px;
+        background: var(--color-kumo-base);
+        color: var(--text-color-kumo-default);
+      }
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 20px;
+      }
+      h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 24px 0 12px;
+      }
+      [data-testid="code-fixture"] {
+        display: grid;
+        gap: 16px;
+      }
+      [data-testid="code-fixture"] > pre {
+        overflow-x: auto;
+      }
+      @media (max-width: 700px) {
+        body {
+          padding: 12px;
+        }
+        main {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./code-preview.tsx"></script>
+  </body>
+</html>

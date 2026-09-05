@@ -38,6 +38,16 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./code": {
+      "types": "./src/code/index.ts",
+      "import": "./src/code/index.ts",
+      "default": "./src/code/index.ts"
+    },
+    "./code/server": {
+      "types": "./src/code/server.tsx",
+      "import": "./src/code/server.tsx",
+      "default": "./src/code/server.tsx"
+    },
     "./components/autocomplete": {
       "types": "./src/components/autocomplete/index.ts",
       "import": "./src/components/autocomplete/index.ts",
@@ -72,6 +82,11 @@
       "types": "./src/components/cloudflare-logo/index.ts",
       "import": "./src/components/cloudflare-logo/index.ts",
       "default": "./src/components/cloudflare-logo/index.ts"
+    },
+    "./components/code": {
+      "types": "./src/components/code/index.ts",
+      "import": "./src/components/code/index.ts",
+      "default": "./src/components/code/index.ts"
     },
     "./components/collapsible": {
       "types": "./src/components/collapsible/index.ts",
@@ -248,7 +263,10 @@
     "@octanejs/base-ui": "0.1.49",
     "@octanejs/day-picker": "0.0.18",
     "@octanejs/phosphor-icons": "0.0.31",
-    "cnfast": "^0.0.8"
+    "@shikijs/langs": "4.0.0",
+    "@shikijs/themes": "4.0.0",
+    "cnfast": "^0.0.8",
+    "shiki": "4.0.0"
   },
   "devDependencies": {
     "@octanejs/testing-library": "0.1.48",

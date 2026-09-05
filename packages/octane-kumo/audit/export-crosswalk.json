@@ -112,12 +112,30 @@
     {
       "source": "Code",
       "target": "Code",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/code.test.tsx",
+        "tests/code-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/code-preview.tsx"
+      ],
+      "notes": "Legacy escaped text with native styles, five language variants and Code.Block identity. The values prop remains accepted but unused, matching the pinned implementation."
     },
     {
       "source": "CodeBlock",
       "target": "CodeBlock",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/code.test.tsx",
+        "tests/code-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/code-preview.tsx"
+      ],
+      "notes": "Legacy plain-text wrapper, identical to Code.Block; distinct from the trusted-HTML code/server renderer."
     },
     {
       "source": "Collapsible",
@@ -636,6 +654,44 @@
       "source": "TooltipProvider",
       "target": "TooltipProvider",
       "status": "adapted-unverified"
+    }
+  ],
+  "codeSubpaths": [
+    {
+      "source": "@cloudflare/kumo/code",
+      "target": "octane-kumo/code",
+      "status": "adapted-unverified",
+      "exports": [
+        "ShikiProvider",
+        "CodeHighlighted",
+        "useShikiHighlighter",
+        "normalizeLanguage",
+        "LANGUAGE_ALIASES"
+      ],
+      "evidence": [
+        "tests/highlighting.test.tsx",
+        "tests/highlighting-engine.test.tsx",
+        "tests/code-hydration.test.tsx",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/code-preview.tsx"
+      ],
+      "notes": "Preserves client props/types, aliases, lazy JavaScript/WASM engines, dual themes, fallback, line numbers/highlights and labels. Native provider owns/disposes asynchronous engines, deduplicates equivalent language sets and resets failures on reconfiguration. Copy uses the shared fallback helper, reveals keyboard focus and cleans up timers; inherited object names are rejected. No Shiki modules are reachable from root component exports, and code entry static imports contain no Shiki implementation."
+    },
+    {
+      "source": "@cloudflare/kumo/code/server",
+      "target": "octane-kumo/code/server",
+      "status": "adapted-unverified",
+      "exports": ["highlightCode", "createServerHighlighter", "CodeBlock"],
+      "evidence": [
+        "tests/highlighting-engine.test.tsx",
+        "tests/code-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/code-preview.tsx"
+      ],
+      "notes": "Native trusted-HTML renderer and shared lazy Shiki loader, canonical language options, JavaScript default and reusable disposal. One-off highlighting disposes via finally even when rendering fails. No React differential parity claim."
     }
   ],
   "primitivePolicy": "Only Octane-native primitive subpaths are eligible for export. Missing primitive families remain explicit gaps rather than ReactCompat fallbacks."

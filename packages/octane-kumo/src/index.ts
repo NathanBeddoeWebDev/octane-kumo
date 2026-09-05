@@ -5,6 +5,7 @@ export * from "./components/breadcrumbs";
 export * from "./components/button";
 export * from "./components/checkbox";
 export * from "./components/cloudflare-logo";
+export * from "./components/code";
 export * from "./components/collapsible";
 export * from "./components/combobox";
 export * from "./components/date-picker";

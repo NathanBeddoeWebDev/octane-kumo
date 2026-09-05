@@ -6,7 +6,7 @@ Octane's native component, ref, and event contracts.
 
 This package is an early, source-published port. Its native surface currently
 contains `Autocomplete`, `Badge`, `Banner`, `Breadcrumbs`, `Button`,
-`CloudflareLogo`, `Combobox`, `DatePicker`, `DateRangePicker`, `Empty`, `Grid`, `Input`,
+`CloudflareLogo`, `Code`, `CodeBlock`, `Combobox`, `DatePicker`, `DateRangePicker`, `Empty`, `Grid`, `Input`,
 `InputArea`/`Textarea`, `InputGroup`, `Label`, `LayerCard`, `Link`, `Loader`,
 `MenuBar`, `Meter`, `Pagination`, `Select`, `SensitiveInput`, `Sidebar`,
 `SkeletonLine`, `Surface`, `Table`, `TableOfContents`, `Tabs`, `Text`, `Toolbar`, and
@@ -23,6 +23,61 @@ export function SaveAction() {
   return <Button variant="primary">Save</Button>;
 }
 ```
+
+## Code display and syntax highlighting
+
+The legacy `Code`, `Code.Block`, and `CodeBlock` exports render escaped plain
+text, preserving Kumo's five language variants and styling metadata. As in the
+pinned implementation, `Code.values` is accepted but does not interpolate.
+
+Syntax highlighting lives only under `octane-kumo/code`; ordinary component
+imports do not pull Shiki into their bundle. Engines, themes, and requested
+grammars load asynchronously after mounting. Use a shared provider for multiple
+blocks:
+
+```tsx
+/** @jsxImportSource octane */
+import { ShikiProvider, CodeHighlighted } from "octane-kumo/code";
+
+export function Example() {
+  return (
+    <ShikiProvider engine="javascript" languages={["ts", "bash"]}>
+      <CodeHighlighted
+        code={'const greeting = "Hello";\nconsole.log(greeting);'}
+        lang="ts"
+        showLineNumbers
+        highlightLines={[2]}
+        showCopyButton
+      />
+    </ShikiProvider>
+  );
+}
+```
+
+Both `javascript` and `wasm` engines use `github-light`/`vesper` themes, selected
+by the existing `data-mode` styling. The 18 supported languages and aliases are
+exported as types and `LANGUAGE_ALIASES`; `normalizeLanguage` rejects unknown
+names. `useShikiHighlighter` exposes readiness, loading/error state, labels,
+and a highlighting function. Unconfigured languages, loading, and failures
+remain readable escaped text, including during SSR. Providers dispose engines
+on replacement/unmount, including initialization that finishes late. Copy
+buttons become visible on keyboard focus and copy the original source, with
+provider/component labels and a cleaned-up two-second success timer.
+Copy controls reserve their own space rather than overlaying multi-line source
+on narrow screens; long lines scroll inside the remaining code viewport.
+
+For build-time or server highlighting, import `highlightCode`,
+`createServerHighlighter`, and `CodeBlock` from `octane-kumo/code/server`.
+`highlightCode` creates and disposes a one-off engine; dispose reusable
+highlighters yourself. Server utilities take canonical language names and
+default to the JavaScript engine. The server `CodeBlock` takes **trusted HTML
+produced by these helpers**, not arbitrary user HTML, and needs no provider.
+It is distinct from the legacy root `CodeBlock`, which takes plain `code`.
+
+Import `octane-kumo/styles/standalone` without Tailwind. Run
+`pnpm --filter octane-kumo dev:visual` and open `/tests/visual/code.html` for
+light/dark engines, line numbers/highlights, copy controls, fallback text, and
+contained long-line scrolling.
 
 ## Date picking
 

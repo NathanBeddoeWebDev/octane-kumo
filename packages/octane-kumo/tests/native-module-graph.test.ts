@@ -11,7 +11,11 @@ describe("native module graph", () => {
     const result = await build({
       build: {
         lib: {
-          entry: resolve(packageRoot, "src/index.ts"),
+          entry: {
+            index: resolve(packageRoot, "src/index.ts"),
+            code: resolve(packageRoot, "src/code/index.ts"),
+            server: resolve(packageRoot, "src/code/server.tsx"),
+          },
           formats: ["es"],
         },
         rollupOptions: {
@@ -46,6 +50,28 @@ describe("native module graph", () => {
             specifier === dependency || specifier.startsWith(`${dependency}/`),
         ),
       ).toBe(false);
+    }
+    const isShiki = (id: string) => /\/(?:@shikijs|shiki)[/@]/.test(id);
+    expect(
+      chunks.some((chunk) => Object.keys(chunk.modules).some(isShiki)),
+    ).toBe(true);
+    for (const entry of chunks.filter((chunk) => chunk.isEntry)) {
+      const seen = new Set<string>();
+      const visit = (fileName: string) => {
+        if (seen.has(fileName)) return;
+        seen.add(fileName);
+        const chunk = chunks.find(
+          (candidate) => candidate.fileName === fileName,
+        );
+        if (!chunk) return;
+        expect(Object.keys(chunk.modules).some(isShiki)).toBe(false);
+        for (const imported of chunk.imports) visit(imported);
+        if (entry.name === "index") {
+          // Even dynamic imports must be absent from the ordinary component graph.
+          for (const imported of chunk.dynamicImports) visit(imported);
+        }
+      };
+      visit(entry.fileName);
     }
   });
 });

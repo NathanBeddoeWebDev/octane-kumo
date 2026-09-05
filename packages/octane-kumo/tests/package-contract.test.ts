@@ -10,6 +10,8 @@ import {
   Checkbox as RootCheckbox,
   CloudflareLogo as RootCloudflareLogo,
   PoweredByCloudflare as RootPoweredByCloudflare,
+  Code as RootCode,
+  CodeBlock as RootCodeBlock,
   Collapsible as RootCollapsible,
   Combobox as RootCombobox,
   DatePicker as RootDatePicker,
@@ -50,6 +52,11 @@ import { Banner as SubpathBanner } from "octane-kumo/components/banner";
 import { Breadcrumbs as SubpathBreadcrumbs } from "octane-kumo/components/breadcrumbs";
 import { Button as SubpathButton } from "octane-kumo/components/button";
 import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
+import {
+  Code as SubpathCode,
+  CodeBlock as SubpathCodeBlock,
+} from "octane-kumo/components/code";
+import { CodeBlock as ServerCodeBlock } from "octane-kumo/code/server";
 import {
   CloudflareLogo as SubpathCloudflareLogo,
   PoweredByCloudflare as SubpathPoweredByCloudflare,
@@ -104,6 +111,10 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootCode).toBe(SubpathCode);
+    expect(RootCodeBlock).toBe(SubpathCodeBlock);
+    expect(RootCode.Block).toBe(RootCodeBlock);
+    expect(ServerCodeBlock).not.toBe(RootCodeBlock);
     expect(RootDatePicker).toBe(SubpathDatePicker);
     expect(RootDateRangePicker).toBe(SubpathDateRangePicker);
     expect(RootPagination).toBe(SubpathPagination);

@@ -60,6 +60,9 @@ describe("packed consumer", () => {
         "@octanejs/base-ui",
         "@octanejs/day-picker",
         "@octanejs/phosphor-icons",
+        "@shikijs/langs",
+        "@shikijs/themes",
+        "shiki",
         "cnfast",
         "octane",
       ]) {
@@ -79,6 +82,8 @@ import {
   Checkbox,
   CloudflareLogo,
   PoweredByCloudflare,
+  Code,
+  CodeBlock,
   Collapsible,
   Combobox,
   type ComboboxFilter,
@@ -116,6 +121,9 @@ import {
   Tooltip,
   Toolbar,
 } from "octane-kumo";
+import { Code as CodeSubpath, type CodeLang } from "octane-kumo/components/code";
+import { ShikiProvider, CodeHighlighted, useShikiHighlighter, normalizeLanguage, LANGUAGE_ALIASES, type LanguageInput } from "octane-kumo/code";
+import { CodeBlock as ServerCodeBlock, highlightCode, createServerHighlighter } from "octane-kumo/code/server";
 import { Autocomplete as AutocompleteSubpath } from "octane-kumo/components/autocomplete";
 import { Badge as BadgeSubpath } from "octane-kumo/components/badge";
 import { Banner as BannerSubpath } from "octane-kumo/components/banner";
@@ -217,6 +225,15 @@ void [
 
 export const consumerView = (
   <div>
+    <Code code="const n = 1" lang={"ts" satisfies CodeLang} style={{ whiteSpace: "pre-wrap" }} values={{ n: { value: "2" } }} />
+    <Code.Block code="echo hello" lang="bash" />
+    <CodeBlock code="{}" lang="jsonc" />
+    <CodeSubpath code="body {}" lang="css" className="custom-code" />
+    <ShikiProvider engine="javascript" languages={["ts", "json"] satisfies LanguageInput[]} labels={{ copy: "Copy source" }}>
+      <CodeHighlighted code="const n = 1" lang="ts" showLineNumbers highlightLines={[1]} showCopyButton />
+    </ShikiProvider>
+    <ServerCodeBlock html="<pre><code>trusted</code></pre>" />
+    {void [useShikiHighlighter, normalizeLanguage("ts"), LANGUAGE_ALIASES, highlightCode, createServerHighlighter]}
     <DatePicker mode="single" onChange={(date, trigger, modifiers, event) => { date?.getDate(); trigger.getDate(); void modifiers.selected; event.preventDefault(); }} footer={<span>Choose a date</span>} />
     <DatePicker mode="single" required selected={new Date()} onChange={(date) => date.getDate()} />
     <DatePickerSubpath mode="multiple" onChange={(dates) => dates?.map((date) => date.getDate())} />
@@ -499,7 +516,7 @@ export const consumerView = (
           "-p",
           resolve(consumerDirectory, "tsconfig.json"),
         ],
-        { stdio: "pipe" },
+        { stdio: "inherit" },
       );
 
       const packedManifest = JSON.parse(
