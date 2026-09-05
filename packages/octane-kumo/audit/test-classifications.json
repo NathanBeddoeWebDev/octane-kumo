@@ -2,6 +2,21 @@
   "schemaVersion": 1,
   "tests": [
     {
+      "path": "packages/octane-kumo/tests/toast.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Native provider/manager dispatch, five variants, native actions, custom content/update/close, external upserts versus hook duplicate bump/ending behavior, promise outcomes, portal precedence and timeout lifecycle."
+    },
+    {
+      "path": "packages/octane-kumo/tests/clipboard-text.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Clipboard field ref/sizes, alternate/empty text, labels/callbacks, successful and failed clipboard fallback, repeated plain/anchored feedback reset, instance isolation, portal routing and late async cleanup."
+    },
+    {
+      "path": "packages/octane-kumo/tests/feedback-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Real SSR compilation, trigger/copy node adoption, post-hydration toast dispatch/action and plain/anchored copying, tooltip role and aria-describedby association. Portal content is client-created. Not a React differential lane."
+    },
+    {
       "path": "packages/octane-kumo/tests/code.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Legacy Code styling, escaping, ignored values, and Code.Block identity."

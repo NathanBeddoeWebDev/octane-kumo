@@ -78,6 +78,11 @@
       "import": "./src/components/checkbox/index.ts",
       "default": "./src/components/checkbox/index.ts"
     },
+    "./components/clipboard-text": {
+      "types": "./src/components/clipboard-text/index.ts",
+      "import": "./src/components/clipboard-text/index.ts",
+      "default": "./src/components/clipboard-text/index.ts"
+    },
     "./components/cloudflare-logo": {
       "types": "./src/components/cloudflare-logo/index.ts",
       "import": "./src/components/cloudflare-logo/index.ts",
@@ -237,6 +242,11 @@
       "types": "./src/components/tooltip/index.ts",
       "import": "./src/components/tooltip/index.ts",
       "default": "./src/components/tooltip/index.ts"
+    },
+    "./components/toast": {
+      "types": "./src/components/toast/index.ts",
+      "import": "./src/components/toast/index.ts",
+      "default": "./src/components/toast/index.ts"
     },
     "./components/toolbar": {
       "types": "./src/components/toolbar/index.ts",

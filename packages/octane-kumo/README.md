@@ -6,14 +6,15 @@ Octane's native component, ref, and event contracts.
 
 This package is an early, source-published port. Its native surface currently
 contains `Autocomplete`, `Badge`, `Banner`, `Breadcrumbs`, `Button`,
-`CloudflareLogo`, `Code`, `CodeBlock`, `Combobox`, `DatePicker`, `DateRangePicker`, `Empty`, `Grid`, `Input`,
+`ClipboardText`, `CloudflareLogo`, `Code`, `CodeBlock`, `Combobox`, `DatePicker`, `DateRangePicker`, `Empty`, `Grid`, `Input`,
 `InputArea`/`Textarea`, `InputGroup`, `Label`, `LayerCard`, `Link`, `Loader`,
 `MenuBar`, `Meter`, `Pagination`, `Select`, `SensitiveInput`, `Sidebar`,
 `SkeletonLine`, `Surface`, `Table`, `TableOfContents`, `Tabs`, `Text`, `Toolbar`, and
 `Tooltip`; the complete `Collapsible`, `Dialog`, `DropdownMenu`, `Popover`,
 `Checkbox`, `Switch`, and generic `Radio` families; the direct `RadioGroup`,
 `RefreshButton`, `LinkButton`, and `PoweredByCloudflare` exports; and the native
-link, tooltip, and portal providers.
+link, tooltip, and portal providers; and `Toast`, `Toasty`/`ToastProvider` with
+`useKumoToastManager` and `createKumoToastManager`.
 
 ```tsx
 /** @jsxImportSource octane */
@@ -23,6 +24,61 @@ export function SaveAction() {
   return <Button variant="primary">Save</Button>;
 }
 ```
+
+## Toasts and clipboard feedback
+
+Wrap application content with `Toasty` (also exported as `ToastProvider`) and
+dispatch from descendants with `useKumoToastManager().add(...)`. The raw native
+`Toast` compound API is also exported for custom composition. The Kumo helpers
+preserve `variant`, native `content`, `actions`, typed `data`, update/close and
+promise success/error options:
+
+```tsx
+/** @jsxImportSource octane */
+import { Toasty, createKumoToastManager, ClipboardText } from "octane-kumo";
+
+const notifications = createKumoToastManager();
+
+export function App() {
+  return (
+    <Toasty toastManager={notifications}>
+      <ClipboardText
+        text="Displayed resource name"
+        textToCopy="resource-id-123"
+        tooltip={{ text: "Copy resource ID", copiedText: "Resource ID copied" }}
+        onCopy={() =>
+          notifications.add({ title: "Copied", variant: "success" })
+        }
+      />
+    </Toasty>
+  );
+}
+```
+
+The external manager is an event dispatcher: mount its provider before calling
+it; pre-mount events are not queued. As in the oracle, external same-ID adds
+update existing content, while in-tree duplicate adds bump the existing toast
+without replacing its content and ignore toasts already exiting. Use `update`
+when replacement is intended. `Toasty.variant` remains accepted but unused;
+set variants on individual notifications. Native Base UI owns stacking,
+timeout/pause and dismissal. Explicit `container` takes precedence over
+`KumoPortalProvider`; portal contents are client-created, not server-rendered.
+
+`ClipboardText` supports all three sizes (default `lg`), a native div ref,
+alternate copy text including the empty string, localized labels and `onCopy`.
+It uses Clipboard API with legacy fallback, reports success only after copying,
+and resets plain check feedback 1500ms after the last successful copy. Tooltip
+mode uses a per-instance anchored toast, preventing feedback duplication across
+fields; re-copy restarts its animation and timeout. Copied feedback pauses with
+the native toast viewport, and cleanup ignores late clipboard completions.
+Tooltips have explicit role/description linkage and route through the portal
+provider. Clipboard icon transitions exclude hover colors; toast text uses 14px
+and reserves space beside its close button.
+
+Run `pnpm --filter octane-kumo dev:visual` and open
+`/tests/visual/feedback.html` to exercise variants, stacks, timeout, keyboard
+copying, and theme switching. Import `octane-kumo/styles/standalone` when not
+using Tailwind.
 
 ## Code display and syntax highlighting
 

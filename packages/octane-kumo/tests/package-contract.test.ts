@@ -8,6 +8,12 @@ import {
   Breadcrumbs as RootBreadcrumbs,
   Button as RootButton,
   Checkbox as RootCheckbox,
+  ClipboardText as RootClipboardText,
+  Toast as RootToast,
+  Toasty as RootToasty,
+  ToastProvider as RootToastProvider,
+  createKumoToastManager as RootCreateToastManager,
+  useKumoToastManager as RootUseToastManager,
   CloudflareLogo as RootCloudflareLogo,
   PoweredByCloudflare as RootPoweredByCloudflare,
   Code as RootCode,
@@ -52,6 +58,14 @@ import { Banner as SubpathBanner } from "octane-kumo/components/banner";
 import { Breadcrumbs as SubpathBreadcrumbs } from "octane-kumo/components/breadcrumbs";
 import { Button as SubpathButton } from "octane-kumo/components/button";
 import { Checkbox as SubpathCheckbox } from "octane-kumo/components/checkbox";
+import { ClipboardText as SubpathClipboardText } from "octane-kumo/components/clipboard-text";
+import {
+  Toast as SubpathToast,
+  Toasty as SubpathToasty,
+  ToastProvider as SubpathToastProvider,
+  createKumoToastManager as SubpathCreateToastManager,
+  useKumoToastManager as SubpathUseToastManager,
+} from "octane-kumo/components/toast";
 import {
   Code as SubpathCode,
   CodeBlock as SubpathCodeBlock,
@@ -111,6 +125,12 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootClipboardText).toBe(SubpathClipboardText);
+    expect(RootToast).toBe(SubpathToast);
+    expect(RootToasty).toBe(SubpathToasty);
+    expect(RootToastProvider).toBe(SubpathToastProvider);
+    expect(RootCreateToastManager).toBe(SubpathCreateToastManager);
+    expect(RootUseToastManager).toBe(SubpathUseToastManager);
     expect(RootCode).toBe(SubpathCode);
     expect(RootCodeBlock).toBe(SubpathCodeBlock);
     expect(RootCode.Block).toBe(RootCodeBlock);

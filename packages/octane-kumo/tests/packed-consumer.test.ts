@@ -80,6 +80,14 @@ import {
   Breadcrumbs,
   Button,
   Checkbox,
+  ClipboardText,
+  Toasty,
+  ToastProvider,
+  Toast,
+  createKumoToastManager,
+  useKumoToastManager,
+  type KumoToastManagerAddOptions,
+  type KumoToastOptions,
   CloudflareLogo,
   PoweredByCloudflare,
   Code,
@@ -121,6 +129,8 @@ import {
   Tooltip,
   Toolbar,
 } from "octane-kumo";
+import { ClipboardText as ClipboardTextSubpath } from "octane-kumo/components/clipboard-text";
+import { Toasty as ToastySubpath, Toast as ToastSubpath, createKumoToastManager as CreateToastSubpath } from "octane-kumo/components/toast";
 import { Code as CodeSubpath, type CodeLang } from "octane-kumo/components/code";
 import { ShikiProvider, CodeHighlighted, useShikiHighlighter, normalizeLanguage, LANGUAGE_ALIASES, type LanguageInput } from "octane-kumo/code";
 import { CodeBlock as ServerCodeBlock, highlightCode, createServerHighlighter } from "octane-kumo/code/server";
@@ -172,6 +182,21 @@ import { GridItem as GridItemSubpath } from "octane-kumo/components/grid";
 const inputRef: { current: HTMLInputElement | null } = { current: null };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
+const clipboardRef: { current: HTMLDivElement | null } = { current: null };
+const toastManager = createKumoToastManager();
+const notification: KumoToastManagerAddOptions<{ count: number }> = { variant: "success", title: <span>Saved</span>, data: { count: 1 }, actions: [{ children: "Undo", onClick: event => event.preventDefault() }] };
+toastManager.add(notification);
+toastManager.update("saved", { variant: "info", content: <strong>Updated</strong> });
+toastManager.promise(Promise.resolve(42), { loading: { title: "Loading" }, success: value => ({ title: value.toFixed(), variant: "success", data: { count: value } }), error: error => ({ title: error.message, variant: "error" }) });
+// @ts-expect-error Kumo variants remain a closed union.
+toastManager.add({ variant: "purple" });
+// @ts-expect-error Toast actions use native DOM events, not synthetic events.
+toastManager.add({ actions: [{ onClick: (event: { nativeEvent: MouseEvent }) => { void event; } }] });
+function ToastConsumer() {
+  const manager = useKumoToastManager();
+  const items: KumoToastOptions[] = manager.toasts;
+  return <Button onClick={() => manager.add({ title: "From hook", variant: "info" })}>{items.length}</Button>;
+}
 const autocompleteFilter: AutocompleteFilter = Autocomplete.useFilter({
   locale: "en",
 });
@@ -225,6 +250,13 @@ void [
 
 export const consumerView = (
   <div>
+    <Toasty toastManager={toastManager}><ToastConsumer /></Toasty>
+    <ToastProvider container={{ current: null }}><span>Alias</span></ToastProvider>
+    <ToastySubpath toastManager={CreateToastSubpath()}><span>Subpath</span></ToastySubpath>
+    <Toast.Provider><Toast.Viewport /></Toast.Provider>
+    {void ToastSubpath.createToastManager()}
+    <ClipboardText text="Shown" textToCopy="" ref={clipboardRef} tooltip={{ side: "left", text: "Copy", copiedText: "Copied" }} labels={{ copyAction: "Copy value" }} onCopy={() => {}} />
+    <ClipboardTextSubpath text="Subpath" size="sm" />
     <Code code="const n = 1" lang={"ts" satisfies CodeLang} style={{ whiteSpace: "pre-wrap" }} values={{ n: { value: "2" } }} />
     <Code.Block code="echo hello" lang="bash" />
     <CodeBlock code="{}" lang="jsonc" />

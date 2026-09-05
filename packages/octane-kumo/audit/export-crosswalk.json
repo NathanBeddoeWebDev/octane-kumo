@@ -96,7 +96,16 @@
     {
       "source": "ClipboardText",
       "target": "ClipboardText",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/clipboard-text.test.tsx",
+        "tests/feedback-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/feedback-preview.tsx"
+      ],
+      "notes": "Native div ref, all sizes, alternate copy text, callbacks/labels, animated icons/live feedback, tooltips and anchored copied toasts. Uses the shared copy helper with no false success, per-instance toast managers instead of the oracle's global manager, portal-provider routing, tooltip role/description linkage, and async/timer cleanup. Icon transitions exclude hover colors."
     },
     {
       "source": "CloudflareLogo",
@@ -606,7 +615,16 @@
     {
       "source": "Toast",
       "target": "Toast",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/toast.test.tsx",
+        "tests/feedback-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/feedback-preview.tsx"
+      ],
+      "notes": "Exports native Toast compound parts plus Toasty/ToastProvider, useKumoToastManager/createKumoToastManager and Kumo option types. Preserves external upserts versus hook-side duplicate bump/ending semantics, variants/content/actions, typed data and promise transitions. Explicit portal container overrides context. Providers must mount before external dispatch; portal DOM is client-created. Bump frames are cancelled on unmount, toast text is 14px and close-button space is reserved. Toasty.variant remains accepted but unused as in the oracle. Native primitives own timeout/pause, limit, stacking and dismissal; no exhaustive React differential claim."
     },
     {
       "source": "Toolbar",
