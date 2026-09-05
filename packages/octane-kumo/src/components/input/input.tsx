@@ -1,6 +1,6 @@
 /** @jsxImportSource octane */
 import { Input as BaseInput } from "@octanejs/base-ui/input";
-import type { OctaneNode } from "octane";
+import type { ElementDescriptor, OctaneNode } from "octane";
 import type { JSX } from "octane/jsx-runtime";
 import { Field, normalizeFieldError, type FieldError } from "../field/field";
 import { cn } from "../../utils/cn";
@@ -120,6 +120,19 @@ export function inputVariants({
 
 type NativeInputProps = Omit<JSX.IntrinsicElements["input"], "size">;
 
+export interface InputRenderState {
+  dirty: boolean;
+  disabled: boolean;
+  filled: boolean;
+  focused: boolean;
+  touched: boolean;
+  valid: boolean | null;
+}
+
+export type InputRender =
+  | ElementDescriptor
+  | ((props: NativeInputProps, state: InputRenderState) => ElementDescriptor);
+
 export type InputProps = NativeInputProps &
   Pick<KumoInputVariantsProps, "size" | "variant"> & {
     description?: OctaneNode;
@@ -128,6 +141,7 @@ export type InputProps = NativeInputProps &
     labelTooltip?: OctaneNode;
     onValueChange?: (value: string, details: InputValueChangeDetails) => void;
     passwordManagerIgnore?: boolean;
+    render?: InputRender;
   };
 
 export function Input({

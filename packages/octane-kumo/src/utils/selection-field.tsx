@@ -20,6 +20,7 @@ export interface SelectionFieldPresentationProps {
   error?: string | FieldError;
   hideLabel?: boolean;
   label?: OctaneNode;
+  labelId?: string;
   labelTooltip?: OctaneNode;
   required?: boolean;
 }
@@ -47,6 +48,7 @@ export function SelectionFieldPresentation({
   error: errorProp,
   hideLabel = false,
   label,
+  labelId,
   labelTooltip,
   required,
 }: SelectionFieldPresentationProps) {
@@ -58,6 +60,7 @@ export function SelectionFieldPresentation({
     <>
       {label ? (
         <AriaLabel
+          id={labelId}
           className={cn(
             "m-0 text-base font-medium text-kumo-default select-none",
             hideLabel && "sr-only",

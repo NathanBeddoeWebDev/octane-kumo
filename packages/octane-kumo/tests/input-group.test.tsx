@@ -70,6 +70,41 @@ describe("InputGroup", () => {
     expect(event).toBeInstanceOf(InputEvent);
   });
 
+  it("composes Input render props while preserving group props and state", () => {
+    const ref: { current: HTMLInputElement | null } = { current: null };
+    let inputs = 0;
+    let disabledState = false;
+    render(() => (
+      <InputGroup disabled label="Account">
+        <InputGroup.Input
+          onInput={() => inputs++}
+          ref={ref}
+          render={(props, state) => {
+            disabledState = state.disabled;
+            return (
+              <input
+                {...props}
+                data-composed="group"
+                onInput={(event) => {
+                  props.onInput?.(event);
+                  inputs++;
+                }}
+              />
+            );
+          }}
+        />
+      </InputGroup>
+    ));
+
+    const input = screen.getByRole("textbox", { name: "Account" });
+    fireEvent.input(input, { target: { value: "team" } });
+    expect(input.getAttribute("data-composed")).toBe("group");
+    expect(input.hasAttribute("disabled")).toBe(true);
+    expect(ref.current).toBe(input);
+    expect(inputs).toBe(2);
+    expect(disabledState).toBe(true);
+  });
+
   it("auto-detects individual mode for direct non-ghost buttons", () => {
     render(() => (
       <InputGroup>

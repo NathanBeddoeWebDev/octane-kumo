@@ -68,6 +68,63 @@ describe("Input", () => {
     expect((input as HTMLInputElement).value).toBe("workers");
   });
 
+  it("composes render elements and callbacks through Base Input", () => {
+    const elementRef: { current: HTMLInputElement | null } = { current: null };
+    let elementInputs = 0;
+    const { unmount } = render(Input, {
+      props: {
+        "aria-label": "Element composition",
+        onInput: () => elementInputs++,
+        ref: elementRef,
+        render: (
+          <input data-composed="element" onInput={() => elementInputs++} />
+        ),
+      },
+    });
+    const elementInput = screen.getByRole("textbox", {
+      name: "Element composition",
+    });
+    fireEvent.input(elementInput, { target: { value: "one" } });
+    expect(elementInput.getAttribute("data-composed")).toBe("element");
+    expect(elementRef.current).toBe(elementInput);
+    expect(elementInputs).toBe(2);
+    unmount();
+
+    const callbackRef: { current: HTMLInputElement | null } = { current: null };
+    let callbackInputs = 0;
+    let renderState: { disabled: boolean; focused: boolean } | undefined;
+    render(Input, {
+      props: {
+        "aria-label": "Callback composition",
+        disabled: true,
+        onInput: () => callbackInputs++,
+        ref: callbackRef,
+        render: (props, state) => {
+          renderState = state;
+          return (
+            <input
+              {...props}
+              data-composed="callback"
+              onInput={(event) => {
+                props.onInput?.(event);
+                callbackInputs++;
+              }}
+            />
+          );
+        },
+      },
+    });
+    const callbackInput = screen.getByRole("textbox", {
+      name: "Callback composition",
+    });
+    fireEvent.input(callbackInput, { target: { value: "two" } });
+    expect(callbackInput.getAttribute("data-composed")).toBe("callback");
+    expect(callbackInput.hasAttribute("disabled")).toBe(true);
+    expect(callbackRef.current).toBe(callbackInput);
+    expect(callbackInputs).toBe(2);
+    expect(renderState).toMatchObject({ disabled: true, focused: false });
+  });
+
   it("reports value changes with native Base UI details", () => {
     let value: string | undefined;
     let details: InputValueChangeDetails | undefined;

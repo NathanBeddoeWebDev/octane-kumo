@@ -201,7 +201,7 @@ function SwitchControl({
             ? variant === "neutral"
               ? "bg-kumo-contrast ring-kumo-contrast"
               : "bg-kumo-brand ring-kumo-brand"
-            : "bg-kumo-recessed ring-kumo-line",
+            : "bg-kumo-fill ring-kumo-interact",
           className,
         )
       }
@@ -282,7 +282,7 @@ export function SwitchRoot({
   if (!label) return control;
 
   return (
-    <FieldBase.Root className={cn("inline-flex")}>
+    <FieldBase.Root className={cn("flex")}>
       <FieldBase.Label
         className={cn(
           "!m-0 inline-flex !min-h-0 items-center gap-2 !text-base",

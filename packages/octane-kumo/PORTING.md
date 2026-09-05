@@ -2,12 +2,16 @@
 
 ## Target
 
-The first stable release keeps every current high-level Kumo component
-available while replacing React implementation dependencies with Octane-native
+The first stable release targets the non-chart high-level Kumo catalog
+while replacing React implementation dependencies with Octane-native
 packages and renderer code. Compatibility means preserving names, compound
 APIs, principal props and variants, semantic tokens, accessibility, and
 observable behavior where practical. Octane-native events, refs, and element
 types are intentional API adaptations.
+
+Chart, SankeyChart, and TimeseriesChart are deferred at user request until needed.
+They are excluded from current parity and release scope, not treated as passing
+or silently replaced with React wrappers. Their oracle sources remain pinned.
 
 Raw primitive subpaths are exported only when an Octane-native primitive exists.
 ReactCompat is reserved for an optional `octane-kumo/react` emergency subpath;
@@ -48,7 +52,8 @@ React dependency.
    divergences, prove no React in native chunks, then remove the React oracle.
 
 Incremental npm alpha releases may be cut from coherent verified slices. Stable
-is blocked on the full catalog and parity ledger.
+is blocked on the in-scope catalog and parity ledger; deferring charts does not
+waive any acceptance gate for the native components.
 
 ## Component acceptance
 

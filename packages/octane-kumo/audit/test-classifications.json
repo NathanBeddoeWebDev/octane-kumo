@@ -2,6 +2,11 @@
   "schemaVersion": 1,
   "tests": [
     {
+      "path": "packages/octane-kumo/tests/parity/run.mjs",
+      "disposition": "react-octane-browser-differential",
+      "reason": "One shared fixture compiled independently for the pinned React oracle and native Octane; representative non-chart interactions, computed appearance, accessibility snapshots and screenshot differences across light/dark/mobile profiles. Strict diagnostic output retains adaptations, shared defects and regressions for triage rather than claiming exhaustive parity."
+    },
+    {
       "path": "packages/octane-kumo/tests/command-palette.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Native collection keyboard/click behavior, disabled skipping, generic object filtering, grouped rich results, highlights, controlled dialog portals, Escape override and focus restoration."

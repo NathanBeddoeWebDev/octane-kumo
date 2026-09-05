@@ -281,6 +281,7 @@
     "dev:visual": "vite --host 127.0.0.1 --open /tests/visual/",
     "sync:styles": "node scripts/sync-styles.mjs",
     "test": "vp test run",
+    "test:parity": "node tests/parity/run.mjs",
     "typecheck": "tsrx-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

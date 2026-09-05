@@ -20,7 +20,9 @@ import { useIsHydrating } from "@octanejs/base-ui/utils/useIsHydrating";
 import { CaretUpDown, Check } from "@octanejs/phosphor-icons";
 import {
   createContext,
+  flushSync,
   useContext,
+  useId,
   useMemo,
   useState,
   type ElementDescriptor,
@@ -365,6 +367,10 @@ function SelectTrigger<T>({
       buttonProps,
       {
         role: "combobox",
+        // Kumo names the control from its label, not the selected value that
+        // React Aria includes in the default button naming relationship.
+        "aria-label": props["aria-label"],
+        "aria-labelledby": props["aria-labelledby"],
         "aria-invalid": context.hasError || undefined,
         "aria-readonly": readOnly || undefined,
         "data-kumo-component": "Select",
@@ -406,7 +412,36 @@ function SelectPopover({
         "flex max-h-[min(var(--available-height),24rem)] min-w-(--trigger-width) flex-col rounded-lg bg-kumo-base py-1.5 text-kumo-default shadow-lg ring ring-kumo-line",
       )}
     >
-      {!state || state.isOpen ? children : null}
+      {!state || state.isOpen ? (
+        <div
+          className={cn("contents")}
+          onKeyDown={(event) => {
+            if (
+              !event.defaultPrevented ||
+              ![
+                "Home",
+                "End",
+                "ArrowUp",
+                "ArrowDown",
+                "PageUp",
+                "PageDown",
+              ].includes(event.key)
+            )
+              return;
+            // Aria updates its roving key before passively moving DOM focus.
+            // Commit navigation before rapid Enter can activate the old option.
+            // This wrapper receives the event after Aria; selection stays there.
+            flushSync(() => {});
+            const option = event.currentTarget.querySelector<HTMLElement>(
+              '[role="option"][tabindex="0"]',
+            );
+            if (option && option !== option.ownerDocument.activeElement)
+              option.focus({ preventScroll: true });
+          }}
+        >
+          {children}
+        </div>
+      ) : null}
     </AriaPopover>
   );
 }
@@ -446,6 +481,13 @@ function SelectRoot<T, Multiple extends boolean | undefined = false>({
   readOnly,
   ...props
 }: SelectPropsGeneric<T, Multiple>) {
+  const labelId = useId();
+  const ariaLabel =
+    props["aria-label"] ??
+    (!label && !props["aria-labelledby"] ? placeholder : undefined);
+  const labelledBy = ariaLabel
+    ? undefined
+    : (props["aria-labelledby"] ?? (label ? labelId : undefined));
   const normalizedItems = useMemo(() => normalizeItems(items), [items]);
   const values = useMemo(
     () => normalizedItems.map((item) => item.value),
@@ -499,14 +541,8 @@ function SelectRoot<T, Multiple extends boolean | undefined = false>({
     <SelectContext.Provider value={context}>
       <AriaSelect
         {...props}
-        aria-label={
-          props["aria-label"] ??
-          (!props["aria-labelledby"] && typeof label === "string"
-            ? label
-            : !props["aria-labelledby"]
-              ? placeholder
-              : undefined)
-        }
+        className={cn("grid gap-2")}
+        aria-label={ariaLabel}
         isDisabled={loading || disabled}
         isInvalid={Boolean(error)}
         isOpen={open}
@@ -537,6 +573,7 @@ function SelectRoot<T, Multiple extends boolean | undefined = false>({
       >
         <SelectionFieldPresentation
           label={label}
+          labelId={labelId}
           hideLabel={hideLabel}
           labelTooltip={labelTooltip}
           required={required}
@@ -544,10 +581,8 @@ function SelectRoot<T, Multiple extends boolean | undefined = false>({
           error={normalizedError}
         >
           <SelectTrigger<T>
-            aria-label={props["aria-label"]}
-            aria-labelledby={
-              props["aria-label"] ? "" : props["aria-labelledby"]
-            }
+            aria-label={ariaLabel}
+            aria-labelledby={labelledBy}
             className={cn(
               selectVariants({ size }),
               disabled && "cursor-not-allowed opacity-50",

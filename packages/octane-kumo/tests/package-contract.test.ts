@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it } from "vite-plus/test";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
   Autocomplete as RootAutocomplete,
   Badge as RootBadge,
@@ -54,6 +54,8 @@ import {
   Text as RootText,
   Textarea as RootTextarea,
   Toolbar as RootToolbar,
+  cn,
+  safeRandomId,
 } from "octane-kumo";
 import { Autocomplete as SubpathAutocomplete } from "octane-kumo/components/autocomplete";
 import { Badge as SubpathBadge } from "octane-kumo/components/badge";
@@ -130,6 +132,26 @@ function sourceFiles(directory: string): string[] {
 }
 
 describe("package contract", () => {
+  it("exports the public utilities from the package root", () => {
+    expect(cn("base", false, "active")).toBe("base active");
+    expect(safeRandomId()).toMatch(/^[\w-]+$/);
+  });
+
+  it("preserves safeRandomId's crypto and non-crypto fallbacks", () => {
+    try {
+      vi.stubGlobal("crypto", { randomUUID: () => "native-uuid" });
+      expect(safeRandomId()).toBe("native-uuid");
+      vi.stubGlobal("crypto", {
+        getRandomValues: (bytes: Uint8Array) => bytes.fill(255),
+      });
+      expect(safeRandomId()).toBe("ffffffff-ffff-4fff-bfff-ffffffffffff");
+      vi.stubGlobal("crypto", undefined);
+      expect(safeRandomId()).toMatch(/^r[a-z0-9]+$/);
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it("resolves the root and component subpath to the same native export", () => {
     expect(RootCommandPalette).toBe(SubpathCommandPalette);
     expect(RootDeleteResource).toBe(SubpathDeleteResource);

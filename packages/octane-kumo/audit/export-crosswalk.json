@@ -8,7 +8,8 @@
   "target": "octane-kumo",
   "statuses": {
     "adapted-unverified": "A native implementation is exported, but the complete acceptance matrix is not closed.",
-    "planned": "Required for the first stable release but not yet exported."
+    "planned": "Required for the first stable release but not yet exported.",
+    "deferred": "Excluded from the current port and parity scope until explicitly needed. Not exported or claimed as compatible."
   },
   "entries": [
     {
@@ -77,7 +78,8 @@
     {
       "source": "Chart",
       "target": "Chart",
-      "status": "planned"
+      "status": "deferred",
+      "notes": "Shelved at user request; revisit when chart support is needed."
     },
     {
       "source": "Checkbox",
@@ -494,7 +496,8 @@
     {
       "source": "SankeyChart",
       "target": "SankeyChart",
-      "status": "planned"
+      "status": "deferred",
+      "notes": "Shelved at user request; revisit when chart support is needed."
     },
     {
       "source": "Select",
@@ -637,7 +640,8 @@
     {
       "source": "TimeseriesChart",
       "target": "TimeseriesChart",
-      "status": "planned"
+      "status": "deferred",
+      "notes": "Shelved at user request; revisit when chart support is needed."
     },
     {
       "source": "Toast",

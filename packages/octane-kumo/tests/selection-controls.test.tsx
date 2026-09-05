@@ -16,6 +16,50 @@ import { Select } from "../src/components/select/select";
 afterEach(cleanup);
 
 describe("Select", () => {
+  it("names the trigger from its label rather than repeating the selected value", async () => {
+    render(() => (
+      <Select
+        label={<span>Environment</span>}
+        defaultValue="production"
+        items={{ production: "Production", staging: "Staging" }}
+      />
+    ));
+    const trigger = screen.getByRole("combobox", { name: "Environment" });
+    expect(trigger.textContent).toContain("Production");
+    fireEvent.click(trigger);
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: "Staging" })).toBeTruthy(),
+    );
+    fireEvent.click(screen.getByRole("option", { name: "Staging" }));
+    await waitFor(() => expect(trigger.textContent).toContain("Staging"));
+    expect(screen.getByRole("combobox", { name: "Environment" })).toBe(trigger);
+  });
+
+  it.each(["aria-label", "aria-labelledby"] as const)(
+    "honors an explicit %s without repeating the value",
+    (attribute) => {
+      render(() => (
+        <>
+          <span id="external-label">Deployment target</span>
+          <Select
+            {...{
+              [attribute]:
+                attribute === "aria-label"
+                  ? "Deployment target"
+                  : "external-label",
+            }}
+            label="Environment"
+            defaultValue="production"
+            items={{ production: "Production" }}
+          />
+        </>
+      ));
+      expect(
+        screen.getByRole("combobox", { name: "Deployment target" }).textContent,
+      ).toContain("Production");
+    },
+  );
+
   it("opens, selects the original value, and preserves Kumo styling", async () => {
     const values: string[] = [];
 

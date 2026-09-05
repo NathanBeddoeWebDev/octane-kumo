@@ -109,6 +109,10 @@ import {
   Input,
   InputArea,
   InputGroup,
+  KUMO_INPUT_GROUP_DEFAULT_VARIANTS,
+  KUMO_INPUT_GROUP_VARIANTS,
+  type KumoInputGroupFocusMode,
+  type KumoInputGroupVariantsProps,
   Label,
   LayerCard,
   Link,
@@ -131,6 +135,8 @@ import {
   Textarea,
   Tooltip,
   Toolbar,
+  cn,
+  safeRandomId,
 } from "octane-kumo";
 import { ClipboardText as ClipboardTextSubpath } from "octane-kumo/components/clipboard-text";
 import { CommandPalette as CommandSubpath, type HighlightRange } from "octane-kumo/components/command-palette";
@@ -160,6 +166,11 @@ import { Field as FieldSubpath } from "octane-kumo/components/field";
 import {
   Input as InputSubpath,
   InputArea as InputAreaSubpath,
+  InputGroup as LegacyInputGroupSubpath,
+  KUMO_INPUT_GROUP_DEFAULT_VARIANTS as LegacyInputGroupDefaults,
+  KUMO_INPUT_GROUP_VARIANTS as LegacyInputGroupVariants,
+  type KumoInputGroupFocusMode as LegacyInputGroupFocusMode,
+  type KumoInputGroupVariantsProps as LegacyInputGroupVariantsProps,
   Textarea as TextareaSubpath,
 } from "octane-kumo/components/input";
 import { InputGroup as InputGroupSubpath } from "octane-kumo/components/input-group";
@@ -186,6 +197,10 @@ import { Grid as GridSubpath } from "octane-kumo/components/grid";
 import { GridItem as GridItemSubpath } from "octane-kumo/components/grid";
 
 const inputRef: { current: HTMLInputElement | null } = { current: null };
+const inputGroupFocusMode: KumoInputGroupFocusMode = "container";
+const legacyInputGroupFocusMode: LegacyInputGroupFocusMode = "individual";
+const inputGroupVariants: KumoInputGroupVariantsProps = { focusMode: inputGroupFocusMode };
+const legacyInputGroupVariantProps: LegacyInputGroupVariantsProps = { focusMode: legacyInputGroupFocusMode };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
 const clipboardRef: { current: HTMLDivElement | null } = { current: null };
@@ -238,6 +253,15 @@ void [
   GridItemSubpath,
   InputSubpath,
   InputAreaSubpath,
+  LegacyInputGroupSubpath,
+  LegacyInputGroupDefaults,
+  LegacyInputGroupVariants,
+  KUMO_INPUT_GROUP_DEFAULT_VARIANTS,
+  KUMO_INPUT_GROUP_VARIANTS,
+  inputGroupVariants,
+  legacyInputGroupVariantProps,
+  cn("consumer", "typed"),
+  safeRandomId(),
   InputGroupSubpath,
   LabelSubpath,
   LayerCardSubpath,
@@ -331,6 +355,7 @@ export const consumerView = (
         value.toUpperCase();
         details.event.preventDefault();
       }}
+      render={(props, state) => <input {...props} aria-busy={state.focused} />}
     />
     <Field label="Worker name" error={{ message: "Required", match: true }}>
       <Input aria-label="Worker name" />
@@ -344,7 +369,7 @@ export const consumerView = (
     <Textarea aria-label="Summary" minRows={2} />
     <InputGroup label="Worker subdomain">
       <InputGroup.Addon>@</InputGroup.Addon>
-      <InputGroup.Input ref={inputRef} onValueChange={(value) => value.trim()} />
+      <InputGroup.Input ref={inputRef} onValueChange={(value) => value.trim()} render={<input data-consumer-input="" />} />
       <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
       <InputGroup.Button variant="secondary">Check</InputGroup.Button>
     </InputGroup>

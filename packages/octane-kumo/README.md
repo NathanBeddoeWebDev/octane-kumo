@@ -16,8 +16,8 @@ contains `Autocomplete`, `Badge`, `Banner`, `Breadcrumbs`, `Button`,
 link, tooltip, and portal providers; and `Toast`, `Toasty`/`ToastProvider` with
 `useKumoToastManager` and `createKumoToastManager`.
 `DeleteResource`, the compound `CommandPalette`, and `Flow` are also native.
-Only the chart family remains planned in the high-level export ledger; broader
-parity and consumer verification still gate stable release.
+The chart family is deferred until needed and excluded from current parity and
+release scope. Broader parity and consumer verification still gate stable release.
 
 ```tsx
 /** @jsxImportSource octane */
@@ -27,6 +27,31 @@ export function SaveAction() {
   return <Button variant="primary">Save</Button>;
 }
 ```
+
+## React-to-Octane parity checks
+
+Run `pnpm --filter octane-kumo test:parity` from this repository. It compiles one
+shared scenario fixture independently for React and native Octane, then runs
+Chromium interaction checks and records computed styles, geometry, accessibility
+snapshots, page overflow, and screenshots in light, dark, and 390px mobile views.
+The React source is the pinned local oracle; both lanes use the byte-checked
+standalone stylesheet. This diagnostic lane uses the oracle package's installed
+Playwright and does not add React to the native package.
+
+Pass scenario names for a focused run, for example
+`pnpm --filter octane-kumo test:parity forms command`. `PARITY_OUTPUT` optionally
+sets the artifact directory; otherwise a temporary directory is printed. Inspect
+`results.json` and screenshots there. The command exits nonzero on differences;
+it does **not** silently allowlist documented adaptations or declare an entire
+component verified from one smoke scenario. Static API findings are recorded in
+[audit/parity-api.md](./audit/parity-api.md); the browser results, triaged gaps,
+shared issues, and coverage limits are in
+[audit/parity-report.md](./audit/parity-report.md). The compatibility follow-up
+restores the missing utility/input APIs, corrects Select naming and spacing,
+synchronizes rapid keyboard navigation focus, and aligns Flow sizing and Switch
+layout/off-state fill. Switch retains semantic theme colors instead of copying
+the oracle's hard-coded palette. Shared oracle issues and other documented
+adaptations remain visible; this is not an exhaustive clean-parity claim.
 
 ## Confirmation, command search, and workflows
 

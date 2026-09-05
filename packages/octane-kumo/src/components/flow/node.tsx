@@ -118,7 +118,7 @@ function FlowNodeComponent({
       {
         className: cn(
           !render &&
-            "absolute cursor-default rounded-md bg-kumo-base px-3 py-2 text-base shadow ring ring-kumo-line",
+            "absolute cursor-default rounded-md bg-kumo-base px-3 py-2 shadow ring ring-kumo-line",
         ),
         style: position
           ? {

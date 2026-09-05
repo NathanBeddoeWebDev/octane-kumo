@@ -42,5 +42,6 @@ export * from "./components/text";
 export * from "./components/toast";
 export * from "./components/tooltip";
 export * from "./components/toolbar";
+export { cn, safeRandomId } from "./utils/cn";
 export * from "./utils/link-provider";
 export * from "./utils/portal-provider";
