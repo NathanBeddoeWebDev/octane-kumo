@@ -2,6 +2,21 @@
   "schemaVersion": 1,
   "tests": [
     {
+      "path": "packages/octane-kumo/tests/table.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers Table compound semantics, intrinsic refs/events, variant and sticky classes, controlled/uncontrolled selection, indeterminate and disabled checkboxes, native details and deprecated callbacks."
+    },
+    {
+      "path": "packages/octane-kumo/tests/pagination.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers caller-controlled pages, draft synchronization and commits, bounds, empty/unknown totals, simple/full controls, custom info, localized labels and numeric Select callbacks."
+    },
+    {
+      "path": "packages/octane-kumo/tests/table-pagination-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Checks real SSR compilation, table/row/control node adoption, non-default initial page, post-hydration select-all and disabled rows, paging, page-size changes, and both input and dropdown selectors. This is not a React differential lane."
+    },
+    {
       "path": "packages/octane-kumo/tests/button.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Covers the native Button vertical using scenarios derived from the pinned Kumo tests. It is not a one-for-one adapted upstream suite or a React differential lane."

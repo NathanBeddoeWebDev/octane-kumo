@@ -25,6 +25,7 @@ import {
   Link as RootLink,
   MenuBar as RootMenuBar,
   Meter as RootMeter,
+  Pagination as RootPagination,
   Popover as RootPopover,
   Radio as RootRadio,
   RadioGroup as RootRadioGroup,
@@ -34,6 +35,7 @@ import {
   SkeletonLine as RootSkeletonLine,
   Surface as RootSurface,
   Switch as RootSwitch,
+  Table as RootTable,
   TableOfContents as RootTableOfContents,
   Tabs as RootTabs,
   Text as RootText,
@@ -69,6 +71,8 @@ import { Link as SubpathLink } from "octane-kumo/components/link";
 import { SkeletonLine as SubpathSkeletonLine } from "octane-kumo/components/loader";
 import { MenuBar as SubpathMenuBar } from "octane-kumo/components/menubar";
 import { Meter as SubpathMeter } from "octane-kumo/components/meter";
+import { Pagination as SubpathPagination } from "octane-kumo/components/pagination";
+import { Table as SubpathTable } from "octane-kumo/components/table";
 import { Popover as SubpathPopover } from "octane-kumo/components/popover";
 import {
   Radio as SubpathRadio,
@@ -96,6 +100,8 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootPagination).toBe(SubpathPagination);
+    expect(RootTable).toBe(SubpathTable);
     expect(RootAutocomplete).toBe(SubpathAutocomplete);
     expect(RootBadge).toBe(SubpathBadge);
     expect(RootBanner).toBe(SubpathBanner);

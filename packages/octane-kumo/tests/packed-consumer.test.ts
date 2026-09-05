@@ -95,6 +95,7 @@ import {
   Link,
   MenuBar,
   Meter,
+  Pagination,
   Popover,
   Radio,
   RadioGroup,
@@ -104,6 +105,7 @@ import {
   SkeletonLine,
   Surface,
   Switch,
+  Table,
   TableOfContents,
   Tabs,
   Text,
@@ -138,6 +140,8 @@ import { Link as LinkSubpath } from "octane-kumo/components/link";
 import { SkeletonLine as SkeletonLineSubpath } from "octane-kumo/components/loader";
 import { MenuBar as MenuBarSubpath } from "octane-kumo/components/menubar";
 import { Meter as MeterSubpath } from "octane-kumo/components/meter";
+import { Pagination as PaginationSubpath, PaginationInfo, PaginationControls, PaginationSeparator, PaginationPageSize, paginationVariants, type PaginationProps } from "octane-kumo/components/pagination";
+import { Table as TableSubpath, KUMO_TABLE_VARIANTS, type KumoTableLayout } from "octane-kumo/components/table";
 import { Popover as PopoverSubpath } from "octane-kumo/components/popover";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
 import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
@@ -188,6 +192,9 @@ void [
   LinkSubpath,
   MenuBarSubpath,
   MeterSubpath,
+  PaginationSubpath,
+  paginationVariants(),
+  TableSubpath,
   PopoverSubpath,
   RadioSubpath,
   SensitiveInputSubpath,
@@ -205,6 +212,22 @@ void [
 
 export const consumerView = (
   <div>
+    <Table layout={"fixed" satisfies KumoTableLayout} ref={{ current: null }}>
+      <Table.Header variant="compact" sticky><Table.Row><Table.CheckHead indeterminate onCheckedChange={(checked, details) => { void checked; details?.cancel(); }} /><Table.Head sticky="left" scope="col">Name<Table.ResizeHandle onPointerDown={(event) => event.preventDefault()} /></Table.Head></Table.Row></Table.Header>
+      <Table.Body><Table.Row variant="selected"><Table.CheckCell checked label="Worker" onValueChange={(checked) => { void checked; }} /><Table.Cell sticky="right" colSpan={2}>Worker</Table.Cell></Table.Row></Table.Body>
+      <Table.Footer><Table.Row><Table.Cell>Total</Table.Cell></Table.Row></Table.Footer>
+    </Table>
+    <Pagination page={2} setPage={(page) => page.toFixed()} perPage={10} totalCount={100} labels={{ pageNumber: "Page" }}>
+      <Pagination.Info>{({ pageShowingRange }) => pageShowingRange}</Pagination.Info>
+      <Pagination.Separator />
+      <Pagination.PageSize value={10} onChange={(size) => size.toFixed()} />
+      <Pagination.Controls pageSelector="dropdown" />
+    </Pagination>
+    <PaginationSubpath {...({ setPage: (page) => page.toFixed(), hasNextPage: true } satisfies PaginationProps)} />
+    <PaginationSubpath setPage={() => {}} totalCount={100} perPage={10}>
+      <PaginationInfo /><PaginationSeparator /><PaginationControls controls="simple" /><PaginationPageSize value={10} onChange={() => {}} />
+    </PaginationSubpath>
+    <TableSubpath className={KUMO_TABLE_VARIANTS.layout.fixed.classes} />
     <Badge variant="success" appearance="dot">Operational</Badge>
     <Button aria-label="Save changes">Save</Button>
     <Button aria-labelledby="save-label">Save</Button>

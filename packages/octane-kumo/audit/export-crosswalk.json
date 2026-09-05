@@ -350,7 +350,16 @@
     {
       "source": "Pagination",
       "target": "Pagination",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/pagination.test.tsx",
+        "tests/table-pagination-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/table-pagination-preview.tsx"
+      ],
+      "notes": "Compound and legacy APIs, caller-controlled pages, internal input drafts, page-size and page-number Select adapters, localized labels, known/unknown totals, and SSR/hydration are native. Empty totals stay on page one with range 0-0; non-finite drafts restore the current page, fractions truncate, and Enter prevents form submission. These are intentional corrections to oracle edge cases, not exact differential parity."
     },
     {
       "source": "Popover",
@@ -495,7 +504,16 @@
     {
       "source": "Table",
       "target": "Table",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/table.test.tsx",
+        "tests/table-pagination-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/table-pagination-preview.tsx"
+      ],
+      "notes": "All ten compound parts, intrinsic refs and native attributes/events, layout and row variants, compact/sticky headers and columns, Checkbox-backed selection, event details and deprecated callback alias are native. Selection and pagination data remain caller-owned; ResizeHandle is only a styled event target, not a resizing engine."
     },
     {
       "source": "TableOfContents",
