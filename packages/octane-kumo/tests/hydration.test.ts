@@ -12,6 +12,7 @@ import {
   PopoverHydrationFixture,
 } from "./fixtures/overlay-hydration";
 import { StatusHydrationFixture } from "./fixtures/status-hydration";
+import { SelectionHydrationFixture } from "./fixtures/selection-hydration";
 import { TooltipHydrationFixture } from "./fixtures/tooltip-hydration";
 import { renderHydrationFixture } from "./hydration-ssr";
 
@@ -590,6 +591,107 @@ describe("Navigation controls SSR and hydration", () => {
         expect(
           within(container).getByTestId("hydrated-menu-value").textContent,
         ).toBe("grid");
+      });
+      expect(errors).not.toHaveBeenCalled();
+    } finally {
+      root?.unmount();
+      errors.mockRestore();
+      container.remove();
+    }
+  });
+});
+
+describe("Selection controls SSR and hydration", () => {
+  it("adopts select, autocomplete, and combobox controls and remains interactive", async () => {
+    const serverResult = await renderHydrationFixture(
+      "tests/fixtures/selection-hydration.tsx",
+      "SelectionHydrationFixture",
+    );
+    const container = document.createElement("div");
+    container.innerHTML = serverResult.html;
+    document.body.appendChild(container);
+    const serverSelect = within(container).getByRole("combobox", {
+      name: "Hydrated environment",
+    });
+    const serverAutocomplete = within(container).getByRole("combobox", {
+      name: "Hydrated country",
+    });
+    const serverCombobox = within(container).getByRole("combobox", {
+      name: "Hydrated language",
+    });
+    const errors = vi.spyOn(console, "error").mockImplementation(() => {});
+    let root: Root | undefined;
+
+    try {
+      expect(serverSelect.textContent).toContain("Production");
+
+      await act(async () => {
+        root = hydrateRoot(
+          container,
+          createElement(SelectionHydrationFixture, {}),
+        );
+        await Promise.resolve();
+      });
+
+      expect(
+        within(container).getByRole("combobox", {
+          name: "Hydrated environment",
+        }),
+      ).toBe(serverSelect);
+      expect(
+        within(container).getByRole("combobox", { name: "Hydrated country" }),
+      ).toBe(serverAutocomplete);
+      expect(
+        within(container).getByRole("combobox", { name: "Hydrated language" }),
+      ).toBe(serverCombobox);
+
+      fireEvent.click(serverSelect);
+      await waitFor(() =>
+        expect(
+          within(document.body).getByRole("option", { name: "Staging" }),
+        ).toBeTruthy(),
+      );
+      fireEvent.click(
+        within(document.body).getByRole("option", { name: "Staging" }),
+      );
+
+      await act(async () => {
+        serverAutocomplete.focus();
+        fireEvent.input(serverAutocomplete, { target: { value: "Bra" } });
+        await Promise.resolve();
+      });
+      await waitFor(() =>
+        expect(
+          within(document.body).getByRole("option", { name: "Brazil" }),
+        ).toBeTruthy(),
+      );
+      fireEvent.click(
+        within(document.body).getByRole("option", { name: "Brazil" }),
+      );
+
+      fireEvent.click(
+        within(container).getByRole("button", { name: "Show options" }),
+      );
+      await waitFor(() =>
+        expect(
+          within(document.body).getByRole("option", { name: "French" }),
+        ).toBeTruthy(),
+      );
+      fireEvent.click(
+        within(document.body).getByRole("option", { name: "French" }),
+      );
+
+      await waitFor(() => {
+        expect(
+          within(container).getByTestId("hydrated-select-value").textContent,
+        ).toBe("staging");
+        expect(
+          within(container).getByTestId("hydrated-autocomplete-value")
+            .textContent,
+        ).toBe("Brazil");
+        expect(
+          within(container).getByTestId("hydrated-combobox-value").textContent,
+        ).toBe("fr");
       });
       expect(errors).not.toHaveBeenCalled();
     } finally {

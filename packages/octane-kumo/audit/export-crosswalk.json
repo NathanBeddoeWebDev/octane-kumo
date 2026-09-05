@@ -14,7 +14,16 @@
     {
       "source": "Autocomplete",
       "target": "Autocomplete",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/selection-controls.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "The compound InputGroup, Content, List, Item, Group, GroupLabel, Separator, Empty, Collection, and useFilter surface is native. Free-form controlled text, automatic and custom object filtering, item commits, Field integration, hydration, and representative visuals are covered."
     },
     {
       "source": "Badge",
@@ -127,7 +136,16 @@
     {
       "source": "Combobox",
       "target": "Combobox",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/selection-controls.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "The compound TriggerInput, TriggerValue, TriggerMultipleWithInput, Content, List, Item, Chip, Input, Empty, Group, GroupLabel, Collection, Trigger, Value, Icon, and useFilter surface is native. Object values, filtering, single and multiple selection, controlled chips, render composition, hydration, and representative visuals are covered."
     },
     {
       "source": "CommandPalette",
@@ -398,7 +416,16 @@
     {
       "source": "Select",
       "target": "Select",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/selection-controls.test.tsx",
+        "tests/hydration.test.ts",
+        "tests/package-contract.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/visual/button-preview.tsx"
+      ],
+      "notes": "Primitive and object values, item maps and arrays, disabled descriptors, controlled multiple selection, read-only options, render composition, Field integration, hydration, and representative visuals are covered."
     },
     {
       "source": "SensitiveInput",

@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 import {
+  Autocomplete as RootAutocomplete,
   Badge as RootBadge,
   Banner as RootBanner,
   Breadcrumbs as RootBreadcrumbs,
@@ -10,6 +11,7 @@ import {
   CloudflareLogo as RootCloudflareLogo,
   PoweredByCloudflare as RootPoweredByCloudflare,
   Collapsible as RootCollapsible,
+  Combobox as RootCombobox,
   Dialog as RootDialog,
   DropdownMenu as RootDropdownMenu,
   Empty as RootEmpty,
@@ -26,6 +28,7 @@ import {
   Popover as RootPopover,
   Radio as RootRadio,
   RadioGroup as RootRadioGroup,
+  Select as RootSelect,
   SensitiveInput as RootSensitiveInput,
   Sidebar as RootSidebar,
   SkeletonLine as RootSkeletonLine,
@@ -37,6 +40,7 @@ import {
   Textarea as RootTextarea,
   Toolbar as RootToolbar,
 } from "octane-kumo";
+import { Autocomplete as SubpathAutocomplete } from "octane-kumo/components/autocomplete";
 import { Badge as SubpathBadge } from "octane-kumo/components/badge";
 import { Banner as SubpathBanner } from "octane-kumo/components/banner";
 import { Breadcrumbs as SubpathBreadcrumbs } from "octane-kumo/components/breadcrumbs";
@@ -47,6 +51,7 @@ import {
   PoweredByCloudflare as SubpathPoweredByCloudflare,
 } from "octane-kumo/components/cloudflare-logo";
 import { Collapsible as SubpathCollapsible } from "octane-kumo/components/collapsible";
+import { Combobox as SubpathCombobox } from "octane-kumo/components/combobox";
 import { Dialog as SubpathDialog } from "octane-kumo/components/dialog";
 import { DropdownMenu as SubpathDropdownMenu } from "octane-kumo/components/dropdown";
 import { Empty as SubpathEmpty } from "octane-kumo/components/empty";
@@ -70,6 +75,7 @@ import {
   RadioGroup as SubpathRadioGroup,
 } from "octane-kumo/components/radio";
 import { SensitiveInput as SubpathSensitiveInput } from "octane-kumo/components/sensitive-input";
+import { Select as SubpathSelect } from "octane-kumo/components/select";
 import { Sidebar as SubpathSidebar } from "octane-kumo/components/sidebar";
 import { Surface as SubpathSurface } from "octane-kumo/components/surface";
 import { Switch as SubpathSwitch } from "octane-kumo/components/switch";
@@ -90,6 +96,7 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootAutocomplete).toBe(SubpathAutocomplete);
     expect(RootBadge).toBe(SubpathBadge);
     expect(RootBanner).toBe(SubpathBanner);
     expect(RootBreadcrumbs).toBe(SubpathBreadcrumbs);
@@ -98,6 +105,7 @@ describe("package contract", () => {
     expect(RootCloudflareLogo).toBe(SubpathCloudflareLogo);
     expect(RootPoweredByCloudflare).toBe(SubpathPoweredByCloudflare);
     expect(RootCollapsible).toBe(SubpathCollapsible);
+    expect(RootCombobox).toBe(SubpathCombobox);
     expect(RootDialog).toBe(SubpathDialog);
     expect(RootDropdownMenu).toBe(SubpathDropdownMenu);
     expect(RootEmpty).toBe(SubpathEmpty);
@@ -114,6 +122,7 @@ describe("package contract", () => {
     expect(RootPopover).toBe(SubpathPopover);
     expect(RootRadio).toBe(SubpathRadio);
     expect(RootRadioGroup).toBe(SubpathRadioGroup);
+    expect(RootSelect).toBe(SubpathSelect);
     expect(RootSensitiveInput).toBe(SubpathSensitiveInput);
     expect(RootSidebar).toBe(SubpathSidebar);
     expect(RootSkeletonLine).toBe(SubpathSkeletonLine);

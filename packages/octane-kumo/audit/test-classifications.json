@@ -19,7 +19,7 @@
     {
       "path": "packages/octane-kumo/tests/hydration.test.ts",
       "disposition": "octane-only-framework-contract",
-      "reason": "Checks Button, Tooltip, Badge, Meter, SkeletonLine, Empty, Collapsible, Dialog, Popover, DropdownMenu, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, Radio, Tabs, Toolbar, and MenuBar through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
+      "reason": "Checks Button, Tooltip, Badge, Meter, SkeletonLine, Empty, Collapsible, Dialog, Popover, DropdownMenu, Input, InputArea, InputGroup, SensitiveInput, Checkbox, Switch, Radio, Select, Autocomplete, Combobox, Tabs, Toolbar, and MenuBar through Octane SSR compilation, hydration adoption, and post-hydration interaction; it is not an adapted upstream or React differential lane."
     },
     {
       "path": "packages/octane-kumo/tests/input-area.test.tsx",
@@ -59,7 +59,32 @@
     {
       "path": "packages/octane-kumo/tests/packed-consumer.test.ts",
       "disposition": "repo-authored-package-contract",
-      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles the currently exported component surface through root and component-subpath imports, including Dialog, Popover, DropdownMenu, Tabs, Toolbar, MenuBar, CloudflareLogo, and PoweredByCloudflare."
+      "reason": "Packs the package, installs its tarball into a temporary external consumer, and compiles the currently exported component surface through root and component-subpath imports, including Dialog, Popover, DropdownMenu, Select, Autocomplete, Combobox, Tabs, Toolbar, MenuBar, CloudflareLogo, and PoweredByCloudflare."
+    },
+    {
+      "path": "packages/octane-kumo/tests/selection-controls.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers Select, Autocomplete, and Combobox primitive and object values, item data, filtering, disabled and read-only behavior, controlled single and multiple selection, trigger composition, and chips."
+    },
+    {
+      "path": "packages/octane-kumo/tests/selection-compatibility.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Regression coverage for retained application values, form serialization/reset, visible Field associations, Toolbar input composition and refs, value callbacks, and chip keyboard removal."
+    },
+    {
+      "path": "packages/octane-kumo/tests/combobox-compatibility.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers uncontrolled object callbacks and serialized selection values outside the current collection."
+    },
+    {
+      "path": "packages/octane-kumo/tests/combobox-trigger.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers primary trigger tab reachability, refs, keyboard opening, popup input focus, and dismissal focus restoration."
+    },
+    {
+      "path": "packages/octane-kumo/tests/selection-field.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers native ARIA label, description and error associations, precedence, and validation matching."
     },
     {
       "path": "packages/octane-kumo/tests/radio.test.tsx",

@@ -56,6 +56,7 @@ describe("packed consumer", () => {
       );
 
       for (const dependency of [
+        "@octanejs/aria",
         "@octanejs/base-ui",
         "@octanejs/phosphor-icons",
         "cnfast",
@@ -68,6 +69,8 @@ describe("packed consumer", () => {
         resolve(consumerDirectory, "consumer.tsx"),
         `/** @jsxImportSource octane */
 import {
+  Autocomplete,
+  type AutocompleteFilter,
   Badge,
   Banner,
   Breadcrumbs,
@@ -76,6 +79,8 @@ import {
   CloudflareLogo,
   PoweredByCloudflare,
   Collapsible,
+  Combobox,
+  type ComboboxFilter,
   Dialog,
   DropdownMenu,
   Empty,
@@ -93,6 +98,7 @@ import {
   Popover,
   Radio,
   RadioGroup,
+  Select,
   SensitiveInput,
   Sidebar,
   SkeletonLine,
@@ -105,6 +111,7 @@ import {
   Tooltip,
   Toolbar,
 } from "octane-kumo";
+import { Autocomplete as AutocompleteSubpath } from "octane-kumo/components/autocomplete";
 import { Badge as BadgeSubpath } from "octane-kumo/components/badge";
 import { Banner as BannerSubpath } from "octane-kumo/components/banner";
 import { Breadcrumbs as BreadcrumbsSubpath } from "octane-kumo/components/breadcrumbs";
@@ -114,6 +121,7 @@ import {
 } from "octane-kumo/components/cloudflare-logo";
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
 import { Collapsible as CollapsibleSubpath } from "octane-kumo/components/collapsible";
+import { Combobox as ComboboxSubpath } from "octane-kumo/components/combobox";
 import { Dialog as DialogSubpath } from "octane-kumo/components/dialog";
 import { DropdownMenu as DropdownMenuSubpath } from "octane-kumo/components/dropdown";
 import { Empty as EmptySubpath } from "octane-kumo/components/empty";
@@ -133,6 +141,7 @@ import { Meter as MeterSubpath } from "octane-kumo/components/meter";
 import { Popover as PopoverSubpath } from "octane-kumo/components/popover";
 import { Radio as RadioSubpath } from "octane-kumo/components/radio";
 import { SensitiveInput as SensitiveInputSubpath } from "octane-kumo/components/sensitive-input";
+import { Select as SelectSubpath } from "octane-kumo/components/select";
 import { Sidebar as SidebarSubpath } from "octane-kumo/components/sidebar";
 import { Surface as SurfaceSubpath } from "octane-kumo/components/surface";
 import { Switch as SwitchSubpath } from "octane-kumo/components/switch";
@@ -146,7 +155,17 @@ import { GridItem as GridItemSubpath } from "octane-kumo/components/grid";
 const inputRef: { current: HTMLInputElement | null } = { current: null };
 const inputAreaRef: { current: HTMLTextAreaElement | null } = { current: null };
 const checkboxRef: { current: HTMLButtonElement | null } = { current: null };
+const autocompleteFilter: AutocompleteFilter = Autocomplete.useFilter({
+  locale: "en",
+});
+const comboboxFilter: ComboboxFilter = Combobox.useFilter({
+  multiple: true,
+  value: [],
+});
+autocompleteFilter.contains({ label: "Brazil" }, "bra", (item) => item.label);
+comboboxFilter.startsWith({ label: "French" }, "fre", (item) => item.label);
 void [
+  AutocompleteSubpath,
   BadgeSubpath,
   BannerSubpath,
   BreadcrumbsSubpath,
@@ -154,6 +173,7 @@ void [
   CloudflareLogoSubpath,
   PoweredByCloudflareSubpath,
   CollapsibleSubpath,
+  ComboboxSubpath,
   DialogSubpath,
   DropdownMenuSubpath,
   EmptySubpath,
@@ -171,6 +191,7 @@ void [
   PopoverSubpath,
   RadioSubpath,
   SensitiveInputSubpath,
+  SelectSubpath,
   SidebarSubpath,
   SkeletonLineSubpath,
   SurfaceSubpath,
@@ -264,6 +285,38 @@ export const consumerView = (
       <Radio.Item<number> label="10" value={10} />
       <Radio.Item<number> label="25" value={25} />
     </RadioGroup>
+    <Select
+      aria-label="Environment"
+      items={{ production: "Production", staging: "Staging" }}
+      onValueChange={(value) => String(value)}
+    />
+    <Autocomplete aria-label="Country" items={["Argentina", "Brazil"]}>
+      <Autocomplete.InputGroup placeholder="Country" />
+      <Autocomplete.Content>
+        <Autocomplete.List>
+          {(country: string) => (
+            <Autocomplete.Item value={country}>{country}</Autocomplete.Item>
+          )}
+        </Autocomplete.List>
+      </Autocomplete.Content>
+    </Autocomplete>
+    <Combobox
+      aria-label="Language"
+      items={[
+        { label: "English", value: "en" },
+        { label: "French", value: "fr" },
+      ]}
+      itemToStringLabel={(language) => language.label}
+    >
+      <Combobox.TriggerInput placeholder="Language" />
+      <Combobox.Content>
+        <Combobox.List>
+          {(language: { label: string; value: string }) => (
+            <Combobox.Item value={language}>{language.label}</Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Content>
+    </Combobox>
     <Meter label="Storage" max={1000} value={650} />
     <SkeletonLine blockHeight={24} minWidth={60} maxWidth={80} />
     <Empty

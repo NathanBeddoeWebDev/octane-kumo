@@ -1,6 +1,7 @@
 /** @jsxImportSource octane */
 import { Info, Package } from "@octanejs/phosphor-icons";
 import { createRoot, useRef } from "octane";
+import { Autocomplete } from "../../src/components/autocomplete/autocomplete";
 import { Badge } from "../../src/components/badge/badge";
 import { Banner } from "../../src/components/banner/banner";
 import { Breadcrumbs } from "../../src/components/breadcrumbs";
@@ -12,6 +13,7 @@ import {
 import { Checkbox } from "../../src/components/checkbox/checkbox";
 import { CloudflareLogo } from "../../src/components/cloudflare-logo/cloudflare-logo";
 import { Collapsible } from "../../src/components/collapsible/collapsible";
+import { Combobox } from "../../src/components/combobox/combobox";
 import { Dialog } from "../../src/components/dialog/dialog";
 import { DropdownMenu } from "../../src/components/dropdown/dropdown";
 import { Empty } from "../../src/components/empty/empty";
@@ -23,6 +25,7 @@ import { Meter } from "../../src/components/meter/meter";
 import { MenuBar } from "../../src/components/menubar/menubar";
 import { Popover } from "../../src/components/popover/popover";
 import { Radio } from "../../src/components/radio/radio";
+import { Select } from "../../src/components/select/select";
 import { SensitiveInput } from "../../src/components/sensitive-input/sensitive-input";
 import { Sidebar } from "../../src/components/sidebar/sidebar";
 import { Switch } from "../../src/components/switch/switch";
@@ -288,6 +291,55 @@ function FormRows() {
   );
 }
 
+const selectionLanguages = [
+  { label: "English", value: "en" },
+  { label: "French", value: "fr" },
+  { label: "German", value: "de" },
+];
+
+function SelectionRows() {
+  return (
+    <div className={cn("form-grid")}>
+      <Select
+        defaultValue="production"
+        items={{ production: "Production", staging: "Staging" }}
+        label="Environment"
+      />
+      <Select
+        aria-label="Disabled region"
+        disabled
+        placeholder="Disabled region"
+      >
+        <Select.Option value="west">Western Europe</Select.Option>
+      </Select>
+      <Autocomplete items={["Argentina", "Brazil", "Canada"]} label="Country">
+        <Autocomplete.InputGroup placeholder="Search countries" />
+        <Autocomplete.Content>
+          <Autocomplete.List>
+            {(country: string) => (
+              <Autocomplete.Item value={country}>{country}</Autocomplete.Item>
+            )}
+          </Autocomplete.List>
+        </Autocomplete.Content>
+      </Autocomplete>
+      <Combobox
+        defaultValue={selectionLanguages[0]}
+        items={selectionLanguages}
+        label="Language"
+      >
+        <Combobox.TriggerInput placeholder="Search languages" />
+        <Combobox.Content>
+          <Combobox.List>
+            {(language: (typeof selectionLanguages)[number]) => (
+              <Combobox.Item value={language}>{language.label}</Combobox.Item>
+            )}
+          </Combobox.List>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  );
+}
+
 function StatusRows() {
   return (
     <>
@@ -450,6 +502,8 @@ function Preview() {
             <NavigationRows />
             <h3>Form controls</h3>
             <FormRows />
+            <h3>Selection controls</h3>
+            <SelectionRows />
             <div className={cn("status-preview")}>
               <h3>Status and disclosure</h3>
               <StatusRows />
@@ -464,6 +518,8 @@ function Preview() {
             <NavigationRows />
             <h3>Form controls</h3>
             <FormRows />
+            <h3>Selection controls</h3>
+            <SelectionRows />
             <div className={cn("status-preview")}>
               <h3>Status and disclosure</h3>
               <StatusRows />

@@ -38,6 +38,11 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./components/autocomplete": {
+      "types": "./src/components/autocomplete/index.ts",
+      "import": "./src/components/autocomplete/index.ts",
+      "default": "./src/components/autocomplete/index.ts"
+    },
     "./components/badge": {
       "types": "./src/components/badge/index.ts",
       "import": "./src/components/badge/index.ts",
@@ -72,6 +77,11 @@
       "types": "./src/components/collapsible/index.ts",
       "import": "./src/components/collapsible/index.ts",
       "default": "./src/components/collapsible/index.ts"
+    },
+    "./components/combobox": {
+      "types": "./src/components/combobox/index.ts",
+      "import": "./src/components/combobox/index.ts",
+      "default": "./src/components/combobox/index.ts"
     },
     "./components/dialog": {
       "types": "./src/components/dialog/index.ts",
@@ -148,6 +158,11 @@
       "import": "./src/components/radio/index.ts",
       "default": "./src/components/radio/index.ts"
     },
+    "./components/select": {
+      "types": "./src/components/select/index.ts",
+      "import": "./src/components/select/index.ts",
+      "default": "./src/components/select/index.ts"
+    },
     "./components/sensitive-input": {
       "types": "./src/components/sensitive-input/index.ts",
       "import": "./src/components/sensitive-input/index.ts",
@@ -209,20 +224,21 @@
     "typecheck": "tsrx-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@octanejs/base-ui": "0.1.48",
-    "@octanejs/phosphor-icons": "0.0.30",
+    "@octanejs/aria": "0.0.45",
+    "@octanejs/base-ui": "0.1.49",
+    "@octanejs/phosphor-icons": "0.0.31",
     "cnfast": "^0.0.8"
   },
   "devDependencies": {
-    "@octanejs/testing-library": "0.1.47",
+    "@octanejs/testing-library": "0.1.48",
     "@tsrx/typescript-plugin": "0.3.128",
     "happy-dom": "catalog:",
-    "octane": "0.1.50",
+    "octane": "0.1.51",
     "typescript": "catalog:",
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
-    "octane": "0.1.50"
+    "octane": "0.1.51"
   },
   "engines": {
     "node": "^24.12.0"
