@@ -12,6 +12,8 @@ import {
   PoweredByCloudflare as RootPoweredByCloudflare,
   Collapsible as RootCollapsible,
   Combobox as RootCombobox,
+  DatePicker as RootDatePicker,
+  DateRangePicker as RootDateRangePicker,
   Dialog as RootDialog,
   DropdownMenu as RootDropdownMenu,
   Empty as RootEmpty,
@@ -54,6 +56,8 @@ import {
 } from "octane-kumo/components/cloudflare-logo";
 import { Collapsible as SubpathCollapsible } from "octane-kumo/components/collapsible";
 import { Combobox as SubpathCombobox } from "octane-kumo/components/combobox";
+import { DatePicker as SubpathDatePicker } from "octane-kumo/components/date-picker";
+import SubpathDateRangePicker from "octane-kumo/components/date-range-picker";
 import { Dialog as SubpathDialog } from "octane-kumo/components/dialog";
 import { DropdownMenu as SubpathDropdownMenu } from "octane-kumo/components/dropdown";
 import { Empty as SubpathEmpty } from "octane-kumo/components/empty";
@@ -100,6 +104,8 @@ function sourceFiles(directory: string): string[] {
 
 describe("package contract", () => {
   it("resolves the root and component subpath to the same native export", () => {
+    expect(RootDatePicker).toBe(SubpathDatePicker);
+    expect(RootDateRangePicker).toBe(SubpathDateRangePicker);
     expect(RootPagination).toBe(SubpathPagination);
     expect(RootTable).toBe(SubpathTable);
     expect(RootAutocomplete).toBe(SubpathAutocomplete);

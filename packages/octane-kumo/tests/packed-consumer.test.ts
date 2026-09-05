@@ -58,6 +58,7 @@ describe("packed consumer", () => {
       for (const dependency of [
         "@octanejs/aria",
         "@octanejs/base-ui",
+        "@octanejs/day-picker",
         "@octanejs/phosphor-icons",
         "cnfast",
         "octane",
@@ -81,6 +82,8 @@ import {
   Collapsible,
   Combobox,
   type ComboboxFilter,
+  DatePicker,
+  DateRangePicker,
   Dialog,
   DropdownMenu,
   Empty,
@@ -124,6 +127,8 @@ import {
 import { Checkbox as CheckboxSubpath } from "octane-kumo/components/checkbox";
 import { Collapsible as CollapsibleSubpath } from "octane-kumo/components/collapsible";
 import { Combobox as ComboboxSubpath } from "octane-kumo/components/combobox";
+import { DatePicker as DatePickerSubpath, type DateRange, type DayPickerProps } from "octane-kumo/components/date-picker";
+import LegacyDateRangePicker, { dateRangePickerVariants } from "octane-kumo/components/date-range-picker";
 import { Dialog as DialogSubpath } from "octane-kumo/components/dialog";
 import { DropdownMenu as DropdownMenuSubpath } from "octane-kumo/components/dropdown";
 import { Empty as EmptySubpath } from "octane-kumo/components/empty";
@@ -212,6 +217,15 @@ void [
 
 export const consumerView = (
   <div>
+    <DatePicker mode="single" onChange={(date, trigger, modifiers, event) => { date?.getDate(); trigger.getDate(); void modifiers.selected; event.preventDefault(); }} footer={<span>Choose a date</span>} />
+    <DatePicker mode="single" required selected={new Date()} onChange={(date) => date.getDate()} />
+    <DatePickerSubpath mode="multiple" onChange={(dates) => dates?.map((date) => date.getDate())} />
+    <DatePickerSubpath mode="multiple" required selected={[]} onChange={(dates) => dates.map((date) => date.getDate())} />
+    <DatePickerSubpath mode="range" onChange={(range) => { const value: DateRange | undefined = range; void value; }} />
+    <DatePickerSubpath mode="range" required selected={undefined} onChange={(range) => range.from?.getDate()} components={{ Root: ({ rootRef, children, ...props }) => <div {...props} ref={rootRef}>{children}</div>, Chevron: ({ className }) => <span className={className}>Next</span> }} onDayKeyDown={(_day, _modifiers, event) => event.key.toUpperCase()} />
+    <DateRangePicker onStartDateChange={(date) => date?.getDate()} onEndDateChange={(date) => date?.getDate()} />
+    <LegacyDateRangePicker size="sm" variant="subtle" className={dateRangePickerVariants()} onStartDateChange={() => {}} onEndDateChange={() => {}} />
+    {void ({ mode: "single", selected: new Date(), onSelect: (date) => date?.getDate() } satisfies DayPickerProps)}
     <Table layout={"fixed" satisfies KumoTableLayout} ref={{ current: null }}>
       <Table.Header variant="compact" sticky><Table.Row><Table.CheckHead indeterminate onCheckedChange={(checked, details) => { void checked; details?.cancel(); }} /><Table.Head sticky="left" scope="col">Name<Table.ResizeHandle onPointerDown={(event) => event.preventDefault()} /></Table.Head></Table.Row></Table.Header>
       <Table.Body><Table.Row variant="selected"><Table.CheckCell checked label="Worker" onValueChange={(checked) => { void checked; }} /><Table.Cell sticky="right" colSpan={2}>Worker</Table.Cell></Table.Row></Table.Body>

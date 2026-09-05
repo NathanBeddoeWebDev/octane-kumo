@@ -6,7 +6,7 @@ Octane's native component, ref, and event contracts.
 
 This package is an early, source-published port. Its native surface currently
 contains `Autocomplete`, `Badge`, `Banner`, `Breadcrumbs`, `Button`,
-`CloudflareLogo`, `Combobox`, `Empty`, `Grid`, `Input`,
+`CloudflareLogo`, `Combobox`, `DatePicker`, `DateRangePicker`, `Empty`, `Grid`, `Input`,
 `InputArea`/`Textarea`, `InputGroup`, `Label`, `LayerCard`, `Link`, `Loader`,
 `MenuBar`, `Meter`, `Pagination`, `Select`, `SensitiveInput`, `Sidebar`,
 `SkeletonLine`, `Surface`, `Table`, `TableOfContents`, `Tabs`, `Text`, `Toolbar`, and
@@ -23,6 +23,45 @@ export function SaveAction() {
   return <Button variant="primary">Save</Button>;
 }
 ```
+
+## Date picking
+
+`DatePicker` adapts `@octanejs/day-picker` to Kumo's six single/multiple/range
+selection contracts, including required selection and the `onChange` callback
+name. Pass `selected` with `onChange` for controlled selection; omitting the
+callback enables engine-owned selection. As in the oracle, multiple selection
+resets to the clicked date when adding beyond `max`.
+
+Events, footer content, and custom components use native Octane contracts.
+`DateRange` and the native `DayPickerProps` convenience type are also exported.
+Month navigation, localization, disabled/hidden days, modifiers, dropdown
+captions, and custom class names/components are forwarded to the native engine.
+Outside days and month animations default to enabled, as in Kumo.
+
+The adapter maps `initialFocus`, `fromMonth`/`toMonth`, and `fromYear`/`toYear` to
+v10 focus/navigation props; modern props take precedence. The v10 engine no
+longer accepts deprecated v8-era class/style keys, `components.Button`, or
+`fromDate`/`toDate`. Use current class/style keys, specific button components,
+and `hidden` matchers instead. Navigation bounds use `aria-disabled`, not the
+native `disabled` attribute, and prevent navigation at the boundary.
+
+The deprecated `DateRangePicker` preserves the two-month, internally owned
+range API, all sizes/variants, preview, reset callbacks, and display-only
+timezone footer. Month navigation is normalized to the first day to avoid
+month-end skips; invalid month edits do not change the calendar. Selected dates
+are local-midnight `Date` values. It remains a legacy tab-through button grid;
+prefer `DatePicker mode="range"` for roving calendar keyboard navigation.
+
+Import `octane-kumo/styles/standalone` without Tailwind, or the existing
+`octane-kumo/styles/tailwind` entry alongside your Tailwind setup. The native
+standalone entry composes the pinned utility and component styles, since the
+pinned prebuilt utility sheet omits calendar rules. The source copies remain
+byte-for-byte unchanged.
+
+Open `/tests/visual/date-pickers.html` using `pnpm --filter octane-kumo dev:visual`
+for light/dark, selected, disabled, dropdown, range, and legacy-size examples.
+Legacy calendars initialize from the current local month; SSR clients and
+servers must agree on the initial month and locale.
 
 ## Table and pagination
 
@@ -57,7 +96,7 @@ selectors, and unknown/empty totals.
 Export presence is not a parity claim. Badge, Button, Collapsible, Empty,
 Meter, SkeletonLine, Tooltip, Dialog, Popover, DropdownMenu, Select,
 Autocomplete, Combobox, Input, InputArea, InputGroup, SensitiveInput, Checkbox,
-Switch, Radio, Table, Pagination, Tabs, Toolbar, and MenuBar have native interaction and
+Switch, Radio, DatePicker, DateRangePicker, Table, Pagination, Tabs, Toolbar, and MenuBar have native interaction and
 SSR/hydration coverage; Label and Field associations are tested; a packed
 external consumer is compiled; the native bundle graph is checked for React
 imports; and representative light/dark states are rendered in a reproducible

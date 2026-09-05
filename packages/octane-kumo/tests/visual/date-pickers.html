@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Octane Kumo date pickers</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../../src/styles/standalone.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        font:
+          14px Inter,
+          ui-sans-serif,
+          system-ui,
+          sans-serif;
+        background: var(--color-kumo-recessed);
+      }
+      main {
+        display: grid;
+        gap: 24px;
+      }
+      section {
+        padding: 24px;
+        border-radius: 12px;
+        background: var(--color-kumo-base);
+        color: var(--text-color-kumo-default);
+        min-width: 0;
+      }
+      h1,
+      h2 {
+        font-weight: 600;
+        margin: 0 0 16px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      h2 {
+        font-size: 16px;
+      }
+      .examples,
+      .legacy-examples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+      }
+      .legacy-examples {
+        margin-top: 24px;
+      }
+      .example {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+      output {
+        display: block;
+        margin-top: 12px;
+        color: var(--text-color-kumo-subtle);
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 12px;
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./date-pickers-preview.tsx"></script>
+  </body>
+</html>

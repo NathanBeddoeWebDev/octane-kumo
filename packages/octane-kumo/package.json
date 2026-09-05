@@ -83,6 +83,16 @@
       "import": "./src/components/combobox/index.ts",
       "default": "./src/components/combobox/index.ts"
     },
+    "./components/date-picker": {
+      "types": "./src/components/date-picker/index.ts",
+      "import": "./src/components/date-picker/index.ts",
+      "default": "./src/components/date-picker/index.ts"
+    },
+    "./components/date-range-picker": {
+      "types": "./src/components/date-range-picker/index.ts",
+      "import": "./src/components/date-range-picker/index.ts",
+      "default": "./src/components/date-range-picker/index.ts"
+    },
     "./components/dialog": {
       "types": "./src/components/dialog/index.ts",
       "import": "./src/components/dialog/index.ts",
@@ -220,7 +230,7 @@
     },
     "./styles": "./src/styles/kumo.css",
     "./styles/tailwind": "./src/styles/kumo.css",
-    "./styles/standalone": "./src/styles/kumo-standalone.css",
+    "./styles/standalone": "./src/styles/standalone.css",
     "./styles/theme-kumo": "./src/styles/theme-kumo.css",
     "./styles/theme-fedramp": "./src/styles/theme-fedramp.css"
   },
@@ -236,6 +246,7 @@
   "dependencies": {
     "@octanejs/aria": "0.0.45",
     "@octanejs/base-ui": "0.1.49",
+    "@octanejs/day-picker": "0.0.18",
     "@octanejs/phosphor-icons": "0.0.31",
     "cnfast": "^0.0.8"
   },

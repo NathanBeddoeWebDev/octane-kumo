@@ -7,6 +7,8 @@ export * from "./components/checkbox";
 export * from "./components/cloudflare-logo";
 export * from "./components/collapsible";
 export * from "./components/combobox";
+export * from "./components/date-picker";
+export * from "./components/date-range-picker";
 export * from "./components/dialog";
 export * from "./components/dropdown";
 export * from "./components/empty";

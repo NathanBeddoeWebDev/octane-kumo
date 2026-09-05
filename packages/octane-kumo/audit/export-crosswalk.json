@@ -155,12 +155,32 @@
     {
       "source": "DatePicker",
       "target": "DatePicker",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/date-picker.test.tsx",
+        "tests/date-picker.type-spec.tsx",
+        "tests/date-picker-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/styles.test.ts",
+        "tests/visual/date-pickers-preview.tsx"
+      ],
+      "notes": "Native day-picker v10 adapter preserves the six Kumo selection unions, onChange naming, default outside days/animation, Phosphor chevrons, style/component overrides, locale and navigation. Events, footer and component props are native. Common v9 focus/month/year aliases are mapped; removed v8-era class/style keys, components.Button, and fromDate/toDate are not supported. Callback presence controls selection, and multiple max resets match the oracle. This is not a React differential parity claim."
     },
     {
       "source": "DateRangePicker",
       "target": "DateRangePicker",
-      "status": "planned"
+      "status": "adapted-unverified",
+      "evidence": [
+        "tests/date-range-picker.test.tsx",
+        "tests/date-picker-hydration.test.tsx",
+        "tests/package-contract.test.ts",
+        "tests/packed-consumer.test.ts",
+        "tests/native-module-graph.test.ts",
+        "tests/visual/date-pickers-preview.tsx"
+      ],
+      "notes": "Deprecated two-month, 42-day calendars preserve size/variant exports, local selection callbacks, hover/focus previews, reset, editable months and display-only timezone. First-of-month navigation prevents month-end skips; invalid edits are ignored; unused duplicate IDs and color transitions are removed. It remains a tab-through legacy button grid, not DatePicker's roving keyboard calendar. Server and client must agree on initial local month and locale."
     },
     {
       "source": "DeleteResource",

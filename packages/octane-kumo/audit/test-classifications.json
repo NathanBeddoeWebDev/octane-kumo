@@ -2,6 +2,26 @@
   "schemaVersion": 1,
   "tests": [
     {
+      "path": "packages/octane-kumo/tests/date-picker.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers single/multiple/range selection, callback-controlled and internal state, required/disabled days, max reset, modifiers, native events, navigation/focus aliases, localization, dropdowns, hidden/outside days and custom Octane content."
+    },
+    {
+      "path": "packages/octane-kumo/tests/date-picker.type-spec.tsx",
+      "disposition": "repo-authored-package-contract",
+      "reason": "Checks selection discrimination, required callback inference, native events and custom component props; rejects onSelect, absent mode, synthetic events and mismatched values at the Kumo boundary."
+    },
+    {
+      "path": "packages/octane-kumo/tests/date-range-picker.test.tsx",
+      "disposition": "repo-authored-octane-contract",
+      "reason": "Covers legacy sizes/variants, two 42-day calendars, selection and preview, reset/timezone, month-end/leap/year navigation, edited months and duplicate-ID removal."
+    },
+    {
+      "path": "packages/octane-kumo/tests/date-picker-hydration.test.tsx",
+      "disposition": "octane-only-framework-contract",
+      "reason": "Checks real SSR compilation and node adoption for all modern modes and the legacy calendar, followed by selection, navigation and legacy reset. This is not a React differential lane."
+    },
+    {
       "path": "packages/octane-kumo/tests/table.test.tsx",
       "disposition": "repo-authored-octane-contract",
       "reason": "Covers Table compound semantics, intrinsic refs/events, variant and sticky classes, controlled/uncontrolled selection, indeterminate and disabled checkboxes, native details and deprecated callbacks."

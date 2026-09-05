@@ -12,6 +12,21 @@ function sha256(path: string) {
 }
 
 describe("stylesheet provenance", () => {
+  it("composes the standalone utilities with the calendar's component rules", () => {
+    const manifest = JSON.parse(
+      readFileSync(resolve(packageRoot, "package.json"), "utf8"),
+    );
+    const entry = readFileSync(
+      resolve(packageRoot, manifest.exports["./styles/standalone"]),
+      "utf8",
+    );
+    expect(entry).toContain('@import "./kumo-standalone.css"');
+    expect(entry).toContain('@import "./kumo.css"');
+    expect(
+      readFileSync(resolve(packageRoot, "src/styles/kumo.css"), "utf8"),
+    ).toContain(".rdp-day_button");
+  });
+
   for (const file of styleSources.files) {
     it(`${file.target} matches the pinned Kumo source`, () => {
       const target = resolve(packageRoot, file.target);
