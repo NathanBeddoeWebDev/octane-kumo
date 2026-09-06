@@ -38,8 +38,6 @@ catalog:
   wrangler: 4.127.1
   vite-plus: 0.2.6
   "@vitest/browser-playwright": 4.1.10
-onlyBuiltDependencies:
-  - workerd
 overrides:
   vite: "catalog:"
   vitest: "catalog:"
@@ -61,3 +59,9 @@ minimumReleaseAgeExclude:
   - "@oxfmt/*"
   - vitest
   - "@vitest/*"
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  sharp: true
+  workerd: true
